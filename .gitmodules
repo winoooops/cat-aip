@@ -4,3 +4,6 @@
 [submodule "react-quickly-tut"]
 	path = react-quickly-tut
 	url = https://github.com/winoooops/react-quickly-tut
+[submodule "ngAuction"]
+	path = ngAuction
+	url = https://github.com/winoooops/ngAuction.git
