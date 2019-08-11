@@ -1,6 +1,3 @@
-[submodule "react-intro"]
-	path = react-intro
-	url = https://github.com/winoooops/react-intro
 [submodule "react-quickly-tut"]
 	path = react-quickly-tut
 	url = https://github.com/winoooops/react-quickly-tut
