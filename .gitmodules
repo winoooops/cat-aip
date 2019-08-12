@@ -4,3 +4,6 @@
 [submodule "ngAuction"]
 	path = ngAuction
 	url = https://github.com/winoooops/ngAuction.git
+[submodule "MEAN-sample"]
+	path = MEAN-sample
+	url = https://github.com/winoooops/MEAN-sample.git
