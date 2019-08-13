@@ -7,3 +7,6 @@
 [submodule "MEAN-sample"]
 	path = MEAN-sample
 	url = https://github.com/winoooops/MEAN-sample.git
+[submodule "aip2019"]
+	path = aip2019
+	url = https://github.com/benatuts/aip2019.git
