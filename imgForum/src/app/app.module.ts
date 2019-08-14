@@ -4,10 +4,12 @@ import { NgModule } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 import { MaterialUiModule } from './material-ui/material-ui.module'
 import { AppComponent } from './app.component';
+import { ForumComponent } from './forum/forum.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    ForumComponent
   ],
   imports: [
     BrowserModule,
