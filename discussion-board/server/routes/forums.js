@@ -11,7 +11,10 @@ const storage = multer.diskStorage({
     // the image will be saved as img-upload-<date>.extension 
   }
 })
-const upload = multer({ storage }).single('img-upload')
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 100000 }
+}).single('img-upload')
 
 
 router.get('/', (req, res) => {
@@ -24,9 +27,13 @@ router.get('/upload', (req, res) => {
 
 router.post('/upload', (req, res) => {
   upload(req, res, (err) => {
-    if (err) return
-    console.log(req.file)
-    res.send('see console for more info')
+    if (err) {
+      res.render('upload', { title: "upload", msg: err })
+    } else {
+      console.log(req.file)
+      res.send('see console for more info')
+    }
+
   })
 })
 

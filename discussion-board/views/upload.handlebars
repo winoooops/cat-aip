@@ -1,6 +1,9 @@
 <h1>{{ title}}</h1>
 
 <form action="upload" method="POST" enctype="multipart/form-data">
+  {{#if msg}}
+  {{ msg }}
+  {{/if}}
   <div class="file-field input-field">
     <div class="btn">
       <span>File</span>
