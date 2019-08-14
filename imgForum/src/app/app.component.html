@@ -1,2 +1,15 @@
 <!--The content below is only a placeholder and can be replaced.-->
+<mat-toolbar color="primary">
+  <button mat-raised-button [matMenuTriggerFor]="menu" color="accent">Menu</button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>Item 1</button>
+    <button mat-menu-item>Item 2</button>
+  </mat-menu>
+</mat-toolbar>
+
+
+
+
+
+
 <router-outlet></router-outlet>
