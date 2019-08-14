@@ -6,6 +6,8 @@ import { MatToolbar } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
+
 
 @NgModule({
   declarations: [],
@@ -18,7 +20,8 @@ import { MatInputModule } from '@angular/material/input'
     MatToolbar,
     MatInputModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    BrowserAnimationsModule
   ]
 })
 export class MaterialUiModule { }
