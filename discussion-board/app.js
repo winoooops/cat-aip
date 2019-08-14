@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars')
 const app = express()
 const PORT = 3000
 
-const homeRoute = require('./routes/home')
+const homeRoute = require('./server/routes/home')
 
 // configurative middlewars
 app.use(bodyParser.json())
