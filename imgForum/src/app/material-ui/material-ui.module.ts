@@ -7,9 +7,6 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatIconModule } from '@angular/material/icon'
-import { FlexLayoutModule } from '@angular/flex-layout'
-
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
 
 @NgModule({
@@ -26,8 +23,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     MatInputModule,
     MatMenuModule,
     MatIconModule,
-    BrowserAnimationsModule,
-    FlexLayoutModule
   ]
 })
 export class MaterialUiModule { }
