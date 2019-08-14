@@ -1,0 +1,20 @@
+// the colors below should be re-work with custom theme later....
+
+:host {
+    display: block;
+    height: 100%;
+}
+
+mat-toolbar {
+    position: relative;
+}
+
+.links-group-item{
+    font-family: 'Titillium Web', sans-serif;
+    text-decoration: none;
+    color: pink
+}
+
+.menu-option{
+    margin-right: 8px;
+}
