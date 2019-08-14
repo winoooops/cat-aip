@@ -1,1 +1,13 @@
-<p>forum-post works!</p>
+<mat-card>
+    <form action="forums/post" method="POST" >
+        <mat-form-field>
+            <input matInput type="text"/>
+        </mat-form-field>
+
+        <div class="file-upload">
+            <input type="file" />   
+        </div>
+           
+        <button mat-raised-button color="primary" type="submit">Post</button>
+    </form>
+</mat-card>
