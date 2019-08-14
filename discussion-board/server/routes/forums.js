@@ -22,5 +22,13 @@ router.get('/upload', (req, res) => {
   res.render('upload', { title: "upload" })
 })
 
+router.post('/upload', (req, res) => {
+  upload(req, res, (err) => {
+    if (err) return
+    console.log(req.file)
+    res.send('see console for more info')
+  })
+})
+
 
 module.exports = router
