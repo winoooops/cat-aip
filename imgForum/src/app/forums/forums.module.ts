@@ -6,9 +6,9 @@ import { ForumComponent } from '../forum/forum.component';
 import { ForumPostComponent } from '../forum-post/forum-post.component';
 
 const routes: Routes = [
+  { path: ':forum_alias', component: ForumComponent },
+  { path: 'post', component: ForumPostComponent},
   { path: '', component: ForumsComponent }, 
-  { path: ':forum_id', component: ForumComponent },
-  { path: 'add', component: ForumPostComponent}
 ]
 
 
