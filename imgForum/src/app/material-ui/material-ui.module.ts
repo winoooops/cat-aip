@@ -5,6 +5,7 @@ import { MatCardModule } from '@angular/material/card'
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
+import { MatMenuModule } from '@angular/material/menu'
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
 
@@ -21,6 +22,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
     MatInputModule,
     MatButtonModule,
     MatInputModule,
+    MatMenuModule,
     BrowserAnimationsModule
   ]
 })
