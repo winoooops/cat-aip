@@ -4,7 +4,7 @@ const exphbs = require('express-handlebars')
 const app = express()
 const PORT = 3000
 
-const homeRoute = require('./server/routes/home')
+const forumsRoute = require('./server/routes/forums')
 
 // configurative middlewars
 app.use(bodyParser.json())
@@ -16,7 +16,7 @@ app.use(express.static('public'))
 app.engine('handlebars', exphbs());
 app.set('view engine', 'handlebars');
 
-app.use('/', homeRoute)
+app.use('/', forumsRoute)
 
 app.listen(PORT, () => {
   console.log(`server is listening on port ${PORT}`)
