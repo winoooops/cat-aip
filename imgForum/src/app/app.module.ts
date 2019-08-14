@@ -6,9 +6,10 @@ import { MaterialUiModule } from './material-ui/material-ui.module'
 import { AppComponent } from './app.component';
 
 
+
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
