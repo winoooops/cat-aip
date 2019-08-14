@@ -3,7 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 
 const routes: Routes = [
-  { path: 'forums', loadChildren: 'app/forums/forums.module#ForumsModule'}, 
+  { path: 'forums', loadChildren: 'src/app/forums/forums.module#ForumsModule'}, 
   { path: '', redirectTo: '/forums', pathMatch: 'full'} 
 ];
 

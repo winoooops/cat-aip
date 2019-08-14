@@ -1,5 +1,5 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+// import { CommonModule } from '@angular/common';
 import { ForumsComponent } from './forums.component';
 import { Routes, RouterModule } from '@angular/router'
 import { ForumComponent } from '../forum/forum.component';
@@ -11,10 +11,15 @@ const routes: Routes = [
 
 
 @NgModule({
-  declarations: [ForumsComponent],
+  declarations: [
+    ForumsComponent,
+    ForumComponent
+  ],
   imports: [
-    CommonModule,
     RouterModule.forChild( routes )
+  ],
+  exports:[
+    RouterModule
   ]
 })
 export class ForumsModule { }
