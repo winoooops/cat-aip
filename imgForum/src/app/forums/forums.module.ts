@@ -5,6 +5,8 @@ import { Routes, RouterModule } from '@angular/router'
 import { ForumComponent } from './forum/forum.component';
 import { ForumPostComponent } from './forum-post/forum-post.component';
 import { MaterialUiModule } from '../material-ui/material-ui.module';
+import { ThreadsComponent } from './threads/threads.component';
+import { ThreadComponent } from './thread/thread.component';
 
 const routes: Routes = [
   { path: 'post', component: ForumPostComponent },
@@ -17,7 +19,9 @@ const routes: Routes = [
   declarations: [
     ForumsComponent,
     ForumComponent,
-    ForumPostComponent
+    ForumPostComponent,
+    ThreadsComponent,
+    ThreadComponent
   ],
   imports: [
     RouterModule.forChild(routes),
