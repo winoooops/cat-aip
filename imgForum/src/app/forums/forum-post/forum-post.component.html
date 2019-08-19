@@ -1,13 +1,13 @@
 <mat-card>
-    <form action="forums/post" method="POST" >
+    <form action="forums/post" method="POST" (ngSubmit)="onSubmit($event)">
         <mat-form-field>
-            <input matInput type="text"/>
+            <input matInput type="text" />
         </mat-form-field>
 
         <div class="file-upload">
-            <input type="file" />   
+            <input type="file" />
         </div>
-           
+
         <button mat-raised-button color="primary" type="submit">Post</button>
     </form>
 </mat-card>
