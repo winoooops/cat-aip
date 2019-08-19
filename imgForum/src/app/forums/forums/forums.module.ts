@@ -4,12 +4,12 @@ import { ForumsComponent } from './forums.component';
 import { Routes, RouterModule } from '@angular/router'
 import { ForumComponent } from '../forum/forum.component';
 import { ForumPostComponent } from '../forum-post/forum-post.component';
-import { MaterialUiModule } from '../material-ui/material-ui.module';
+import { MaterialUiModule } from '../../material-ui/material-ui.module';
 
 const routes: Routes = [
-  { path: 'post', component: ForumPostComponent},
+  { path: 'post', component: ForumPostComponent },
   { path: ':forum_alias', component: ForumComponent },
-  { path: '', component: ForumsComponent }, 
+  { path: '', component: ForumsComponent },
 ]
 
 
@@ -20,10 +20,10 @@ const routes: Routes = [
     ForumPostComponent
   ],
   imports: [
-    RouterModule.forChild( routes ),
+    RouterModule.forChild(routes),
     MaterialUiModule
   ],
-  exports:[
+  exports: [
     RouterModule
   ]
 })
