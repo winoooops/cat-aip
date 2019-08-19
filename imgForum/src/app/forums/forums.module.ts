@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 // import { CommonModule } from '@angular/common';
-import { ForumsComponent } from './forums.component';
+import { ForumsComponent } from './forums/forums.component';
 import { Routes, RouterModule } from '@angular/router'
-import { ForumComponent } from '../forum/forum.component';
-import { ForumPostComponent } from '../forum-post/forum-post.component';
-import { MaterialUiModule } from '../../material-ui/material-ui.module';
+import { ForumComponent } from './forum/forum.component';
+import { ForumPostComponent } from './forum-post/forum-post.component';
+import { MaterialUiModule } from '../material-ui/material-ui.module';
 
 const routes: Routes = [
   { path: 'post', component: ForumPostComponent },
