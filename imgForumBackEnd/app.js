@@ -1,7 +1,8 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const forumRoute = require('./api/routes/forums')
-const db = require('./config/db')
+const userRoute = require('./api/routes/user')
+// const db = require('./config/db')
 
 
 const app = express() 
@@ -16,6 +17,7 @@ app.use( bodyParser.urlencoded({ extended: false }))
 
 
 app.use('/', forumRoute)
+app.use('/user', userRoute)
 
 app.listen(PORT, () => {
     console.log(`Now listening on port ${PORT}`)
