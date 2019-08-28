@@ -5,9 +5,6 @@ let client
 
 mongoose
     .connect('mongodb://localhost:27017/api', options)
-    .then( (client) => {
-        console.log( client )
-    })
 
 const db = mongoose.connection
 
