@@ -1,0 +1,19 @@
+const mongoose = require('mongoose')
+const options = { useNewUrlParser: true }
+
+mongoose.connect('mongodb://localhost:27017/api', options)
+
+const db = mongoose.connection
+
+db.on('connected', () => {
+    console.log("mongoose connected...")
+})
+
+db.on('error', (err) => {
+    console.log(`mongoose error: ${err}`)
+})
+
+db.on('disconneted', () => {
+    console.log('mongoose disconnected')
+})
+
