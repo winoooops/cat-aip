@@ -1,7 +1,13 @@
 const mongoose = require('mongoose')
 const options = { useNewUrlParser: true }
+const dbName = 'imgForum'
+let client
 
-mongoose.connect('mongodb://localhost:27017/api', options)
+mongoose
+    .connect('mongodb://localhost:27017/api', options)
+    .then( (client) => {
+        console.log( client )
+    })
 
 const db = mongoose.connection
 
@@ -16,4 +22,4 @@ db.on('error', (err) => {
 db.on('disconneted', () => {
     console.log('mongoose disconnected')
 })
-
+4
