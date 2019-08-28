@@ -2,7 +2,7 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const forumRoute = require('./api/routes/forums')
 const userRoute = require('./api/routes/user')
-// const db = require('./config/db')
+const db = require('./config/db')
 
 
 const app = express() 
