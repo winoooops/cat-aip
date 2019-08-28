@@ -1,13 +1,20 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
-
-const SERVER_URL = "http://localhost:3000"
 
 export interface User{
   userId: string, 
   pwd: string
 }
+
+
+const SERVER_URL = "http://localhost:3000"
+
+const httpOptions = {
+  headers: new HttpHeaders({
+    'Content-Type':  'application/json'
+  })
+};
 
 
 
@@ -19,6 +26,6 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
   register(data): Observable<any> {
-    return this.http.post<any>(`${SERVER_URL}/user/login`,data)
+    return this.http.post<any>(`${SERVER_URL}/user/login`, data, httpOptions)
   }
 }

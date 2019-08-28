@@ -16,8 +16,10 @@ router.get('/login', (req,res) => {
 
 // post method
 router.post('/login', (req,res) => {
-    const userId = req.body.username
-    const pwd = req.body.password
+    
+    console.log( req.body )
+    const userId = req.body.userId
+    const pwd = req.body.pwd
 
     User
         .collection
