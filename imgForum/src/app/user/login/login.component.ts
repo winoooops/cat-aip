@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { LoginService, User } from './login.service';
 
 @Component({
   selector: 'app-login',
@@ -12,17 +11,6 @@ export class LoginComponent {
   password: string
 
 
-  constructor( private loginService: LoginService) { }
+  constructor( ) { }
 
-  onSubmit() {
-    const userId = this.username 
-    const pwd = this.password
-
-    const data: User = { userId, pwd }
-    this.loginService
-      .register(data)
-      .subscribe( (msg) => {
-        console.log(msg)
-      })
-  } 
 }
