@@ -10,6 +10,8 @@ export class RegisterComponent {
   // connecting to the backend stuff using fetch api
   username: string 
   password: string
+  passwordConfirm: string
+  email: string
 
 
   constructor( private userService: UserService) { }
