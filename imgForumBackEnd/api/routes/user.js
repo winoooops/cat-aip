@@ -17,13 +17,9 @@ router.get('/login', (req,res) => {
 // post method
 router.post('/login', (req,res) => {
     
-    console.log( req.body )
-    const userId = req.body.userId
-    const pwd = req.body.pwd
-
     User
         .collection
-        .insertOne({ userId, pwd})
+        .insertOne(req.body)
         .then( (data) => {
             res.json({"registed": true})
         })
