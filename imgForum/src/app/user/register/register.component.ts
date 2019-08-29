@@ -37,6 +37,13 @@ export class RegisterComponent {
           width: "250px",
           data: { userId }
         })
+
+        dialogRef
+          .afterClosed()
+          .subscribe( result => {
+            console.log("Dialog closed");
+            
+          })
       })
   } 
 }
