@@ -21,7 +21,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class UserService {
 
   constructor(private http: HttpClient) { }
 
