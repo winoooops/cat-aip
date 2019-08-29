@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 
 export interface User{
   userId: string, 
+  email: string
   pwd: string
 }
 
