@@ -7,16 +7,23 @@
       <form (ngSubmit)="onSubmit()" #form="ngForm">
         <mat-form-field>
           <mat-label>id</mat-label>
-          <input type="text" matInput name="username" placeholder="username" autofocus [(ngModel)]="username" username>
+          <input type="text" matInput name="username" placeholder="username" autofocus [(ngModel)]="username" username #u="ngModel">
+          <mat-error *ngIf="u.touched && u.errors">Id invalid, Please try again...</mat-error>
         </mat-form-field>
   
         <mat-form-field>
           <mat-label>email</mat-label>
-          <input type="text" matInput name="email" placeholder="username" autofocus [(ngModel)]="email" email>
+          <input type="text" matInput name="email" placeholder="john@email.com" autofocus [(ngModel)]="email" email #e="ngModel">
+          <mat-error *ngIf="e.touched && e.errors">Please enter a valid email address...</mat-error>
         </mat-form-field>
 
         <mat-form-field>
-          <input type="password" matInput name="password" placeholder="password" [(ngModel)]="password">
+          <input type="password" matInput name="password" placeholder="password" [(ngModel)]="password" #p1="ngModel">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input type="password" matInput name="passwordConfirm" placeholder="confirm password" [(ngModel)]="passwordConfirm" #p2="ngModel">
+          <mat-error></mat-error>
         </mat-form-field>
         <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Register</button>
       </form>
