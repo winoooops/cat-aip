@@ -6,6 +6,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MaterialUiModule } from '../material-ui/material-ui.module';
 import { EmailDirective } from './validators/email.directive';
+import { UsernameDirective } from './validators/username.directive';
 
 
 // something going on here
@@ -18,7 +19,8 @@ const userRoutes: Routes = [
   declarations: [
     LoginComponent,
     RegisterComponent,
-    EmailDirective
+    EmailDirective,
+    UsernameDirective
   ],
   imports: [
     CommonModule,
