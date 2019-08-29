@@ -33,7 +33,11 @@ router.post('/register', (req,res) => {
                 email: email, 
                 salt: salt,
                 hash: hash
-            }).save()        
+            }).save()
+            // send back some msg so the angular learn it need to redirect to login route
+            res.send({
+                status: "success"
+            })    
         })
         
     }) 
@@ -43,9 +47,11 @@ router.post('/register', (req,res) => {
 
 
 /*****************************************
- *  user authentification 
+ *  user login & authentification 
 ******************************************/
-
+// router.get('/login', (req,res) => {
+//     req.
+// })
 
 
 module.exports = router
