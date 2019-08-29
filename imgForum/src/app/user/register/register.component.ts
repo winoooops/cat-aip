@@ -19,8 +19,8 @@ export class RegisterComponent {
   onSubmit() {
     const userId = this.username 
     const pwd = this.password
-
-    const data: User = { userId, pwd }
+    const email = this.email 
+    const data: User = { userId, email, pwd }
     this.userService
       .register(data)
       .subscribe( (msg) => {
