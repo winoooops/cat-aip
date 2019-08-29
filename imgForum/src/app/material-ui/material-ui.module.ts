@@ -7,7 +7,7 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatInputModule } from '@angular/material/input'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatIconModule } from '@angular/material/icon'
-
+import { MatDialogModule } from '@angular/material/dialog'
 
 @NgModule({
   declarations: [],
@@ -23,6 +23,7 @@ import { MatIconModule } from '@angular/material/icon'
     MatInputModule,
     MatMenuModule,
     MatIconModule,
+    MatDialogModule
   ]
 })
 export class MaterialUiModule { }
