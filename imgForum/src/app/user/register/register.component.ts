@@ -25,6 +25,8 @@ export class RegisterComponent {
       .register(data)
       .subscribe( (msg) => {
         console.log(msg)
+        // if the msg is success, redirect the spa routing to user/login
+        // * store the password and username in the sessionStorage 
       })
   } 
 }
