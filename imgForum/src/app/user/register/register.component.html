@@ -6,11 +6,16 @@
     <mat-card-content>
       <form (ngSubmit)="onSubmit()" #form="ngForm">
         <mat-form-field>
-          <mat-label></mat-label>
+          <mat-label>id</mat-label>
           <input type="text" matInput name="username" placeholder="username" autofocus [(ngModel)]="username">
         </mat-form-field>
         <mat-error></mat-error>
   
+        <mat-form-field>
+          <mat-label>email</mat-label>
+          <input type="text" matInput name="email" placeholder="username" autofocus [(ngModel)]="email" email>
+        </mat-form-field>
+
         <mat-form-field>
           <input type="password" matInput name="password" placeholder="password" [(ngModel)]="password">
         </mat-form-field>
