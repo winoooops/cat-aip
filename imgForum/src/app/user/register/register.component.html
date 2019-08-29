@@ -9,7 +9,6 @@
           <mat-label>id</mat-label>
           <input type="text" matInput name="username" placeholder="username" autofocus [(ngModel)]="username">
         </mat-form-field>
-        <mat-error></mat-error>
   
         <mat-form-field>
           <mat-label>email</mat-label>
@@ -19,7 +18,7 @@
         <mat-form-field>
           <input type="password" matInput name="password" placeholder="password" [(ngModel)]="password">
         </mat-form-field>
-        <button mat-raised-button color="primary" type="submit">Register</button>
+        <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Register</button>
       </form>
     </mat-card-content>
   
