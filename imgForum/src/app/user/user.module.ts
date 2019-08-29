@@ -5,6 +5,7 @@ import { Routes, RouterModule } from '@angular/router'
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { MaterialUiModule } from '../material-ui/material-ui.module';
+import { EmailDirective } from './validators/email.directive';
 
 
 // something going on here
@@ -16,7 +17,8 @@ const userRoutes: Routes = [
 @NgModule({
   declarations: [
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    EmailDirective
   ],
   imports: [
     CommonModule,
