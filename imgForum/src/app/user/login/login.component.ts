@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-login',
@@ -7,10 +8,18 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
   // connecting to the backend stuff using fetch api
-  username: string 
+  username: string
   password: string
 
 
-  constructor( ) { }
+  constructor(private userService: UserService) { }
 
+  onSubmit() {
+    this.userService.login({
+      userId: this.username,
+      password: this.password
+    }).subscribe((res) =>
+      alert(res.message)
+    )
+  }
 }
