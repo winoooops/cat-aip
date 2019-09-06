@@ -22,5 +22,7 @@ before( (done) => {
 // drop all the records before each and every test starts
 // usse done() again for asynchronos 
 beforeEach( done => {
-    mongoose.connection.collections.users.drop( () => done() )
+    mongoose.connection.collections.users.drop( () => { 
+        done() 
+    })
 })
