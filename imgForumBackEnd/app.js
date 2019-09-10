@@ -18,7 +18,7 @@ app.use( bodyParser.json() )
 app.use( bodyParser.urlencoded({ extended: false }))
 app.use( cors() )
 
-app.use('/', forumRoute)
+app.use('/forums', forumRoute)
 app.use('/user', userRoute)
 
 app.listen(PORT, () => {

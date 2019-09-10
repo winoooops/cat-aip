@@ -1,16 +1,31 @@
 const express = require('express')
 const router = express.Router() 
-
-router.get('/', (req, res) => {
-    res.send('getting all the forums')
-})
-
-router.get('/post', (req,res) => {
-    res.send('the form for posting imgage should be here')
-})
+const Image = require('../models/image')
+// router.get('/post', (req,res) => {
+//     res.send('showing the uplaod form ')
+// })
 
 router.post('/post', (req,res) => {
-    res.send("send img post here")
+   
+    // allow user to upload the image's url 
+    // automatically takes down user's id
+    // created an empty array for comments 
+
+    // save records to the database
+    // redirect and show uploaded image
+    const { url, author } = req.body
+    new Image({ url, author})
+            .save()
+            .then( () => {
+                res.json({
+                    "message": "image uploaded..." 
+                 })
+            })
+    
+
+    res.json({
+       "message": "image uploaded..." 
+    })
 })
 
 
