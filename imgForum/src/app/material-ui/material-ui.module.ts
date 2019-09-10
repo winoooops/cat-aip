@@ -8,6 +8,8 @@ import { MatInputModule } from '@angular/material/input'
 import { MatMenuModule } from '@angular/material/menu'
 import { MatIconModule } from '@angular/material/icon'
 import { MatDialogModule } from '@angular/material/dialog'
+import { MatSidenavModule } from '@angular/material/sidenav'
+import { MatListModule } from '@angular/material/list'
 
 @NgModule({
   declarations: [],
@@ -23,7 +25,9 @@ import { MatDialogModule } from '@angular/material/dialog'
     MatInputModule,
     MatMenuModule,
     MatIconModule,
-    MatDialogModule
+    MatDialogModule,
+    MatSidenavModule,
+    MatListModule
   ]
 })
 export class MaterialUiModule { }
