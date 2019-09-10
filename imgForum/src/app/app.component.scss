@@ -1,26 +1,41 @@
-// the colors below should be re-work with custom theme later....
-
-:host {
-    display: block;
+mat-sidenav-container, mat-sidenav-content, mat-sidenav {
     height: 100%;
-}
-
-mat-toolbar {
-    position: relative;
-}
-
-.links-group-item{
-    font-family: 'Titillium Web', sans-serif;
+  }
+  
+  mat-sidenav {
+    width: 250px;
+  }
+  
+  a {
     text-decoration: none;
-    color: pink
-}
-
-.menu-option{
-    margin-right: 8px;
-}
-
-.container{
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
-}
+    color: white;
+  }
+  
+  a:hover,
+  a:active {
+    color: lightgray;
+  }
+  
+  .navigation-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+  }
+  
+  .icon {
+    display: inline-block;
+    height: 30px;
+    margin: 0 auto;
+    padding-right: 5px;
+    text-align: center;
+    vertical-align: middle;
+    width: 15%;
+  }
+  
+  .label {
+    display: inline-block;
+    line-height: 30px;
+    margin-left: 7px;
+    width: 85%;
+  }

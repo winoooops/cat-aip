@@ -1,24 +1,67 @@
-<!--The content below is only a placeholder and can be replaced.-->
-<mat-toolbar color="primary" fxLayout="row">
-  <div class="links-group" fxFlex="6 0 auto" fxLayout fxLayoutAlign="space-around start">
-    <a [routerLink]="['/']" class="links-group-item">Forums</a>
-    <a [routerLink]="['/forums/post']" class="links-group-item">Post</a>
-    <a [routerLink]="['/user/login']" class="links-group-item">Login</a>
+<mat-sidenav-container>
+    <mat-sidenav  #sidenav role="navigation">
+      <mat-nav-list>
+      <a mat-list-item> 
+        <mat-icon class="icon">input</mat-icon>
+        <span class="label">Login</span>
+      </a>
+      <a mat-list-item>
+        <mat-icon class="icon">home</mat-icon>
+        <span class="label">Home</span>
+      </a>
+      <a mat-list-item>
+        <mat-icon class="icon">dashboard</mat-icon>
+        <span class="label">Dashboard</span>
+      </a>
+      <a mat-list-item type="button">
+        <mat-icon class="icon">input</mat-icon>
+        <span class="label">LogOut</span>
+      </a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+       <div fxHide.gt-xs>
+         <button mat-icon-button>
+          <mat-icon>menu</mat-icon>
+        </button>
+      </div>
+       <div>
+         <a [routerLink]="['/']">Image Forum</a>
+       </div>
+       <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs>
+          <ul fxLayout fxLayoutGap="20px" class="navigation-items">
+              <li>
+                <a [routerLink]="['/user/login']">
+                  <mat-icon class="icon">input</mat-icon>
+                  <span class="label">Login</span>
+                </a>
+              </li>
+              <li>
+                <a [routerLink]="['/forums']">
+                  <mat-icon class="icon">home</mat-icon>
+                  <span class="label">Home</span>
+                </a>
+              </li>
+              <li>
+                  <a [routerLink]="['/']">
+                    <!-- add the feature later -->
+                    <mat-icon class="icon">dashboard</mat-icon>
+                    <span class="label">LeaderBoard</span>
+                  </a>
+                </li>
+              <li>
+                  <a>
+                    <mat-icon class="icon">input</mat-icon>
+                    <span class="label">LogOut</span>
+                   </a>
+              </li>
+          </ul>
+       </div>
+      </mat-toolbar>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
 
-  </div>
-
-  <div class="menu" fxFlex="1 0 auto">
-    <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-option">
-      <mat-icon>menu</mat-icon>
-    </button>
-
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item>Item 1</button>
-      <button mat-menu-item>Item 2</button>
-    </mat-menu>
-  </div>
-</mat-toolbar>
-
-<div class="container">
+<div class="content-container">
   <router-outlet></router-outlet>
 </div>
