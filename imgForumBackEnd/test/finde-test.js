@@ -19,24 +19,25 @@ describe('finding test', () => {
             .save()
             .then( () => done() )
     })
+
+    // offcially starts the testing
+    it('Find document by userId from the database', (done) => {
+        User
+            .findOne({ userId: 'joe'})
+            .then( result => {
+                assert( result.userId === 'joe') // pass when it is true
+                done()
+            })
+    }) 
+
+    it('find document by email from the database', (done) => {
+        User
+            .findOne({ email: 'joe@uts.com'})
+            .then( result => {
+                assert( result.email === 'joe@uts.com')
+                done()
+            })
+    })
 })
 
 
-// offcially starts the testing
-it('Find document by userId from the database', (done) => {
-    User
-        .findOne({ userId: 'joe'})
-        .then( result => {
-            assert( result.userId === 'joe')
-            done()
-        })
-}) 
-
-it('find document by email from the database', (done) => {
-    User
-        .findOne({ email: 'joe@uts.com'})
-        .then( result => {
-            assert( result.email === 'joe@uts.com')
-            done()
-        })
-})
