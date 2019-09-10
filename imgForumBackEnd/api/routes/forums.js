@@ -21,11 +21,6 @@ router.post('/post', (req,res) => {
                     "message": "image uploaded..." 
                  })
             })
-    
-
-    res.json({
-       "message": "image uploaded..." 
-    })
 })
 
 
