@@ -19,7 +19,7 @@ export class LoginComponent {
       userId: this.username,
       password: this.password
     }).subscribe((res) =>
-      alert(res.message)
+      alert(res.id)
     )
   }
 }
