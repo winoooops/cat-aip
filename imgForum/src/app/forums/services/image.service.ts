@@ -13,7 +13,7 @@ const httpOptions = {
 
 
 export interface Image {
-  url: string, 
+  image: File, 
   author: string
 }
 
@@ -27,11 +27,12 @@ export interface Image {
 export class ImageService {
   constructor(private http: HttpClient) { }
 
-  saveImageData(data): Observable<Image> {
-    return this.http.post<any>(`${SERVER_URL}/forums/post`, data, httpOptions)
+  saveImageData(data): Observable<any> {
+    console.log( data.get('image') )
+    return this.http.post<any>(`${SERVER_URL}/forums/post`, data)
   }
 
-  getImageData(): Observable<Array<Image>> {
-    return this.http.get<any>(`${SERVER_URL}/forums/`, httpOptions)
+  getImageData(): Observable<Array<any>> {
+    return this.http.get<any>(`${SERVER_URL}/forums/`)
   }
 }
