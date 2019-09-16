@@ -5,11 +5,10 @@
       
         <mat-card-content>
           <form (ngSubmit)="onSubmit()" #form="ngForm">
-            <mat-form-field>
+            <div>
               <mat-label></mat-label>
-              <input type="text" matInput name="url" placeholder="image url" autofocus [(ngModel)]="url">
-            </mat-form-field>
-            <mat-error></mat-error>
+              <input type="file" name="image" autofocus [(ngModel)]="image">
+            </div>
       
             <mat-form-field>
               <input type="text" matInput name="author" placeholder="Your name" [(ngModel)]="author">
@@ -17,5 +16,4 @@
             <button mat-raised-button color="primary" type="submit">Upload</button>
           </form>
         </mat-card-content>
-      
       </mat-card>
