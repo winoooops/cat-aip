@@ -1,16 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ImageService, Image } from '../services/image.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-post',
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent{
+export class PostComponent implements OnInit{
   url: string
   author: string
 
-  constructor(private imageService: ImageService) { }
+  constructor(
+    private imageService: ImageService,
+    private route: ActivatedRoute  
+  ) { }
+
+  ngOnInit(){
+    this.route.queryParams.subscribe( (params: Params) => {
+      this.author = params['id']
+    })
+  }
+
 
   onSubmit() {
     const url = this.url
