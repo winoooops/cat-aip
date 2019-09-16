@@ -6,7 +6,7 @@ const imgSchema = new Schema({
         data: Buffer, 
         contentType: String
     }, 
-    author: String, 
+    // author: String, 
 })
 
 module.exports = mongoose.model('Image', imgSchema)
