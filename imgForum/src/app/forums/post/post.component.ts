@@ -8,7 +8,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./post.component.scss']
 })
 export class PostComponent implements OnInit{
-  url: string
+  file 
   author: string
 
   constructor(
@@ -22,20 +22,22 @@ export class PostComponent implements OnInit{
     })
   }
 
-
-  onSubmit() {
-    const url = this.url
-    const author = this.author
-
-    const newImg: Image = {
-      url, 
-      author
-    }
-
-    this.imageService.saveImageData(newImg)
-      .subscribe( (r) => {
-        console.log(r)
-      })
+  fileChange(element) {
+    this.file = element.target.files[0]
+    console.log( this.file )
   }
 
+
+  onSubmit() {
+    console.log( this.file )
+    let formData: FormData = new FormData() 
+    formData.append("image", this.file, this.file.name)
+    // console.log( formData.get('image') )
+
+    this.imageService
+      .saveImageData(formData)
+      .subscribe( r => {
+        console.log( r )
+      })
+  }
 }
