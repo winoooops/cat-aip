@@ -23,5 +23,16 @@ router.post('/post', (req,res) => {
             })
 })
 
+router.get('/', (req,res) => {
+    // read the image data
+    // send an array as response upon req
+   Image
+    .find({})
+    .then( (result) => {
+        res.json( result )
+    })
+
+})
+
 
 module.exports = router
