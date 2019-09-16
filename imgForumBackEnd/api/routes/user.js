@@ -69,8 +69,9 @@ router.post('/signin', (req, res) => {
                 if (err) return err;
                 // comepare the inputed hash with the hash store
                 if (hash === obj[0]['hash']) {
+                    console.log( obj[0])
                     res.json({
-                        "message": "RightOn..."
+                        "id": obj[0]['userId']
                     })
                 } else {
                     res.json({
