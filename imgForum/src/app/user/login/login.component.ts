@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -12,14 +13,18 @@ export class LoginComponent {
   password: string
 
 
-  constructor(private userService: UserService) { }
+  constructor(
+    private userService: UserService,
+    private router: Router  
+  ) { }
 
   onSubmit() {
     this.userService.login({
       userId: this.username,
       password: this.password
-    }).subscribe((res) =>
-      alert(res.id)
-    )
+    }).subscribe((res) =>{
+      alert(res.id);
+      this.router.navigate(['forums'], { queryParams: { id: res.id } })
+    })
   }
 }
