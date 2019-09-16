@@ -24,7 +24,7 @@ export class LoginComponent {
       password: this.password
     }).subscribe((res) =>{
       alert(res.id);
-      this.router.navigate(['forums'], { queryParams: { id: res.id } })
+      this.router.navigate(['forums/post'], { queryParams: { id: res.id } })
     })
   }
 }
