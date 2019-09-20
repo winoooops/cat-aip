@@ -13,7 +13,14 @@ import { PostComponent } from './post/post.component';
 
 const routes: Routes = [
   { path: 'post', component: PostComponent },
-  { path: ':forum_alias', component: ForumComponent },
+  {
+    path: ':forum_alias',
+    component: ForumComponent,
+    children: [
+      { path: '', component: ThreadsComponent, },
+      { path: ':thread_alias', component: ThreadComponent }
+    ]
+  },
   { path: '', component: ForumsComponent },
 ]
 
