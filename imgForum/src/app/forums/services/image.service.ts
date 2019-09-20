@@ -37,7 +37,12 @@ export class ImageService {
     return this._data
   }
 
-
+  forum(forum_alias): Forum{
+    // return the forum that matches the alias
+    return this._data.find( row => {
+      return row.alias = forum_alias
+    })
+  }
 
 
   saveImageData(data): Observable<any> {
