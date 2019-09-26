@@ -2,9 +2,6 @@ const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
 
-const bcrypt = require('bcrypt')
-const saltRounds = 10
-
 // check connection status with mongodb server
 
 /*****************************************
@@ -17,30 +14,29 @@ const saltRounds = 10
 
 // post method
 router.post('/register', (req, res) => {
-    const { userId, email, pwd } = req.body
-    bcrypt.genSalt(saltRounds, (err, salt) => {
-        if (err) {
-            console.log(err);
-            return
-        }
-        bcrypt.hash(pwd, salt, (err, hash) => {
-            if (err) {
-                console.log(err);
-                return
-            }
-            new User({
-                userId: userId,
-                email: email,
-                salt: salt,
-                hash: hash
-            }).save()
-            // send back some msg so the angular learn it need to redirect to login route
-            res.send({
-                status: "success"
-            })
-        })
 
-    })
+    // Get user information from the request
+    var userData = {
+        username : req.body.userId,
+        email : req.body.email,
+        password : req.body.pwd
+    }
+
+    // Save the user to the database
+    User.create(userData, function (err, user) {
+        // TODO: Modify front-end to behave according to message returned.
+        if (err) {
+            // If error, display failure dialog
+            res.json({
+                "message" : "Username or email already existed!"
+            });
+        } else {
+            // If success, display success dialog t
+            res.json({
+                "message" : "Registration successful!"
+            });
+        }
+      });
 })
 
 
@@ -61,7 +57,7 @@ router.post('/signin', (req, res) => {
                 // 2.1 if not found, notify user to register
                 // send back a json respons saying the id doesn't exist
                 res.json({
-                    "message": "Id not found..."
+                    "message": "Id not found...",
                 })
             }
             const salt = obj[0]['salt']//get the salt from database
@@ -69,16 +65,14 @@ router.post('/signin', (req, res) => {
                 if (err) return err;
                 // comepare the inputed hash with the hash store
                 if (hash === obj[0]['hash']) {
-                    console.log( obj[0])
                     res.json({
-                        "id": obj[0]['userId']
+                        "message": "RightOn..."
                     })
                 } else {
                     res.json({
                         "message": "wrong password"
                     })
                 }
-
             })
         })
 })
