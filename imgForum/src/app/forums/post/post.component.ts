@@ -10,7 +10,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class PostComponent implements OnInit{
   file 
   author: string
-
+  imgPath:string
   constructor(
     private imageService: ImageService,
     private route: ActivatedRoute  
@@ -24,6 +24,7 @@ export class PostComponent implements OnInit{
 
   fileChange(element) {
     this.file = element.target.files[0]
+    this.imgPath = this.file
     console.log( this.file )
   }
 
