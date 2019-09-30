@@ -8,11 +8,13 @@ import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
+import { RankComponent } from './rank/rank.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
+    RankComponent,
   ],
   imports: [
     BrowserModule,

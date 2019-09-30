@@ -6,6 +6,7 @@ const imgSchema = new Schema({
         data: Buffer, 
         contentType: String
     }, 
+    userId:Number
     // author: String, 
 })
 
