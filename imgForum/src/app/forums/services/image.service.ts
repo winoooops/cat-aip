@@ -53,4 +53,8 @@ export class ImageService {
   getImageId(): Observable<Array<any>> {
     return this.http.get<any>(`${SERVER_URL}/forums/`)
   }
+
+  getImageData(id): Observable<any>{
+    return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
+  }
 }
