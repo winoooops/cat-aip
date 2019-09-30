@@ -20,8 +20,6 @@ const multer = require('multer')
 const upload = multer({ storage: storage })
 
 
-
-
 router.post('/post', upload.single('image'), (req,res) => {
     // allow user to upload the image's url -> users are now required to upload img from disk (updated 16/09/19)
     // automatically takes down user's id
@@ -40,11 +38,23 @@ router.post('/post', upload.single('image'), (req,res) => {
     console.log( file )
 
     const img = fs.readFileSync( req.file.path )
-    const encode_img = img.toString('base64') // encode the img to a base64 string 
+    // const encode_img = img.toString('base64') // encode the img to a base64 string 
 
+    /**********************************************************************
+     * tell if the encode_img is properly encoded as base64
+    **********************************************************************/
+
+    // const base64Rejex = /^(?:[A-Z0-9+\/]{4})*(?:[A-Z0-9+\/]{2}==|[A-Z0-9+\/]{3}=|[A-Z0-9+\/]{4})$/i;
+    // const  isBase64Valid = base64Rejex.test(encode_img); // base64Data is the base64 string
+    // if(isBase64Valid) {
+    //     console.log('valid...')
+    // }
+
+    // store the img use Image model 
+    // only store thme as buffer with its contentType
     new Image({
         img: {
-            data: new Buffer(encode_img, 'base64'),
+            data: new Buffer(img),
             contentType: req.file.mimetype, 
         }
     })
@@ -64,13 +74,23 @@ router.post('/post', upload.single('image'), (req,res) => {
 
 router.get('/', (req,res) => {
     // read the image data
-    // send an array as response upon req
+    // send an array of images as response upon req
    Image
     .find({})
     .then( (result) => {
+        console.log( result )
         res.json( result )
     })
 
+})
+
+router.get('/:id',(req, res) => {
+    const id = req.params.id
+    Image
+        .find({"_id": id})
+        .then( result => {
+            res.json( result )
+        })
 })
 
 
