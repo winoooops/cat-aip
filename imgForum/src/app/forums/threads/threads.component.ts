@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from '../services/image.service';
-import { arrayBufferToBase64 } from '../shared/convertB64'
-
 
 @Component({
   selector: 'app-threads',
@@ -10,6 +8,7 @@ import { arrayBufferToBase64 } from '../shared/convertB64'
 })
 export class ThreadsComponent implements OnInit {
   idArr: String[]
+  id: string
   constructor(private imageService: ImageService) { }
 
   ngOnInit() {
