@@ -7,37 +7,40 @@ import { ActivatedRoute, Params } from '@angular/router';
   templateUrl: './post.component.html',
   styleUrls: ['./post.component.scss']
 })
-export class PostComponent implements OnInit{
-  file 
+export class PostComponent implements OnInit {
+  file
   author: string
 
   constructor(
     private imageService: ImageService,
-    private route: ActivatedRoute  
+    private route: ActivatedRoute
   ) { }
 
-  ngOnInit(){
-    this.route.queryParams.subscribe( (params: Params) => {
+  ngOnInit() {
+    this.route.queryParams.subscribe((params: Params) => {
       this.author = params['id']
     })
   }
 
   fileChange(element) {
     this.file = element.target.files[0]
-    console.log( this.file )
+    console.log(this.file)
   }
 
 
   onSubmit() {
-    console.log( this.file )
-    let formData: FormData = new FormData() 
+    console.log(this.file)
+    let formData: FormData = new FormData()
     formData.append("image", this.file, this.file.name)
-    // console.log( formData.get('image') )
+    formData.append("author", this.author)
+
+    console.log(formData.get('image'))
+    console.log(formData.get('author'))
 
     this.imageService
       .saveImageData(formData)
-      .subscribe( r => {
-        console.log( r )
+      .subscribe(r => {
+        console.log(r)
       })
   }
 }
