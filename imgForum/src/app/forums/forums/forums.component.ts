@@ -14,7 +14,16 @@ export class ForumsComponent implements OnInit {
   constructor(private imageService: ImageService) { }
 
   ngOnInit() {
-    this.forums = this.imageService.forums()
+    // this.forums = this.imageService.forums()
+    this.getForums()
+  }
+  getForums(){
+    return this.imageService.getImageId().subscribe(
+      forums => {
+        console.log(forums);
+        this.forums = forums
+      }
+    )
   }
 
 }

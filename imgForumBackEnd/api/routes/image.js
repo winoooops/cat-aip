@@ -50,23 +50,7 @@ router.post('/post', upload.single('image'), (req,res) => {
 
    
     })
-    router.get('/', (req,res) => {
-        // read the image data
-        // send an array as response upon req
-       Image.find(image).then( (result) => {
-            res.json( result )
-            console.log(result)
-        })
     
-    })  
-
-    router.get('/:id',(req, res)=>{
-        const id = req.params.id
-        Image.find({"_id":id}).then(result=>{
-            res.json(result)
-            console.log(result)
-        })
-    })
     // Image.find(image).exec(function(err, docs){
     //     //console.log(docs);
     // })
@@ -74,5 +58,21 @@ router.post('/post', upload.single('image'), (req,res) => {
     
 })
 
+router.get('/', (req,res) => {
+    // read the image data
+    // send an array as response upon req
+   Image.find().then( (result) => {
+        res.json( result )
+        console.log(result)
+    })
 
+})  
+
+router.get('/:id',(req, res)=>{
+    const id = req.params.id
+    Image.find({"_id":id}).then(result=>{
+        res.json(result)
+        console.log(result)
+    })
+})
 module.exports = router
