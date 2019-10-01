@@ -44,6 +44,9 @@ export class PostComponent implements OnInit {
     let formData: FormData = new FormData()
     formData.append("image", this.file, this.file.name)
     formData.append("author", this.author)
+    for(let i = 0 ; i <= this.tags.length ; i ++ ) {
+      formData.append('tags[]', this.tags[i])
+    }
     // formData.append('tags', this.tags)
 
 
@@ -62,11 +65,8 @@ export class PostComponent implements OnInit {
     const input = event.input
     const value = event.value
 
-    console.log('poop')
-
-
     // add the tag once the input is completed 
-    if( value ) {
+    if( (value || '').trim() ) {
       this.tags.push( value.trim() )
     } 
 
