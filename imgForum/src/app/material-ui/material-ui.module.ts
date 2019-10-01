@@ -10,6 +10,9 @@ import { MatIconModule } from '@angular/material/icon'
 import { MatDialogModule } from '@angular/material/dialog'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
+import { MatChipsModule } from '@angular/material/chips'
+
+
 
 @NgModule({
   declarations: [],
@@ -27,7 +30,8 @@ import { MatListModule } from '@angular/material/list'
     MatIconModule,
     MatDialogModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatChipsModule
   ]
 })
 export class MaterialUiModule { }
