@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ɵbypassSanitizationTrustResourceUrl } from '@angular/core';
 import { ImageService, Image } from '../services/image.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { MatChipInputEvent } from '@angular/material/chips';
+import { ENTER, COMMA } from '@angular/cdk/keycodes'
+
 
 @Component({
   selector: 'app-post',
@@ -10,7 +13,14 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class PostComponent implements OnInit {
   file
   author: string
-  tags: string[]
+  tags: string[] = ["cat", "movies", "wallpaper"]
+  tagProps  = {
+    visible: true, 
+    selectable: true,
+    removable: true,
+    addOnBlur: true
+  }
+  separatorKeysCodes: number[] = [ENTER, COMMA]
 
   constructor(
     private imageService: ImageService,
@@ -47,4 +57,34 @@ export class PostComponent implements OnInit {
         console.log(r)
       })
   }
+
+  add(event: MatChipInputEvent) {
+    const input = event.input
+    const value = event.value
+
+    console.log('poop')
+
+
+    // add the tag once the input is completed 
+    if( value ) {
+      this.tags.push( value.trim() )
+    } 
+
+    // reset the input value 
+    if( input ) {
+      input.value = ''
+    }
+
+
+  }
+
+  remove(tag: string) {
+    console.log(`${tag} tag has been deleted...`)
+    const index = this.tags.indexOf(tag)
+    if( index >= 0 ) {
+       this.tags.splice(index, 1)
+    }
+    // console.log( this.tags )
+  }
+
 }
