@@ -10,6 +10,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 export class PostComponent implements OnInit {
   file
   author: string
+  tags: string[]
 
   constructor(
     private imageService: ImageService,
@@ -33,6 +34,9 @@ export class PostComponent implements OnInit {
     let formData: FormData = new FormData()
     formData.append("image", this.file, this.file.name)
     formData.append("author", this.author)
+    // formData.append('tags', this.tags)
+
+
 
     console.log(formData.get('image'))
     console.log(formData.get('author'))

@@ -37,6 +37,7 @@ router.post('/post', upload.single('image'), (req, res) => {
 
     const author = req.body.author
     const tags = req.body.tags
+    console.log(tags)
     const img = fs.readFileSync(req.file.path)
     // const encode_img = img.toString('base64') // encode the img to a base64 string 
 
