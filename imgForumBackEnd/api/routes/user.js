@@ -1,11 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const User = require('../models/user')
-const salt = 10;
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // check connection status with mongodb server
-
 /*****************************************
  provide login functionality
  1. store the salt 
@@ -13,8 +12,9 @@ const bcrypt = require('bcrypt');
  3. store the password hash, instead of passowrd
  4. store the record on MongoDB
 ******************************************/
-
 // post method
+var sess;
+
 router.post('/register', (req, res) => {
     // Get user information from the request
     var userData = {
@@ -33,24 +33,35 @@ router.post('/register', (req, res) => {
             });
         }
     });
-    console.log("hhehhee")
 })
 
-
+  
 router.post('/signin', (req, res) => {
+    if (!req.body.password || !req.body.userId) {
+        res.json({
+            message : "username and password must be provided!"
+        })
+    }
     User.findOne({username : req.body.userId}, function(err, result) {
         if (err) {
             console.log(err);
         }
         bcrypt.compare(req.body.password, result.password, (err, correctness) => {
+            if (err) {
+                console.log(err);
+            }
+            // username and password match
             if (correctness) {
-                res.cookie(req.body.userId, user);
+                // generate token
+                let token = jwt.sign({username:req.body.userId},'secret', {expiresIn : '3h'});
                 res.json({
-                    "id" : req.body.userId
+                    token : token,
+                    id : req.body.userId
                 })
             } else {
+                console.log("Loggin failure!");
                 res.json({
-                    "id" : "wrong password!"
+                    id : "wrong password!"
                 })
             }
         })
@@ -58,12 +69,33 @@ router.post('/signin', (req, res) => {
 })
 
 router.post('/logout', (req, res) => {
-    res.clearCookie(cookieName);
-    res.json({
-        "message" : "Logged out!"
+    req.session.destroy(() => {
+        res.json({
+            "message" : "reset!"
+        })
     })
 })
 
+// Below codes are modified based on https://github.com/AzharHusain/token-based-authentication
+router.get('/username', verifyToken, function(req,res,next){
+    return res.status(200).json(decodedToken.username);
+  })
+  
+var decodedToken = '';
+
+function verifyToken(req,res,next){
+    let token = req.query.token;
+    jwt.verify(token,'secret', function(err, tokendata){
+      if(err){
+        return res.status(400).json({message:' Unauthorized request'});
+      }
+      if(tokendata){
+        decodedToken = tokendata;
+        next();
+      }
+    })
+  }
+  
 
 
 

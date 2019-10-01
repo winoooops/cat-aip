@@ -22,9 +22,16 @@ export class LoginComponent {
     this.userService.login({
       userId: this.username,
       password: this.password
-    }).subscribe((res) =>{
-      alert(res.id);
-      this.router.navigate(['forums/post'], { queryParams: { id: res.id } })
-    })
+    }).subscribe(
+      data => {
+        // save token to localstorage
+        console.log(data);
+        localStorage.setItem('token', data.token);
+        this.router.navigate(['forums/post'], { queryParams: { id: data.id } })
+      },
+      error => {
+        alert("Error occurred!");
+      }
+    );
   }
 }

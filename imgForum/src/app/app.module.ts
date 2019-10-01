@@ -8,7 +8,6 @@ import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { JwtModule } from '@auth0/angular-jwt';
 
 
 @NgModule({
@@ -23,15 +22,6 @@ import { JwtModule } from '@auth0/angular-jwt';
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
-    JwtModule.forRoot({
-      config: {
-        tokenGetter: function tokenGetter() {
-             return localStorage.getItem('access_token');
-            },
-        whitelistedDomains: ['localhost:3000'],
-        blacklistedRoutes: ['http://localhost:3000/user/signin']
-      }
-    })
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -56,12 +56,6 @@ router.post('/post', upload.single('image'), (req,res) => {
         })
 })
 
-
-
-
-
-
-
 router.get('/', (req,res) => {
     // read the image data
     // send an array as response upon req

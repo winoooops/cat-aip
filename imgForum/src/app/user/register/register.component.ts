@@ -16,7 +16,6 @@ export class RegisterComponent {
   passwordConfirm: string
   email: string
 
-
   constructor( 
     private userService: UserService,
     private dialog: MatDialog
