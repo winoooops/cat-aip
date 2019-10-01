@@ -1,5 +1,6 @@
-import { Component, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ImageService, Image } from '../services/image.service';
+import { Forum } from 'src/app/services/data';
 
 @Component({
   selector: 'app-forum',
@@ -8,15 +9,12 @@ import { ImageService, Image } from '../services/image.service';
 })
 export class ForumsComponent implements OnInit {
   images: Image[]
+  forums: Forum[]
 
   constructor(private imageService: ImageService) { }
 
   ngOnInit() {
-    this.imageService.getImageData()
-      .subscribe( (images) => {
-        this.images = images
-        console.log( this.images )
-      })
+    this.forums = this.imageService.forums()
   }
 
 }

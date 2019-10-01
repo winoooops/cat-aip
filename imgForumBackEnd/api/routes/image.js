@@ -59,6 +59,14 @@ router.post('/post', upload.single('image'), (req,res) => {
         })
     
     })  
+
+    router.get('/:id',(req, res)=>{
+        const id = req.params.id
+        Image.find({"_id":id}).then(result=>{
+            res.json(result)
+            console.log(result)
+        })
+    })
     // Image.find(image).exec(function(err, docs){
     //     //console.log(docs);
     // })
