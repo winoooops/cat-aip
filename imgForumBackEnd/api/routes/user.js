@@ -42,6 +42,11 @@ router.post('/signin', (req, res) => {
             message : "username and password must be provided!"
         })
     }
+    if (req.query.token) {
+        res.json({
+            "message" : "Already signed in!"
+        })
+    }
     User.findOne({username : req.body.userId}, function(err, result) {
         if (err) {
             console.log(err);

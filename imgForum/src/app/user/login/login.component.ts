@@ -16,7 +16,12 @@ export class LoginComponent {
   constructor(
     private userService: UserService,
     private router: Router  
-  ) { }
+  ) { 
+    if (localStorage.token) {
+      alert("You have already signed in!")
+      this.router.navigate(['/forums/post']);
+    }
+  }
 
   onSubmit() {
     this.userService.login({
