@@ -1,19 +1,24 @@
 <mat-card>
-        <mat-card-header>
-          <mat-card-title>Post Image</mat-card-title>
-        </mat-card-header>
-      
-        <mat-card-content>
-          <form (ngSubmit)="onSubmit()" #form="ngForm">
-            <div>
-              <mat-label></mat-label>
-              <input type="file" autofocus (change) ="fileChange($event)">
-            </div>
-      
-            <mat-form-field>
-              <input type="text" matInput name="author" placeholder="Your name" [(ngModel)]="author">
-            </mat-form-field>
-            <button mat-raised-button color="primary" type="submit">Upload</button>
-          </form>
-        </mat-card-content>
-      </mat-card>
+  <mat-card-header>
+    <mat-card-title>Post Image</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <div>
+        <mat-label></mat-label>
+        <input type="file" autofocus (change)="fileChange($event)">
+      </div>
+
+      <mat-form-field>
+        <input type="text" matInput name="author" placeholder="Your name" [(ngModel)]="author">
+      </mat-form-field>
+
+      <mat-form-field>
+        <input type="text" matInput name="tags" placeholder="tags" [(ngModel)]="tags">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Upload</button>
+    </form>
+  </mat-card-content>
+</mat-card>
