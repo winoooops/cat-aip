@@ -1,26 +1,26 @@
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
-const router = express.Router() 
+const router = express.Router()
 const Image = require('../models/image')
 const multer = require('multer')
 
 
 
- // define a storage location and naming strategy <---- multer enabled 
- const storage = multer.diskStorage({
-    destination: (req,file,cb) => {
-        cb(null, path.join(__dirname + '../../../images') )
+// define a storage location and naming strategy <---- multer enabled 
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, path.join(__dirname + '../../../images'))
     },
-    filename: (req,file,cb) => {
-        cb(null, file.filename + '-' + Date.now() )
-    } 
+    filename: (req, file, cb) => {
+        cb(null, file.filename + '-' + Date.now())
+    }
 })
 
 const upload = multer({ storage: storage })
 
 
-router.post('/post', upload.single('image'), (req,res) => {
+router.post('/post', upload.single('image'), (req, res) => {
     // allow user to upload the image's url -> users are now required to upload img from disk (updated 16/09/19)
     // automatically takes down user's id
     // created an empty array for comments 
@@ -28,16 +28,15 @@ router.post('/post', upload.single('image'), (req,res) => {
     // save records to the database
     // redirect and show uploaded image
 
-    // parts of the code below is inspired from `https://code.tutsplus.com/tutorials/file-upload-with-multer-in-node--cms-32088`
-    
+    // the code below is inspired by `https://code.tutsplus.com/tutorials/file-upload-with-multer-in-node--cms-32088`
+
     const file = req.file
-    if( !file ) {
-        return 
+    if (!file) {
+        return
     }
 
-    console.log( file )
-
-    const img = fs.readFileSync( req.file.path )
+    const author = req.body.author
+    const img = fs.readFileSync(req.file.path)
     // const encode_img = img.toString('base64') // encode the img to a base64 string 
 
     /**********************************************************************
@@ -55,11 +54,12 @@ router.post('/post', upload.single('image'), (req,res) => {
     new Image({
         img: {
             data: new Buffer(img),
-            contentType: req.file.mimetype, 
-        }
+            contentType: req.file.mimetype,
+        },
+        author: author
     })
         .save()
-        .then( () => {
+        .then(() => {
             res.json({
                 "message": "image uploaded..."
             })
@@ -72,24 +72,24 @@ router.post('/post', upload.single('image'), (req,res) => {
 
 
 
-router.get('/', (req,res) => {
+router.get('/', (req, res) => {
     // read the image data
     // send an array of images as response upon req
-   Image
-    .find({})
-    .then( (result) => {
-        console.log( result )
-        res.json( result )
-    })
+    Image
+        .find({})
+        .then((result) => {
+            console.log(result)
+            res.json(result)
+        })
 
 })
 
-router.get('/:id',(req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id
     Image
-        .find({"_id": id})
-        .then( result => {
-            res.json( result )
+        .find({ "_id": id })
+        .then(result => {
+            res.json(result)
         })
 })
 
