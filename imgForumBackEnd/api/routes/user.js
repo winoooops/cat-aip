@@ -44,6 +44,7 @@ router.post('/signin', (req, res) => {
         }
         bcrypt.compare(req.body.password, result.password, (err, correctness) => {
             if (correctness) {
+                res.cookie(req.body.userId, user);
                 res.json({
                     "id" : req.body.userId
                 })
@@ -54,6 +55,13 @@ router.post('/signin', (req, res) => {
             }
         })
     }) 
+})
+
+router.post('/logout', (req, res) => {
+    res.clearCookie(cookieName);
+    res.json({
+        "message" : "Logged out!"
+    })
 })
 
 
