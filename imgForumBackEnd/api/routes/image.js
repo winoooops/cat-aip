@@ -7,9 +7,7 @@ var mime = require('mime');
 const multer = require('multer')
 var path = require('path')
 
-// require the image url from users
-//Image.remove();
-//var imagePath = "C:/Users/21043/Pictures/My Image Garden/testimage.jpg";
+
 const storage = multer.diskStorage({
     destination: (req,file,cb) => {
         cb(null, path.join(__dirname + '../../../images') )
@@ -37,23 +35,7 @@ router.post('/post', upload.single('image'), (req,res) => {
     
     console.log('saved img to mongo');
 
-    
-    //router.get('/', function(req, res, next){
-        // Image.find({userId:5566}, function(err, doc){
-        //    // if(err) return next(err);
-        //    // res.contentType(doc.img.contentType);
-        //     //res.send(doc.img.data)
-        //     console.log(doc.img.data);
-        //     console.log(doc.img.contentType)            
-        // });
-    //});
-
-   
     })
-    
-    // Image.find(image).exec(function(err, docs){
-    //     //console.log(docs);
-    // })
     
     
 })
