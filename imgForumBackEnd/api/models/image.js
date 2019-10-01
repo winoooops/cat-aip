@@ -7,6 +7,7 @@ const imgSchema = new Schema({
         contentType: String
     },
     author: String,
+    tags: [String]
 })
 
 module.exports = mongoose.model('Image', imgSchema)
