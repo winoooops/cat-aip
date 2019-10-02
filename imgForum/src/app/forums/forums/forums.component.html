@@ -8,9 +8,10 @@
     <tr *ngFor="let forum of forums" [routerLink]="[forum.alias]">
             <td>{{forum.img.data}}</td>
             <td>{{forum.img.contentType}}</td>
-        <td>{{forum.title}}</td>
+            <td><img src="data:{{forum.img.contentType}};base64,{{forum.img.data.data}}"></td>
+        <!-- <td>{{forum.title}}</td>
         <td>{{forum.threads[0].title}} by {{forum.threads[0].posts[0].username}} on
             {{forum.threads[0].posts[0].timestamp | date:'medium'}}</td>
-        <td>{{forum.threads.length}}</td>
+        <td>{{forum.threads.length}}</td> -->
     </tr>
 </table>

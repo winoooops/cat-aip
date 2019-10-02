@@ -16,14 +16,19 @@ export class ForumsComponent implements OnInit {
   ngOnInit() {
     // this.forums = this.imageService.forums()
     this.getForums()
+ 
   }
   getForums(){
     return this.imageService.getImageId().subscribe(
       forums => {
         console.log(forums);
+        forums.forEach(e => {
+          e.img.data.data = this.imageService.arrayBufferToBase64(e.img.data.data)
+        });
         this.forums = forums
       }
     )
   }
+  
 
 }
