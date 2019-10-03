@@ -1,0 +1,21 @@
+:host {
+    margin: auto;
+    width: 80%;
+}
+
+.selector {
+    margin-bottom: 2rem;
+    margin-top: 2rem;
+}
+
+.selector button {
+    margin-left: 20px;
+}
+
+
+
+main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); // enable the grid template system
+    grid-gap: 1rem;
+}
