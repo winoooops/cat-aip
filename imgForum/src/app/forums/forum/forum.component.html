@@ -3,4 +3,10 @@
       <span class="title">{{forum?.title}}</span>
     </div>
   </header>
-  <router-outlet></router-outlet>
+  <div class="selector">
+    <button mat-button color="accent">All</button>
+    <button mat-raised-button color="accent" routerLink="['']">Cats</button>
+    <button mat-button color="accent">Wallpaper</button>
+    <button mat-button color="accent">Film</button>
+  </div>
+<router-outlet></router-outlet>
