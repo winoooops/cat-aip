@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from '../services/image.service';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-threads',
@@ -9,10 +10,18 @@ import { ImageService } from '../services/image.service';
 export class ThreadsComponent implements OnInit {
   idArr: String[]
   id: string
-  constructor(private imageService: ImageService) { }
+  tag: string 
+
+  constructor(
+    private imageService: ImageService,
+    private route: ActivatedRoute,  
+  ) { }
 
   ngOnInit() {
-    this.imageService.getImageId()
+    this.route.params.subscribe( (params: Params) => {
+      this.tag = this.route.snapshot.parent.params["forum_alias"]
+      console.log( this.tag )
+      this.imageService.getImageIdByTag( this.tag )
       .subscribe( r => {
         // only get the id of each documents
         
@@ -21,6 +30,14 @@ export class ThreadsComponent implements OnInit {
 
         // pass it down to child components
       })
+    })
+
+
+
+
+
+
+    
   }
 
 }
