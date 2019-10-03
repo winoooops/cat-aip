@@ -11,6 +11,7 @@ export class ThreadComponent implements OnInit {
   @Input() id: string
   imgSrc: string
   author: string
+  tags: string[] 
   constructor(private imageService: ImageService) { }
 
   ngOnInit() {
@@ -26,7 +27,7 @@ export class ThreadComponent implements OnInit {
         const imgStr = arrayBufferToBase64(r[0].img.data.data)
         // console.log( imgStr )
         this.author = r[0].author
-
+        this.tags = r[0].tags
         this.imgSrc = flag + imgStr
         // console.log(this.imgSrc)
       })
