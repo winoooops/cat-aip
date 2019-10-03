@@ -11,7 +11,6 @@ import { ThreadsComponent } from './threads/threads.component';
 import { ThreadComponent } from './thread/thread.component';
 import { PostComponent } from './post/post.component';
 
-
 const routes: Routes = [
   { path: 'post', component: PostComponent },
   {

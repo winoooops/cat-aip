@@ -16,7 +16,6 @@ export class RegisterComponent {
   passwordConfirm: string
   email: string
 
-
   constructor( 
     private userService: UserService,
     private dialog: MatDialog
@@ -31,19 +30,19 @@ export class RegisterComponent {
       .register(data)
       .subscribe( (msg) => {
         console.log(msg)
-        // if the msg is success, redirect the spa routing to user/login
-        // * store the password and username in the sessionStorage 
-        const dialogRef: MatDialogRef<DialogComponent> = this.dialog.open(DialogComponent, {
-          width: "250px",
-          data: { userId }
-        })
-
-        dialogRef
-          .afterClosed()
-          .subscribe( result => {
-            console.log("Dialog closed");
-            
-          })
+        
+        // If input data is invalid, registration failed.
+        // if the msg is success, redirect the spa routing to user/login.
+        // * store the password and username in the sessionStorage.
+          const dialogRef: MatDialogRef<DialogComponent> = this.dialog.open(DialogComponent, {
+            width: "250px",
+            data: { userId }
+          })  
+        // dialogRef
+        //   .afterClosed()
+        //   .subscribe( result => {
+        //     console.log("Dialog closed");
+        //   })
       })
   } 
 }

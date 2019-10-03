@@ -6,7 +6,7 @@
     <mat-card-content>
       <form (ngSubmit)="onSubmit()" #form="ngForm">
         <mat-form-field>
-          <mat-label>id</mat-label>
+          <mat-label>Id</mat-label>
           <input type="text" matInput name="username" placeholder="username" autofocus [(ngModel)]="username" username #u="ngModel">
           <mat-error *ngIf="u.touched && u.errors">Id invalid, Please try again...</mat-error>
         </mat-form-field>

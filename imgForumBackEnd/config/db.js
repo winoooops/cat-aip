@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const options = { useNewUrlParser: true }
+mongoose.set('useCreateIndex', true);
 const dbName = 'imgForum'
 let client
 
@@ -19,4 +20,3 @@ db.on('error', (err) => {
 db.on('disconneted', () => {
     console.log('mongoose disconnected')
 })
-4

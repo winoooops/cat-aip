@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface User {
@@ -12,10 +12,11 @@ export interface User {
 const SERVER_URL = "http://localhost:3000"
 
 const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type': 'application/json'
-  })
-};
+  headers: new HttpHeaders({ 
+    'Content-Type': 'application/json',
+    'credentials' : 'include'
+  }),
+};  
 
 
 

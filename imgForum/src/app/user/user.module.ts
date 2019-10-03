@@ -8,12 +8,14 @@ import { MaterialUiModule } from '../material-ui/material-ui.module';
 import { EmailDirective } from './validators/email.directive';
 import { UsernameDirective } from './validators/username.directive';
 import { DialogComponent } from './register/dialog/dialog.component';
+import { LogoutComponent } from './logout/logout.component';
 
 
 // something going on here
 const userRoutes: Routes = [
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'logout', component: LogoutComponent },
 ]
 
 @NgModule({
@@ -22,7 +24,8 @@ const userRoutes: Routes = [
     RegisterComponent,
     EmailDirective,
     UsernameDirective,
-    DialogComponent
+    DialogComponent,
+    LogoutComponent
   ],
   imports: [
     CommonModule,
