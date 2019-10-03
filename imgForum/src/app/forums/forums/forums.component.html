@@ -1,14 +1,8 @@
-<table class="table">
-    <tr>
-        <th>Forum Topic</th>
-        <th>Last Post</th>
-        <th>Threads</th>
-    </tr>
-    <!-- putting the router parameters in an array  -->
-    <tr *ngFor="let forum of forums" [routerLink]="[forum.alias]">
-        <td>{{forum.title}}</td>
-        <td>{{forum.threads[0].title}} by {{forum.threads[0].posts[0].username}} on
-            {{forum.threads[0].posts[0].timestamp | date:'medium'}}</td>
-        <td>{{forum.threads.length}}</td>
-    </tr>
-</table>
+<div class="selector">
+    <button mat-button color="accent" [routerLink]="['all']">All</button>
+    <button mat-raised-button color="accent" [routerLink]="['cats']">Cats</button>
+    <button mat-button color="accent" [routerLink]="['wallpaper']">Wallpaper</button>
+    <button mat-button color="accent" [routerLink]="['films']">Film</button>
+</div>
+<!-- leaderboard componnet should be here... -->
+<router-outlet></router-outlet>
