@@ -35,5 +35,4 @@ export class UserService {
   login(data): Observable<any> {
     return this.http.post<any>(`${SERVER_URL}/user/signin`, data, httpOptions)
   }
-
 }

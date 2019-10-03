@@ -26,6 +26,7 @@ app.use(function(req, res, next) {
 app.use( express.static('public'))
 app.use( bodyParser.json() )
 app.use( bodyParser.urlencoded({ extended: true }))
+app.use( cors() )
 
 app.use('/forums', forumRoute)
 app.use('/user', userRoute)

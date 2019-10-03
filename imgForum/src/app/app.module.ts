@@ -20,7 +20,7 @@ import { FormsModule } from '@angular/forms';
     FlexLayoutModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
