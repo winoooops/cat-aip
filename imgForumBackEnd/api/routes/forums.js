@@ -75,28 +75,39 @@ router.post('/post', upload.single('image'), (req, res) => {
 
 
 
-router.get('/', (req, res) => {
-    // read all the image data
-    // send an array of images as response upon req
-    Image
-        .find({})
-        .then((result) => {
-            console.log(result)
-            res.json(result)
-        })
+// router.get('/', (req, res) => {
+//     // read all the image data
+//     // send an array of images as response upon req
+//     Image
+//         .find({})
+//         .then((result) => {
+//             console.log(result)
+//             res.json(result)
+//         })
 
-})
-
+// })
 
 router.get('/tags/:tag', (req, res) => {
     // read the image data based on the tags
     //
     const tag =  req.params.tag 
-    Image
+
+    if( tag == "all") {
+        Image
+        .find({})
+        .then((result) => {
+            console.log(result)
+            res.json(result)
+        })
+    }
+    else {
+        Image
         .find({ tags: { $all: [ tag ] } })
         .then( result => {
             res.json( result )
         })
+    } 
+   
 })
 
 
