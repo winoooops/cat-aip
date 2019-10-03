@@ -76,7 +76,7 @@ router.post('/post', upload.single('image'), (req, res) => {
 
 
 router.get('/', (req, res) => {
-    // read the image data
+    // read all the image data
     // send an array of images as response upon req
     Image
         .find({})
@@ -86,6 +86,20 @@ router.get('/', (req, res) => {
         })
 
 })
+
+
+router.get('/tags/:tag', (req, res) => {
+    // read the image data based on the tags
+    //
+    const tag =  req.params.tag 
+    Image
+        .find({ tags: { $all: [ tag ] } })
+        .then( result => {
+            res.json( result )
+        })
+})
+
+
 
 router.get('/:id', (req, res) => {
     const id = req.params.id
