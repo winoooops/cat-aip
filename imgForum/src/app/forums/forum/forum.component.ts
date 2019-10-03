@@ -16,8 +16,9 @@ export class ForumComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.route.queryParams.subscribe( (params: Params) => {
-      this.forum = this.imageService.forum( params['alias'])
+    this.route.params.subscribe( (params: Params) => {
+      // this.forum = this.imageService.forum( params['forum_alias'])
+      this.forum = params['forum_alias']
     })
   }
 
