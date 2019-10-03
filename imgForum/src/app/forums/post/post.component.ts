@@ -13,7 +13,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes'
 export class PostComponent implements OnInit {
   file
   author: string
-  tags: string[] = ["cat", "movies", "wallpaper"]
+  tags: string[] = ["cats", "films", "wallpaper"]
   tagProps  = {
     visible: true, 
     selectable: true,
