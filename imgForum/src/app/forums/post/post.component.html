@@ -1,19 +1,41 @@
 <mat-card>
-        <mat-card-header>
-          <mat-card-title>Post Image</mat-card-title>
-        </mat-card-header>
-      
-        <mat-card-content>
-          <form (ngSubmit)="onSubmit()" #form="ngForm">
-            <div>
-              <mat-label></mat-label>
-              <input type="file" autofocus (change) ="fileChange($event)">
-            </div>
-      
-            <mat-form-field>
-              <input type="text" matInput name="author" placeholder="Your name" [(ngModel)]="author">
-            </mat-form-field>
-            <button mat-raised-button color="primary" type="submit">Upload</button>
-          </form>
-        </mat-card-content>
-      </mat-card>
+  <mat-card-header>
+    <mat-card-title>Post Image</mat-card-title>
+  </mat-card-header>
+
+  <mat-card-content>
+    <form (ngSubmit)="onSubmit()" #form="ngForm">
+      <div>
+        <mat-label></mat-label>
+        <input type="file" autofocus (change)="fileChange($event)">
+      </div>
+
+      <mat-form-field>
+        <input type="text" matInput name="author" placeholder="Your name" [(ngModel)]="author">
+      </mat-form-field>
+
+      <mat-form-field class="tags-chip-list">
+          <mat-chip-list #chipList aria-label="tags">
+            <mat-chip 
+              *ngFor="let tag of tags" 
+		          [selectable]="tagProps.selectable"
+              [removable]="tagProps.removable" (removed)="remove(tag)"
+            >
+              {{tag}}
+              <mat-icon matChipRemove *ngIf="tagProps.removable">cancel</mat-icon>
+            </mat-chip>
+            <input 
+              placeholder="New fruit..."
+              name="tags"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="tagProps.addOnBlur"
+              (matChipInputTokenEnd)="add($event)"
+            >
+          </mat-chip-list>
+        </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit">Upload</button>
+    </form>
+  </mat-card-content>
+</mat-card>

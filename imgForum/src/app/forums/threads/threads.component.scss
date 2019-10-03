@@ -3,7 +3,7 @@
     width: 80%;
 }
 
-.selector{
+.selector {
     margin-bottom: 2rem;
     margin-top: 2rem;
 }
@@ -14,24 +14,8 @@
 
 
 
-main{
+main {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr) );// enable the grid template system
+    grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr)); // enable the grid template system
     grid-gap: 1rem;
 }
-
-.img-card {
-    transition: transform 1s;
-
-    &:hover {
-        transform: translateY(-10px)
-    }
-}
-
-
-mat-card img {
-    object-fit: cover;
-    width: 100%;
-
-}
-
