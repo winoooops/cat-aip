@@ -3,11 +3,10 @@ const Schema = mongoose.Schema
 
 const imgSchema = new Schema({
     img: {
-        data: Buffer,
+        data: Buffer, 
         contentType: String
-    },
-    author: String,
-    tags: [String]
+    }, 
+    // author: String, 
 })
 
 module.exports = mongoose.model('Image', imgSchema)

@@ -50,7 +50,7 @@ export class ImageService {
     return this.http.post<any>(`${SERVER_URL}/forums/post`, data)
   }
 
-  getImageId(): Observable<Array<any>> {
+  getImageData(): Observable<Array<any>> {
     return this.http.get<any>(`${SERVER_URL}/forums/`)
   }
 
@@ -59,7 +59,5 @@ export class ImageService {
       observe : 'body',
       params: new HttpParams().append('token', localStorage.getItem('token'))
     });
-  getImageData(id): Observable<any>{
-    return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
   }
 }
