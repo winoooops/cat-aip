@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { Router } from '@angular/router';
+import { DataSharingService } from '../../data-sharing.service';
 
 @Component({
   selector: 'app-login',
@@ -12,10 +13,10 @@ export class LoginComponent {
   username: string
   password: string
 
-
   constructor(
     private userService: UserService,
-    private router: Router  
+    private router: Router, 
+    private dataSharingService: DataSharingService
   ) { 
     if (localStorage.token) {
       alert("You have already signed in!")
@@ -29,14 +30,19 @@ export class LoginComponent {
       password: this.password
     }).subscribe(
       data => {
-        // save token to localstorage
-        console.log(data);
-        localStorage.setItem('token', data.token);
-        this.router.navigate(['forums/post'], { queryParams: { id: data.id } })
+        // Log in successful
+        if (data.token) {
+          localStorage.setItem('token', data.token);
+          this.dataSharingService.isUserLoggedIn.next(true);
+          this.router.navigate(['forums/post'], { queryParams: { id: data.id } })  
+        } else {
+          alert("Wrong password or username!");
+        }
       },
       error => {
         alert("Error occurred!");
       }
     );
   }
+
 }

@@ -10,18 +10,18 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 export class PostComponent implements OnInit{
   file 
   author: string
-
   constructor(
     private imageService: ImageService,
     private route: ActivatedRoute,   
     private router : Router
   ) {
-    if (!localStorage.token) {
-      console.log("here"!);
-      this.router.navigate(['/user/login']);
-    }
    }
   ngOnInit(){
+  
+    if (!localStorage.token) {
+      alert("You must log in first!")
+      this.router.navigate(['/user/login']);
+    }
     this.route.queryParams.subscribe( (params: Params) => {
       this.author = params['id']
     })
