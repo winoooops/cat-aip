@@ -32,10 +32,18 @@
        <div fxFlex fxLayout fxLayoutAlign="flex-end"  fxHide.xs>
           <ul fxLayout fxLayoutGap="20px" class="navigation-items">
               <li>
-                <a [routerLink]="['/user/login']">
-                  <mat-icon class="icon">input</mat-icon>
-                  <span class="label">Login</span>
-                </a>
+                <div *ngIf= "isUserLoggedIn; else showLogIn">
+                    <a [routerLink]="['/user/logout']">
+                      <mat-icon class="icon">input</mat-icon>
+                      <span class="label">Log Out</span>
+                     </a>
+                </div>
+                <ng-template #showLogIn>
+                    <a [routerLink]="['/user/login']">
+                      <mat-icon class="icon">input</mat-icon>
+                      <span class="label">Log In</span>
+                    </a>
+                </ng-template>      
               </li>
               <li>
                 <a [routerLink]="['/forums']">
@@ -50,12 +58,12 @@
                     <span class="label">LeaderBoard</span>
                   </a>
                 </li>
-              <li>
-                  <a>
+              <!-- <li>
+                  <a [routerLink]="['/user/logout']">
                     <mat-icon class="icon">input</mat-icon>
                     <span class="label">LogOut</span>
                    </a>
-              </li>
+              </li> -->
           </ul>
        </div>
       </mat-toolbar>
