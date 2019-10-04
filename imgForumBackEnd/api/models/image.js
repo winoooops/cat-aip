@@ -13,7 +13,7 @@ const imgSchema = new Schema({
 // setting the recursive value 
 
 imgSchema.add({
-    comments: [imgSchema]
+    commentOn: String
 })
 
 module.exports = mongoose.model('Image', imgSchema)
