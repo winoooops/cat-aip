@@ -1,5 +1,5 @@
 <main>
     <div *ngFor="let index of idArr">
-        <app-thread [id]="index"></app-thread>
+        <app-thread [id]="index" [routerLink]="[index]"></app-thread>
     </div>
 </main>
