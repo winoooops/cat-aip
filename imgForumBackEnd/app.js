@@ -31,15 +31,21 @@ app.use( cors() )
 app.use('/forums', forumRoute)
 app.use('/user', userRoute)
 
+const fileName = './images/undefined-1570156856411';
+
 app.get('/', (req, res) => {
-    if (!req.session.count) {
-        req.session.count = 1;
-    }
-    req.session.count++;
-    res.json({
-        count : req.session.count
+    check(req.file.path).then((result) => {
+        if (result[0].textAnnotations.length != 0) {
+            res.json({
+                "message" : "no"
+            })
+        }
+    })
+    .catch((error) => {
+        console.log(error);
     })
 })
+
 app.listen(PORT, () => {
     console.log(`Now listening on port ${PORT}`)
 })

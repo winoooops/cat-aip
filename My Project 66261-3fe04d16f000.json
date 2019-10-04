@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "phrasal-charger-254900",
+  "private_key_id": "3fe04d16f00019c86bd4dcaacfeaa0c794fc56b2",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQC+llAFfSwH7CBw\n7p4ICv3PRBAUp33jPQIKA/nB7H57aE62jxyrlPsamdqSCbSDrdzQb1kRpsrTviLD\nxBdXKLeq0PWUIrVSDO+hphoj1W+Kwo1UC4tJ0SqKKzh6sRZjsi7HncatiOkn32a+\nQdDYTvv7XCzrczDtRS+Yn5PLPNfP25bVFFF+02dhYwnPMInxKhESWewqs6wXdRXn\nY237wqVOYROpxPyVXbTT55ILpPSh14oxy0DjU3jJoN8qMHTDQKYEc/Gt0CNCPKE2\nAtZbdqwV1Gkf8I3wQr3KmR5LUAYIqmS4z1tiUk2ZXfd/+7Syr70N/l+tnEANVt/+\nXRjzsQWtAgMBAAECggEARBLrbTJ69i90nPHWF3hZlN0yQzZaJD7nyg0GeipPOSQW\nLWXrryutDyDSLaRyyi/hNb/31/Kz8rKwty0Eyzh7dfNiLDHDgxWkyB/MqWz0hOMd\n2N2wuEKSR7zNVSGIpj6AMAOeceB7qybEC4P1pTV9EpinYMgJu04hhInHH+pRCWg/\nRpm7uR+elRalHNq7Vlnj0DzRrlrzBJCSAWtDzPV5+yojyby1orfxe5hLX+Y7PhL1\n+1+l0ohQMMfgpfIgKp/4udTc3+OJt20JFiCEL2BI/zpcIGX5BYENYAEZobuPgdnZ\n3oKg7PEnmYyqCekVRSt/vJV2QNOyoZzEpqNIcxh8nwKBgQDmVKyGKva5YQD5/eU4\n67O7i+0lKKkXky+oy5X6nUiJReFrMc9rzLDTCU0tqjEd3g53efDaY8zDpWZEd7t6\nRhimuT66LmGonBj+XSCnBM7NxmDniI2HWUQSZxcwDrLNatvqFKdpZ+CLyWGTFNpi\nsy4Pnh1pC0zHHhbtnkA9tHp6lwKBgQDT08Ft4+juc6MdEn33JCspjgH5sJvlccQk\npqPdBW5yW0X/W6gI5wRWKcAd6qgpX5z0tKGJFPfGRaTLqQ9MRcNMYTXl5mnJTAtG\njgpgo9rMtsAo3Pegr8O1Uti1NjhHBTcgCU4Ry+CNHp6oOkFEuACz1A1a8AukHkP+\n6jGiXnxeWwKBgBFH5w3F6W7tJTqcXvdPT9PRYsB39X/MTjYW2DDOXiPWd1woh4xp\n9hZPS1gSvc6k22cBYh2wgStonGykow9AdRcFLPyhADi7RXDIIewGA1ITATA94Yh3\nHRFYZLf5UlbxHoDIfer9nS4/tK9pUB05nkoTrdc0vtTtoADB78XxZYMPAoGAZG1N\nlGrsQTjjyWG+BNDKAd6IwzdfAe3o/zNeFuh/T4pEamerB+V24d7TbZuV9F+XS1Dk\nENi3C/JyyfeyAAhHKkwgQIn3926tHdszwlOM5WdzPSxd3nnWQH4xreAx2EH5u5+N\nutQ89srgj4Nm9EyEUL2lQ0rxSfLra8zekUtYjWcCgYBFZB6iJa092HtbVyNHoM9o\nBDh46/TnYqyRQllX7hf/MpOWbbU3nA3+gAwZhn1HkuXvDkHP+XsxUMHVRWRjdMtL\ntL59rZzdMmGfzGMqNM1yfirmeSshEjbT9lOou++FC28dpBu+oPgMUwQ6SdOTvCo+\nr0XghwULMZ5i98Qy0awnMg==\n-----END PRIVATE KEY-----\n",
+  "client_email": "haochao@phrasal-charger-254900.iam.gserviceaccount.com",
+  "client_id": "100537978048219236573",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/haochao%40phrasal-charger-254900.iam.gserviceaccount.com"
+}
