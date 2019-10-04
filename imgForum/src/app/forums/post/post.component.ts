@@ -12,6 +12,7 @@ import { ENTER, COMMA } from '@angular/cdk/keycodes'
 })
 export class PostComponent implements OnInit {
   file
+  commentOn: string
   author: string
   tags: string[] = ["cats", "films", "wallpaper"]
   tagProps  = {
@@ -30,6 +31,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
       this.author = params['id']
+      this.commentOn = params['commentOn'] || null 
     })
   }
 
@@ -44,11 +46,12 @@ export class PostComponent implements OnInit {
     let formData: FormData = new FormData()
     formData.append("image", this.file, this.file.name)
     formData.append("author", this.author)
+    formData.append("commentOn", this.commentOn)// add anchor where the comment holds
     for(let i = 0 ; i < this.tags.length ; i ++ ) {
       formData.append('tags[]', this.tags[i])
     }
     // formData.append('tags', this.tags)
-
+    
 
 
     console.log(formData.get('image'))
