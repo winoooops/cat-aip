@@ -37,7 +37,9 @@ router.post('/post', upload.single('image'), (req, res) => {
 
     const author = req.body.author
     const tags = req.body.tags
-    console.log(tags)
+    const commentOn = req.body.commentOn 
+    // console.log( commentOn)
+    // console.log(tags)
     const img = fs.readFileSync(req.file.path)
     // const encode_img = img.toString('base64') // encode the img to a base64 string 
 
@@ -59,7 +61,8 @@ router.post('/post', upload.single('image'), (req, res) => {
             contentType: req.file.mimetype,
         },
         author: author,
-        tags: tags
+        tags: tags,
+        commentOn: commentOn
     })
         .save()
         .then(() => {
@@ -68,11 +71,6 @@ router.post('/post', upload.single('image'), (req, res) => {
             })
         })
 })
-
-
-
-
-
 
 
 // router.get('/', (req, res) => {
