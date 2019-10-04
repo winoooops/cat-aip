@@ -69,7 +69,11 @@ export class PostComponent implements OnInit {
     this.imageService
       .saveImageData(formData)
       .subscribe(r => {
-        console.log(r)
+        if (r.message === 'no') {
+          alert("upload failed! image cannot have texts!")
+        } else {
+          alert("upload success!")
+        }
       })
   }
 
