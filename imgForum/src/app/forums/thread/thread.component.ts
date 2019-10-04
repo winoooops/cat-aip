@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { arrayBufferToBase64 } from '../shared/convertB64'
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-thread',
@@ -15,7 +15,8 @@ export class ThreadComponent implements OnInit {
   tags: string[] 
   constructor(
     private imageService: ImageService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -42,4 +43,13 @@ export class ThreadComponent implements OnInit {
     })
   }
 
+
+  addComment() {
+    console.log( this.id )
+    this.router.navigate(['/forums/post'], {
+      queryParams: {
+        commentOn: this.id
+      }
+    })
+  }
 }
