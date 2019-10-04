@@ -7,7 +7,13 @@ const imgSchema = new Schema({
         contentType: String
     },
     author: String,
-    tags: [String]
+    tags: [String],
+})
+
+// setting the recursive value 
+
+imgSchema.add({
+    comments: [imgSchema]
 })
 
 module.exports = mongoose.model('Image', imgSchema)
