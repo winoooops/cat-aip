@@ -44,7 +44,7 @@ export class PostComponent implements OnInit {
     let formData: FormData = new FormData()
     formData.append("image", this.file, this.file.name)
     formData.append("author", this.author)
-    for(let i = 0 ; i <= this.tags.length ; i ++ ) {
+    for(let i = 0 ; i < this.tags.length ; i ++ ) {
       formData.append('tags[]', this.tags[i])
     }
     // formData.append('tags', this.tags)
@@ -76,6 +76,7 @@ export class PostComponent implements OnInit {
     }
 
 
+    console.log( this.tags )
   }
 
   remove(tag: string) {
