@@ -3,6 +3,7 @@ import { ImageService, Image } from '../services/image.service';
 import { ActivatedRoute, Params } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -24,8 +25,14 @@ export class PostComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
-    private route: ActivatedRoute
-  ) { }
+    private route: ActivatedRoute,
+    private router : Router
+  ) {
+    if (!localStorage.token) {
+      alert("Please sign in before post!")
+      this.router.navigate(['/user/login']);
+    }
+   }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
@@ -41,6 +48,11 @@ export class PostComponent implements OnInit {
 
   onSubmit() {
     console.log(this.file)
+    // empty file check 
+    if (!this.file) {
+      alert("Please choose a image to upload!");
+      return;
+    }
     let formData: FormData = new FormData()
     formData.append("image", this.file, this.file.name)
     formData.append("author", this.author)
