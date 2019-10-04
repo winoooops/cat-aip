@@ -21,7 +21,7 @@ app.use( cors() )
 //app.use('/forums',forumRoute)
 app.use('/forums', imageRoute)
 app.use('/user', userRoute)
-//app.use('/rank', rankRoute)
+app.use('/rank', rankRoute)
 app.listen(PORT, () => {
     console.log(`Now listening on port ${PORT}`)
 })

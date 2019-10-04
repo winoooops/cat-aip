@@ -37,6 +37,7 @@ export class ImageService {
     return this._data
   }
 
+  
   forum(forum_alias): Forum{
     // return the forum that matches the alias
     return this._data.find( row => {
@@ -53,7 +54,9 @@ export class ImageService {
   getImageId(): Observable<Array<any>> {
     return this.http.get<Forum[]>(`${SERVER_URL}/forums/`)
   }
-
+  getRanks(): Observable<Array<any>>{
+    return this.http.get<any>(`${SERVER_URL}/rank/`)
+  }
   getImageData(id): Observable<any>{
     return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
   }

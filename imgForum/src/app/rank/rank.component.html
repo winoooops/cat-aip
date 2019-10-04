@@ -1,17 +1,20 @@
 
 <div style="display: flex; padding-top: 20px">
-    <div name="rankImage" style="width: 70%; margin-left: 2%">
-        <mat-toolbar>
-            <span>Most Popular Images</span>
-        </mat-toolbar>
-        <mat-card>
-            <mat-card-title>No.X</mat-card-title>
-            <mat-card-content></mat-card-content>
-            <img mat-card-image >
-            <mat-card-actions></mat-card-actions>
-            <mat-card-footer style="margin-left: 2px">{{today | date:'L-d H:m'}}</mat-card-footer>
-            <!-- shorTime: 9:43pm -->
-        </mat-card>
+    <div style="display: block; width: 70%;margin-left: 2%">
+        <div  name="rankImage" *ngFor="let rank of ranks" [routerLink]="" >
+            <mat-toolbar>
+                <span>Most Popular Images</span>
+            </mat-toolbar>
+            <mat-card>
+                <mat-card-title>No.X</mat-card-title>
+                <mat-card-content>
+                <img style="margin-top:5px;width: 80%; height:60%" src="data:{{rank.img.contentType}};base64,{{rank.img.data.data}}" mat-card-image >
+                </mat-card-content>
+                <mat-card-actions></mat-card-actions>
+                <mat-card-footer style="margin-left: 2px">{{today | date:'L-d H:m'}}</mat-card-footer>
+                <!-- shorTime: 9:43pm -->
+            </mat-card>
+        </div>
     </div>
     <mat-divider [vertical]="true" style="padding-left:10px;"></mat-divider>
     <div name="rankUser" style="width: 20%; padding-left: 3%">
