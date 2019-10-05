@@ -8,11 +8,6 @@ const imgSchema = new Schema({
     },
     author: String,
     tags: [String],
-})
-
-// setting the recursive value 
-
-imgSchema.add({
     commentOn: String
 })
 
