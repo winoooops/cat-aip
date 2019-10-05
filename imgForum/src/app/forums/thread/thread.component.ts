@@ -2,11 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { arrayBufferToBase64 } from '../shared/convertB64'
 import { ActivatedRoute, Router } from '@angular/router';
+import { Moment } from '../shared/moment.pipe';
 
 @Component({
   selector: 'app-thread',
   templateUrl: './thread.component.html',
-  styleUrls: ['./thread.component.scss']
+  styleUrls: ['./thread.component.scss'],
 })
 export class ThreadComponent implements OnInit {
   @Input() id: string
@@ -14,6 +15,7 @@ export class ThreadComponent implements OnInit {
   imgSrc: string
   author: string
   tags: string[] 
+  time: string
   constructor(
     private imageService: ImageService,
     private route: ActivatedRoute,
@@ -38,7 +40,8 @@ export class ThreadComponent implements OnInit {
         // console.log( imgStr )
         this.author = r[0].author
         this.tags = r[0].tags
-
+        this.time = r[0].createdAt
+        console.log( this.time )
         this.imgSrc = flag + imgStr
         // console.log(this.imgSrc)
       })
