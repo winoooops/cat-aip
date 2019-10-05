@@ -9,7 +9,8 @@ const imgSchema = new Schema({
     author: String,
     tags: [String],
     commentOn: String,
-    createdAt: Date
+    comments: Number,
+    createdAt: Date,
 })
 
 module.exports = mongoose.model('Image', imgSchema)
