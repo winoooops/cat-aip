@@ -73,17 +73,29 @@ router.post('/post', upload.single('image'), (req, res) => {
 })
 
 
-// router.get('/', (req, res) => {
-//     // read all the image data
-//     // send an array of images as response upon req
-//     Image
-//         .find({})
-//         .then((result) => {
-//             console.log(result)
-//             res.json(result)
-//         })
+router.get('/', (req, res) => {
+    // read all the image data
+    // send an array of images as response upon req
+    Image
+        .find({})
+        .then((result) => {
+            console.log(result)
+            res.json(result)
+        })
 
-// })
+})
+
+router.get('/comment/:id', (req, res) => {
+    const id = req.params.id
+
+    Image
+        .find({ commentOn: id })
+        .then(result => {
+            console.log( result )
+            res.json( result )
+        })
+})
+
 
 router.get('/tags/:tag', (req, res) => {
     // read the image data based on the tags
@@ -111,6 +123,8 @@ router.get('/tags/:tag', (req, res) => {
 
 
 router.get('/:id', (req, res) => {
+    // find the image base on its id
+    // also get all the images that are commentingOn this image
     const id = req.params.id
     Image
         .find({ "_id": id })
