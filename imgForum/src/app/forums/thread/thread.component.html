@@ -5,8 +5,10 @@
         <mat-card-subtitle>{{ counts }} replies</mat-card-subtitle>
     </mat-card-header>
     <img [src]="imgSrc" alt="">
-    <div class="tags-Link" *ngFor="let tag of tags">
-        <a [routerLink]="['']">#{{ tag }}</a>
+    <div class="tags-Links" *ngIf="isCommentsViewable">
+        <div class="tag" *ngFor="let tag of tags">
+            <a [routerLink]="['']">#{{ tag }}</a>
+        </div>
     </div>
     
     <mat-card-actions>
