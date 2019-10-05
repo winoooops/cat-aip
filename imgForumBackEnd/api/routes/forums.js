@@ -62,7 +62,8 @@ router.post('/post', upload.single('image'), (req, res) => {
         },
         author: author,
         tags: tags,
-        commentOn: commentOn
+        commentOn: commentOn,
+        createdAt: new Date() 
     })
         .save()
         .then(() => {
