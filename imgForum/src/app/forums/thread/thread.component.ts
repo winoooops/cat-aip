@@ -27,7 +27,14 @@ export class ThreadComponent implements OnInit {
     this.route.params.subscribe( params => {
       // if thread is open in threads' view, get Input() value,
       // if the thread is open by itself via routing, get the paramaters
-      params['thread_alias'] ? this.id = params['thread_alias']: null; 
+
+      // params['thread_alias'] ? this.id = params['thread_alias']: null; 
+      if( params['thread_alias'] ) {
+        this.id = params['thread_alias']
+        this.isCommentsViewable = true
+      }
+
+
       this.imageService.getImageData(this.id)
       .subscribe(r => {
         // console.log( r )
@@ -56,10 +63,5 @@ export class ThreadComponent implements OnInit {
         commentOn: this.id
       }
     })
-  }
-
-  toggleComment() {
-    this.isCommentsViewable = !this.isCommentsViewable
-    console.log( this.isCommentsViewable)
   }
 }
