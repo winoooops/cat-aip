@@ -8,12 +8,14 @@ import { arrayBufferToBase64 } from '../../shared/convertB64';
   styleUrls: ['./comment.component.scss']
 })
 export class CommentComponent implements OnInit {
+  // because the comment-content's card, by design, should not be clickable
+  // so I won't be using routing here
   @Input() id: string 
   imgSrc: string
   author: string
   tags: string[] 
   time: string
-
+  isCommentsViewable: boolean = true
   constructor(private imageService: ImageService) { }
 
   ngOnInit() {
@@ -31,6 +33,10 @@ export class CommentComponent implements OnInit {
         this.time = r[0].createdAt
         this.imgSrc = flag + imgStr
       })
+  }
+
+  toggleComment() {
+    this.isCommentsViewable = !this.isCommentsViewable
   }
 
 }
