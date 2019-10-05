@@ -16,7 +16,7 @@ export class CommentComponent implements OnInit {
   tags: string[] 
   time: string
   counts: number
-  isCommentsViewable: boolean = true
+  isCommentsViewable: boolean = false
   constructor(private imageService: ImageService) { }
 
   ngOnInit() {
