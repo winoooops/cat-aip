@@ -28,7 +28,7 @@ router.post('/post', upload.single('image'), (req, res) => {
     // save records to the database
     // redirect and show uploaded image
 
-    // the code below is inspired by `https://code.tutsplus.com/tutorials/file-upload-with-multer-in-node--cms-32088`
+    // part of the code below is inspired by `https://code.tutsplus.com/tutorials/file-upload-with-multer-in-node--cms-32088`
 
     const file = req.file
     if (!file) {
@@ -38,39 +38,55 @@ router.post('/post', upload.single('image'), (req, res) => {
     const author = req.body.author
     const tags = req.body.tags
     const commentOn = req.body.commentOn 
-    // console.log( commentOn)
-    // console.log(tags)
     const img = fs.readFileSync(req.file.path)
-    // const encode_img = img.toString('base64') // encode the img to a base64 string 
 
-    /**********************************************************************
-     * tell if the encode_img is properly encoded as base64
-    **********************************************************************/
-
-    // const base64Rejex = /^(?:[A-Z0-9+\/]{4})*(?:[A-Z0-9+\/]{2}==|[A-Z0-9+\/]{3}=|[A-Z0-9+\/]{4})$/i;
-    // const  isBase64Valid = base64Rejex.test(encode_img); // base64Data is the base64 string
-    // if(isBase64Valid) {
-    //     console.log('valid...')
-    // }
 
     // store the img use Image model 
-    // only store thme as buffer with its contentType
-    new Image({
-        img: {
-            data: new Buffer(img),
-            contentType: req.file.mimetype,
-        },
-        author: author,
-        tags: tags,
-        commentOn: commentOn,
-        createdAt: new Date() 
-    })
-        .save()
-        .then(() => {
-            res.json({
-                "message": "image uploaded..."
-            })
+    
+    if( commentOn === "" ) {
+        // if the image is the root of a topic, just save it the the database with comments to be 0 
+        new Image({
+            img: {
+                data: new Buffer(img),
+                contentType: req.file.mimetype,
+            },
+            author: author,
+            tags: tags,
+            commentOn: commentOn,
+            createdAt: new Date(),
+            comments: 0 
         })
+            .save()
+            .then( (r) => {
+                res.json(r)
+            })
+
+        
+    } else {
+        // if the image is commenting others, 
+        // search the target doc with the commnetOn's value
+        // increment the comments by 1 
+        // save the new image
+        Image
+        .updateOne({ "_id": commentOn }, { $inc: { comments: 1}})
+        .then( () => {
+            new Image({
+                img: {
+                    data: new Buffer(img),
+                    contentType: req.file.mimetype,
+                },
+                author: author,
+                tags: tags,
+                commentOn: commentOn,
+                createdAt: new Date(),
+                comments: 0 
+            })
+                .save()
+                .then( (r) => {
+                    res.json(r)
+                })
+        })
+    }
 })
 
 
