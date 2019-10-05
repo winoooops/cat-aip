@@ -19,7 +19,7 @@
 </div> -->
 <div class="comments-panel">
     <button mat-button color="primary" (click)="addComment()">reply to this image</button>
-    <div class="comments" *ngFor="let index of idArr">
+    <div class="comments-content" *ngFor="let index of idArr">
         <app-comment [id]="index"></app-comment>
     </div>
 </div>
