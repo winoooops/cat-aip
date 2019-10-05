@@ -14,8 +14,8 @@
         <button mat-button color="primary" (click)="toggleComment()">COMMENT</button>
     </mat-card-actions>
 </mat-card>
-<div class="comments" *ngIf="isCommentsViewable">
-    <!-- shows all the images that has commentOn's value to be this id -->
+<div class="comments">
     <app-comments [id]="id"></app-comments>
 </div>
+
 
