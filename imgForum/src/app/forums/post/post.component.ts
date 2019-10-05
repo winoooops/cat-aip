@@ -31,7 +31,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
       this.author = params['id']
-      this.commentOn = params['commentOn'] || null 
+      this.commentOn = params['commentOn'] || ""
     })
   }
 
