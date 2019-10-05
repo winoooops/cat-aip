@@ -10,6 +10,9 @@ import { MaterialUiModule } from '../material-ui/material-ui.module';
 import { ThreadsComponent } from './threads/threads.component';
 import { ThreadComponent } from './thread/thread.component';
 import { PostComponent } from './post/post.component';
+import { CommentsComponent } from './thread/comments/comments.component';
+import { CommentComponent } from './thread/comment/comment.component';
+
 
 const routes: Routes = [
   { path: 'post', component: PostComponent },
@@ -33,6 +36,8 @@ const routes: Routes = [
     ThreadsComponent,
     ThreadComponent,
     PostComponent,
+    CommentsComponent,
+    CommentComponent
   ],
   imports: [
     CommonModule,
