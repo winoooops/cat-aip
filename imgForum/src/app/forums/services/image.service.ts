@@ -62,6 +62,10 @@ export class ImageService {
     return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
   }
 
+  getCommentImages(id): Observable<Array<any>> {
+    return this.http.get<any>(`${SERVER_URL}/forums/comment/${id}`)
+  }
+
   getUserName() {
     return this.http.get(`${SERVER_URL}/user/username`, {
       observe : 'body',
