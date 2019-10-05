@@ -12,6 +12,7 @@ import { ThreadComponent } from './thread/thread.component';
 import { PostComponent } from './post/post.component';
 import { CommentsComponent } from './thread/comments/comments.component';
 import { CommentComponent } from './thread/comment/comment.component';
+import { Moment } from './shared/moment.pipe';
 
 
 const routes: Routes = [
@@ -37,7 +38,8 @@ const routes: Routes = [
     ThreadComponent,
     PostComponent,
     CommentsComponent,
-    CommentComponent
+    CommentComponent,
+    Moment
   ],
   imports: [
     CommonModule,
