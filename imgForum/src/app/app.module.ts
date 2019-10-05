@@ -9,12 +9,15 @@ import { FlexLayoutModule } from '@angular/flex-layout'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
 import { RankComponent } from './rank/rank.component';
-
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
+// Emoji component: https://www.npmjs.com/package/@ctrl/ngx-emoji-mart
 
 @NgModule({
   declarations: [
     AppComponent,
     RankComponent,
+    EmojiDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { RankComponent } from './rank/rank.component';
     FlexLayoutModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    PickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,13 +1,15 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { RankComponent } from './rank/rank.component';
+import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
 
 
 const routes: Routes = [
   { path: 'forums', loadChildren: 'src/app/forums/forums.module#ForumsModule' },
   { path: 'user', loadChildren: 'src/app/user/user.module#UserModule'},
   { path: 'rank', component: RankComponent},
-  { path: '', redirectTo: '/forums', pathMatch: 'full' }
+  { path: '', redirectTo: '/forums', pathMatch: 'full' },
+  { path: 'emoji', component:EmojiDialogComponent}
 ];
 
 @NgModule({

@@ -31,3 +31,11 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 Preview the picture before upload[Link](https://w3path.com/new-angular-8-file-upload-or-image-upload/)
 
 image interact with mongodb[Link](https://stackoverflow.com/questions/24048271/node-js-express-createserver-not-a-function)[Link](https://steemit.com/utopian-io/@morningtundra/storing-and-retreiving-images-in-mongodb-with-nodejs)
+
+
+2019/10/5
+Emoji add styles in angular.json
+[Link](https://pusher.com/tutorials/emoji-gifs-link-previews-angular-chatroom)
+
+ // "node_modules/@ctrl/ngx-emoji-mart/picker.css",
+ "node_modules/emoji-mart/css/emoji-mart.css"

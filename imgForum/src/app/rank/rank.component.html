@@ -9,6 +9,12 @@
                 <mat-card-title>No.X</mat-card-title>
                 <mat-card-content>
                 <img style="margin-top:5px;width: 80%; height:60%" src="data:{{rank.img.contentType}};base64,{{rank.img.data.data}}" mat-card-image >
+                <a mat-button color="accent" (click)="emojiDialog()">make a comment</a>
+                <!-- <div style=" display: flex">
+                    <button type="button" class="" (click)="emojiPicker()"><mat-icon>face</mat-icon></button>
+                    <emoji-mart class="emojiSection" set="emojione" (emojiSelect)="addEmoji($event)" *ngIf ="showEmojiPicker" title="Pick your emoji..."></emoji-mart>
+                    <input placeholder="Please choose your emiji..." type="text" name="message" [(ngModel)]="message">
+                </div> -->
                 </mat-card-content>
                 <mat-card-actions></mat-card-actions>
                 <mat-card-footer style="margin-left: 2px">{{today | date:'L-d H:m'}}</mat-card-footer>

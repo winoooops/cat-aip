@@ -1,0 +1,17 @@
+
+<div class="mat-dialog-content" >
+    <!-- <h3>Would you like to login now?</h3> -->
+    <div style=" display: flex">
+        <button type="button" class="" (click)="emojiPicker()"><mat-icon>face</mat-icon></button>
+        
+        <input placeholder="Please choose your emiji..." type="text" name="message" [(ngModel)]="message">
+    </div>
+    <emoji-mart  class="emoji-mart" set="emojione" (emojiSelect)="addEmoji($event)" *ngIf ="showEmojiPicker" title="Pick your emoji..."></emoji-mart>
+    <div style="display: flex; flex: auto; ">
+        <button mat-button color="accent" (click)="onNoClick()">Cancel</button>
+        <button mat-button color="accent" (click)="onSendClick()">Send</button>
+    </div>
+    
+    <!-- *ngIf ="showEmojiPicker" -->
+    
+</div>
