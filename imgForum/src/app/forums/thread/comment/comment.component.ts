@@ -15,6 +15,7 @@ export class CommentComponent implements OnInit {
   author: string
   tags: string[] 
   time: string
+  counts: number
   isCommentsViewable: boolean = true
   constructor(private imageService: ImageService) { }
 
@@ -31,6 +32,7 @@ export class CommentComponent implements OnInit {
         this.author = r[0].author
         this.tags = r[0].tags
         this.time = r[0].createdAt
+        this.counts = r[0].comments
         this.imgSrc = flag + imgStr
       })
   }

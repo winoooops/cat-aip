@@ -16,6 +16,7 @@ export class ThreadComponent implements OnInit {
   author: string
   tags: string[] 
   time: string
+  counts: number
   constructor(
     private imageService: ImageService,
     private route: ActivatedRoute,
@@ -48,7 +49,8 @@ export class ThreadComponent implements OnInit {
         this.author = r[0].author
         this.tags = r[0].tags
         this.time = r[0].createdAt
-        console.log( this.time )
+        this.counts = r[0].comments
+        console.log( this.counts )
         this.imgSrc = flag + imgStr
         // console.log(this.imgSrc)
       })
