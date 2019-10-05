@@ -10,6 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ThreadComponent implements OnInit {
   @Input() id: string
+  isCommentsViewable: boolean = false 
   imgSrc: string
   author: string
   tags: string[] 
@@ -37,6 +38,7 @@ export class ThreadComponent implements OnInit {
         // console.log( imgStr )
         this.author = r[0].author
         this.tags = r[0].tags
+
         this.imgSrc = flag + imgStr
         // console.log(this.imgSrc)
       })
@@ -51,5 +53,10 @@ export class ThreadComponent implements OnInit {
         commentOn: this.id
       }
     })
+  }
+
+  toggleComment() {
+    this.isCommentsViewable = !this.isCommentsViewable
+    console.log( this.isCommentsViewable)
   }
 }
