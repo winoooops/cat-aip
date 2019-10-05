@@ -12,6 +12,7 @@ export class CommentComponent implements OnInit {
   imgSrc: string
   author: string
   tags: string[] 
+  time: string
 
   constructor(private imageService: ImageService) { }
 
@@ -27,7 +28,7 @@ export class CommentComponent implements OnInit {
         // console.log( imgStr )
         this.author = r[0].author
         this.tags = r[0].tags
-
+        this.time = r[0].createdAt
         this.imgSrc = flag + imgStr
       })
   }

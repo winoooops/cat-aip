@@ -1,7 +1,7 @@
 <mat-card class="img-card">
     <mat-card-header>
         <mat-card-title>{{ author }}</mat-card-title>
-        <mat-card-subtitle>post x hours ago</mat-card-subtitle>
+        <mat-card-subtitle>post {{ time | moment }}</mat-card-subtitle>
     </mat-card-header>
     <img [src]="imgSrc" alt="">
     <div class="tags-Link" *ngFor="let tag of tags">
