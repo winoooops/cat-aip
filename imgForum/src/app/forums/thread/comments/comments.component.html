@@ -19,8 +19,11 @@
 </div> -->
 <div class="comments-panel">
     <button mat-button color="primary" (click)="addComment()">reply to this image</button>
-    <div class="comments-content" *ngFor="let index of idArr">
-        <app-comment [id]="index"></app-comment>
+    <div class="comments-content" *ngFor="let imgId of idArr; let i = index">
+        <div *ngIf="i < 10">
+            <app-comment [id]="imgId"></app-comment>
+        </div>
+        <!-- should be display the remaining comments as well... -->
     </div>
 </div>
 
