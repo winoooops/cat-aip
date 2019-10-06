@@ -55,6 +55,8 @@ export class CommentComponent implements OnInit {
   }
 
   openEmojiDialog() {
-    this.dialog.open(EmojiDialogComponent)
+    this.dialog.open(EmojiDialogComponent, {
+      data: { "commentOn": this.id } 
+    })
   }
 }
