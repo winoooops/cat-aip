@@ -6,10 +6,11 @@ const imgSchema = new Schema({
         data: Buffer,
         contentType: String
     },
+    emoji: String,
     author: String,
     tags: [String],
     commentOn: String,
-    comments: Number,
+    counts: Number,
     createdAt: Date,
 })
 
