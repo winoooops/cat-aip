@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, ComponentFactoryResolver } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Data, Forum } from '../../services/data'
@@ -11,6 +11,7 @@ const httpOptions = {
     // "Access-Control-Allow-Origin": "*"
   })
 };
+
 
 
 //define a dummy forums dataset
@@ -44,9 +45,12 @@ export class ImageService {
     })
   }
 
+  saveEmojiData(data): Observable<any>{
+    // dont need to use formdata this time,
+    return this.http.post<any>(`${SERVER_URL}/forums/emoji`, data, httpOptions)
+  }
 
   saveImageData(data): Observable<any> {
-    console.log(data.get('image'))
     return this.http.post<any>(`${SERVER_URL}/forums/post`, data)
   }
 
