@@ -1,8 +1,10 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { arrayBufferToBase64 } from '../shared/convertB64'
 import { ActivatedRoute, Router } from '@angular/router';
 import { Moment } from '../shared/moment.pipe';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
 
 @Component({
   selector: 'app-thread',
@@ -12,6 +14,7 @@ import { Moment } from '../shared/moment.pipe';
 export class ThreadComponent implements OnInit {
   @Input() id: string
   isCommentsViewable: boolean = false
+  showEmojiPicker = false;
   imgSrc: string
   author: string
   tags: string[]
@@ -20,7 +23,8 @@ export class ThreadComponent implements OnInit {
   constructor(
     private imageService: ImageService,
     private route: ActivatedRoute,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -66,4 +70,15 @@ export class ThreadComponent implements OnInit {
       }
     })
   }
+
+  // parts of the code below is inspired by https://pusher.com/tutorials/emoji-gifs-link-previews-angular-chatroom
+  // toggleEmojiPicker() {
+  //   this.showEmojiPicker = !this.showEmojiPicker 
+  //   console.log( this.showEmojiPicker )
+  // } 
+
+  openEmojiDialog() {
+    this.dialog.open(EmojiDialogComponent)
+  }
+
 }
