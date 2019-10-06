@@ -70,6 +70,10 @@ export class ImageService {
     return this.http.get<any>(`${SERVER_URL}/forums/comment/${id}`)
   }
 
+  getHotThreads(): Observable<Array<any>>{
+    return this.http.get<any>(`${SERVER_URL}/forums/hot-threads`)
+  }
+
   getUserName() {
     return this.http.get(`${SERVER_URL}/user/username`, {
       observe : 'body',
