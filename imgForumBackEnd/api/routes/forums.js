@@ -148,13 +148,13 @@ router.get('/tags/:tag', (req, res) => {
 })
 
 
-
+// get the doc's data by _id 
 router.get('/:id', (req, res) => {
     // find the image base on its id
     // also get all the images that are commentingOn this image
     const id = req.params.id
     Image
-        .find({ "_id": id })
+        .findOne({ "_id": id })
         .then(result => {
             res.json(result)
         })
