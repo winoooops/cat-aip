@@ -104,17 +104,17 @@ router.post('/emoji', (req, res) => {
         })
 })
 
-router.get('/', (req, res) => {
-    // read all the image data
-    // send an array of images as response upon req
-    Image
-        .find({ isRoot: true })
-        .then((result) => {
-            console.log( result.length )
-            res.json(result)
-        })
+// router.get('/', (req, res) => {
+//     // read all the image data
+//     // send an array of images as response upon req
+//     Image
+//         .find({ isRoot: true })
+//         .then((result) => {
+//             console.log( result.length )
+//             res.json(result)
+//         })
 
-})
+// })
 
 router.get('/comment/:id', (req, res) => {
     const id = req.params.id
@@ -128,9 +128,16 @@ router.get('/comment/:id', (req, res) => {
 
 
 router.get('/hot-threads', (req, res) => {
-    // find all the images in the database ``````````````
+    // find all the root images in the database ``````````````
     Image
-        .find({ img: { $exist: true }})
+        .aggregate([
+            { $match: { isRoot: { $eq: true } }},
+            { $sort: { counts: -1 }}, 
+            { $limit: 5 }
+        ])
+        .then( r => {
+            console.log( r )
+        })
 })
 
 
