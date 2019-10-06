@@ -38,13 +38,12 @@ export class CommentComponent implements OnInit {
           // convent the BSON to base64
           const imgStr = arrayBufferToBase64(doc.img.data.data)
           this.imgSrc = flag + imgStr
-          this.counts = doc.counts
         } else {
           this.isImage = false 
           this.emoji = doc.emoji
         }
-        
         // console.log( imgStr )
+        this.counts = doc.counts
         this.author = doc.author
         this.tags = doc.tags
         this.time = doc.createdAt
