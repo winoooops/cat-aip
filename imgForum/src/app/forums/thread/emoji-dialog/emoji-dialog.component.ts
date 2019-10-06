@@ -15,6 +15,7 @@ export interface ImageID {
 export class EmojiDialogComponent {
   code: string = ""
   commentOn: string 
+  author: string 
   // part of the code below (function addEmoji() ) is from https://pusher.com/tutorials/emoji-gifs-link-previews-angular-chatroom
   constructor(
     private imageService: ImageService,
@@ -25,9 +26,10 @@ export class EmojiDialogComponent {
   addEmoji(event) {
     this.code = event.emoji.unified
     this.commentOn = this.data.commentOn
+    this.author = "anoymous user"
     console.log( this.commentOn )
     this.imageService
-      .saveEmojiData( { "code": this.code, "commentOn": this.commentOn} )
+      .saveEmojiData( { "code": this.code, "commentOn": this.commentOn, "author": this.author } )
       .subscribe( r => {
         console.log( r )
       })
