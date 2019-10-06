@@ -94,7 +94,9 @@ router.post('/emoji', (req, res) => {
     new Image({
         emoji: req.body.code,
         commentOn: req.body.commentOn,
-        author: req.body.author
+        author: req.body.author,
+        createdAt: new Date(),
+        // counts: 0
     })
         .save()
         .then( r => {
@@ -115,7 +117,7 @@ router.get('/', (req, res) => {
 
 router.get('/comment/:id', (req, res) => {
     const id = req.params.id
-
+    // noted that, the results includes iamge and emoji comments 
     Image
         .find({ commentOn: id })
         .then(result => {
@@ -149,9 +151,9 @@ router.get('/tags/:tag', (req, res) => {
 
 
 // get the doc's data by _id 
+// if the id is passed by threads compoenent, this will only search for image docs
+// if the id is passed by comments component, this will search all the docs type
 router.get('/:id', (req, res) => {
-    // find the image base on its id
-    // also get all the images that are commentingOn this image
     const id = req.params.id
     Image
         .findOne({ "_id": id })
