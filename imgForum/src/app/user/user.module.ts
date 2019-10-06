@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms'
 import { Routes, RouterModule } from '@angular/router'
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
-import { MaterialUiModule } from '../material-ui/material-ui.module';
+import { MaterialUiModule } from '../materials/material-ui.module';
 import { EmailDirective } from './validators/email.directive';
 import { UsernameDirective } from './validators/username.directive';
 import { DialogComponent } from './register/dialog/dialog.component';

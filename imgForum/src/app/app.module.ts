@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 
 import { HttpClientModule } from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
-import { MaterialUiModule } from './material-ui/material-ui.module'
+import { MaterialUiModule } from './materials/material-ui.module'
 import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
