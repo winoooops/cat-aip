@@ -141,7 +141,7 @@ router.get('/hot-threads', (req, res) => {
             { $limit: 5 }
         ])
         .then( r => {
-            console.log( r )
+            res.json( r )
         })
 })
 
