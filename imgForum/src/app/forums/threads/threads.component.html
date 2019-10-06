@@ -1,3 +1,9 @@
+<div class="selector">
+    <button mat-button color="accent" [routerLink]="['../../all']">All</button>
+    <button mat-raised-button color="accent" [routerLink]="['../../cats']">Cats</button>
+    <button mat-button color="accent" [routerLink]="['../../wallpaper']">Wallpaper</button>
+    <button mat-button color="accent" [routerLink]="['../../films']">Film</button>
+</div>
 <main>
     <div *ngFor="let index of idArr">
         <app-thread [id]="index" [routerLink]="[index]"></app-thread>

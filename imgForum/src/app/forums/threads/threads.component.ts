@@ -20,13 +20,11 @@ export class ThreadsComponent implements OnInit {
   ngOnInit() {
     this.route.params.subscribe( (params: Params) => {
       this.tag = this.route.snapshot.parent.params["forum_alias"]
-      console.log( this.tag )
       this.imageService.getImageIdByTag( this.tag )
       .subscribe( r => {
         // only get the id of each documents
         
         this.idArr = r.map( doc => doc._id)
-        console.log( this.idArr )
 
         // pass it down to child components
       })

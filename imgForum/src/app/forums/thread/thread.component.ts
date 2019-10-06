@@ -54,7 +54,6 @@ export class ThreadComponent implements OnInit {
           this.tags = doc.tags
           this.time = doc.createdAt
           this.counts = doc.counts
-          console.log(this.counts)
           this.imgSrc = flag + imgStr
           // console.log(this.imgSrc)
         })
