@@ -100,6 +100,7 @@ router.post('/emoji', (req, res) => {
                 commentOn: req.body.commentOn,
                 author: req.body.author,
                 createdAt: new Date(),
+                counts: 0 
                 // counts: 0
             })
                 .save()
