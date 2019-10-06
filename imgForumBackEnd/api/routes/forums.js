@@ -89,6 +89,17 @@ router.post('/post', upload.single('image'), (req, res) => {
     }
 })
 
+router.post('/emoji', (req, res) => {
+    // issue found: because express can not parse form data, if I do it in the old way, the req.body would be empty
+    new Image({
+        emoji: req.body.code,
+        commentOn: req.body.commentOn
+    })
+        .save()
+        .then( r => {
+            res.json( r )
+        })
+})
 
 router.get('/', (req, res) => {
     // read all the image data
@@ -96,7 +107,6 @@ router.get('/', (req, res) => {
     Image
         .find({})
         .then((result) => {
-            console.log(result)
             res.json(result)
         })
 
@@ -108,7 +118,6 @@ router.get('/comment/:id', (req, res) => {
     Image
         .find({ commentOn: id })
         .then(result => {
-            console.log(result)
             res.json(result)
         })
 })
