@@ -90,17 +90,22 @@ router.post('/post', upload.single('image'), (req, res) => {
 })
 
 router.post('/emoji', (req, res) => {
-    // issue found: because express can not parse form data, if I do it in the old way, the req.body would be empty
-    new Image({
-        emoji: req.body.code,
-        commentOn: req.body.commentOn,
-        author: req.body.author,
-        createdAt: new Date(),
-        // counts: 0
-    })
-        .save()
-        .then( r => {
-            res.json( r )
+    // issue found: because express can not parse form data, if I do it in the old way, the req.body would be empty 
+    //-> resolved by add httpHeaders to be app/json
+    Image
+        .updateOne({ "_id": req.body.commentOn }, { $inc: { counts: 1 } })
+        .then( () => {
+            new Image({
+                emoji: req.body.code,
+                commentOn: req.body.commentOn,
+                author: req.body.author,
+                createdAt: new Date(),
+                // counts: 0
+            })
+                .save()
+                .then( r => {
+                    res.json( r )
+                })
         })
 })
 
