@@ -11,7 +11,7 @@ import { MatDialogModule } from '@angular/material/dialog'
 import { MatSidenavModule } from '@angular/material/sidenav'
 import { MatListModule } from '@angular/material/list'
 import { MatChipsModule } from '@angular/material/chips'
-
+import { MatCarouselModule } from '@ngmodule/material-carousel'
 
 
 @NgModule({
@@ -31,7 +31,8 @@ import { MatChipsModule } from '@angular/material/chips'
     MatDialogModule,
     MatSidenavModule,
     MatListModule,
-    MatChipsModule
+    MatChipsModule,
+    MatCarouselModule
   ]
 })
 export class MaterialUiModule { }
