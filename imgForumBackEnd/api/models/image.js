@@ -9,6 +9,7 @@ const imgSchema = new Schema({
     emoji: String,
     author: String,
     tags: [String],
+    isRoot: { type: Boolean, default: false },
     commentOn: String,
     counts: Number,
     createdAt: Date,

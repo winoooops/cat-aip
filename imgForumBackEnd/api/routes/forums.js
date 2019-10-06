@@ -52,7 +52,7 @@ router.post('/post', upload.single('image'), (req, res) => {
             },
             author: author,
             tags: tags,
-            commentOn: commentOn,
+            isRoot: true, 
             createdAt: new Date(),
             counts: 0
         })
@@ -123,6 +123,13 @@ router.get('/comment/:id', (req, res) => {
         .then(result => {
             res.json(result)
         })
+})
+
+
+router.get('/hot-threads', (req, res) => {
+    // find all the images in the database ``````````````
+    Image
+        .find({ img: { $exist: true }})
 })
 
 
