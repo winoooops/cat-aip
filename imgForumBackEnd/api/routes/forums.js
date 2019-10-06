@@ -108,8 +108,9 @@ router.get('/', (req, res) => {
     // read all the image data
     // send an array of images as response upon req
     Image
-        .find({ img: { $exist: true }})
+        .find({ isRoot: true })
         .then((result) => {
+            console.log( result.length )
             res.json(result)
         })
 
@@ -140,7 +141,7 @@ router.get('/tags/:tag', (req, res) => {
 
     if (tag == "all") {
         Image
-            .find({})
+            .find({ isRoot: { $eq: true } })
             .then((result) => {
                 console.log(result)
                 res.json(result)
@@ -148,7 +149,7 @@ router.get('/tags/:tag', (req, res) => {
     }
     else {
         Image
-            .find({ tags: { $all: [tag] } })
+            .find({ isRoot: { $eq: true }, tags: { $all: [tag] } })
             .then(result => {
                 res.json(result)
             })
