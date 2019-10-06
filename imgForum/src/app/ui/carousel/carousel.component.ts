@@ -15,17 +15,13 @@ export class CarouselComponent implements OnInit {
     this.imageService
       .getHotThreads()
       .subscribe( docArr => {
-        // console.log( docArr )
         docArr.forEach( doc => {
           this.imageService
             .getDocData( doc._id )
             .subscribe( doc => {
               const flag = `data:${doc.img.contentType};base64,`
               const imgStr = arrayBufferToBase64(doc.img.data.data)
-              // console.log( imgStr )
-              // this.author = doc.author
               this.imgSrcArr.push(flag + imgStr)
-              console.log( this.imgSrcArr )
             })
         })
       })
