@@ -40,20 +40,20 @@ export class ThreadComponent implements OnInit {
       }
 
 
-      this.imageService.getImageData(this.id)
-        .subscribe(r => {
+      this.imageService.getDocData(this.id)
+        .subscribe(doc => {
           // console.log( r )
           // get the contentType
-          const flag = `data:${r[0].img.contentType};base64,`
+          const flag = `data:${doc.img.contentType};base64,`
           // console.log( flag )
 
           // convent the BSON to base64
-          const imgStr = arrayBufferToBase64(r[0].img.data.data)
+          const imgStr = arrayBufferToBase64(doc.img.data.data)
           // console.log( imgStr )
-          this.author = r[0].author
-          this.tags = r[0].tags
-          this.time = r[0].createdAt
-          this.counts = r[0].counts
+          this.author = doc.author
+          this.tags = doc.tags
+          this.time = doc.createdAt
+          this.counts = doc.counts
           console.log(this.counts)
           this.imgSrc = flag + imgStr
           // console.log(this.imgSrc)
