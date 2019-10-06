@@ -3,10 +3,17 @@
         <mat-card-title>{{ author }}</mat-card-title>
         <mat-card-subtitle>reply {{ time | moment }}</mat-card-subtitle>
     </mat-card-header>
-    <img [src]="imgSrc" alt="">
-    <div class="tags-Link" *ngFor="let tag of tags">
-        <a [routerLink]="['']">#{{ tag }}</a>
+    <div class="image-content" *ngIf="isImage">
+            <img [src]="imgSrc" alt="">
+            <div class="tags-Link" *ngFor="let tag of tags">
+                <a [routerLink]="['']">#{{ tag }}</a>
+            </div>
     </div>
+
+    <div class="emoji-content" *ngIf="!isImage">
+        <p>{{ emoji | toEmoji }}</p>
+    </div>
+    
     
     <mat-card-actions>
         <button mat-button color="primary" (click)="openEmojiDialog()"><mat-icon>sentiment_satisfied_alt</mat-icon></button>
