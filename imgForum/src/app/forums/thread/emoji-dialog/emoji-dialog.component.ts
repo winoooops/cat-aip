@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog' 
+import { ImageService } from '../../services/image.service';
 
-
+export interface ImageID {
+  commentOn: string
+}
 
 
 @Component({
@@ -10,17 +13,24 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
   styleUrls: ['./emoji-dialog.component.scss']
 })
 export class EmojiDialogComponent {
-  message: string = ""
+  code: string = ""
+  commentOn: string 
   // part of the code below (function addEmoji() ) is from https://pusher.com/tutorials/emoji-gifs-link-previews-angular-chatroom
   constructor(
-    public dialogRef: MatDialogRef<EmojiDialogComponent>
+    private imageService: ImageService,
+    public dialogRef: MatDialogRef<EmojiDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: ImageID
   ) { }
 
   addEmoji(event) {
-    const { message } = this;
-    const text = `${message}${event.emoji.native}`;
-    this.message = text;
-    console.log( this.message )
+    this.code = event.emoji.unified
+    this.commentOn = this.data.commentOn
+    console.log( this.commentOn )
+    this.imageService
+      .saveEmojiData( { "code": this.code, "commentOn": this.commentOn} )
+      .subscribe( r => {
+        console.log( r )
+      })
     this.dialogRef.close()
   }
 }
