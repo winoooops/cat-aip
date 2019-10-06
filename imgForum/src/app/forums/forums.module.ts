@@ -15,6 +15,7 @@ import { CommentComponent } from './thread/comment/comment.component';
 import { Moment } from './shared/moment.pipe';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { EmojiDialogComponent } from './thread/emoji-dialog/emoji-dialog.component';
+import { ToEmojiPipe } from './shared/to-emoji.pipe';
 
 const routes: Routes = [
   { path: 'post', component: PostComponent },
@@ -42,6 +43,7 @@ const routes: Routes = [
     CommentComponent,
     Moment,
     EmojiDialogComponent,
+    ToEmojiPipe,
   ],
   imports: [
     CommonModule,
