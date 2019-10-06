@@ -61,8 +61,8 @@ export class ImageService {
   getImageIdByTag(tag): Observable<Array<any>> {
     return this.http.get<any>(`${SERVER_URL}/forums/tags/${tag}`)
   }
-
-  getImageData(id): Observable<any>{
+  // findone topic image's data by _id
+  getDocData(id): Observable<any>{
     return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
   }
 
