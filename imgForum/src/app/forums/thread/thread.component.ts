@@ -78,7 +78,9 @@ export class ThreadComponent implements OnInit {
   // } 
 
   openEmojiDialog() {
-    this.dialog.open(EmojiDialogComponent)
+    this.dialog.open(EmojiDialogComponent, {
+      data: { "commentOn": this.id } 
+    })
   }
 
 }
