@@ -13,7 +13,8 @@ import { PostComponent } from './post/post.component';
 import { CommentsComponent } from './thread/comments/comments.component';
 import { CommentComponent } from './thread/comment/comment.component';
 import { Moment } from './shared/moment.pipe';
-
+import { PickerModule } from '@ctrl/ngx-emoji-mart';
+import { EmojiDialogComponent } from './thread/emoji-dialog/emoji-dialog.component';
 
 const routes: Routes = [
   { path: 'post', component: PostComponent },
@@ -39,16 +40,21 @@ const routes: Routes = [
     PostComponent,
     CommentsComponent,
     CommentComponent,
-    Moment
+    Moment,
+    EmojiDialogComponent,
   ],
   imports: [
     CommonModule,
     FormsModule,
     RouterModule.forChild(routes),
-    MaterialUiModule
+    MaterialUiModule,
+    PickerModule
   ],
   exports: [
     RouterModule
+  ],
+  entryComponents: [
+    EmojiDialogComponent
   ]
 })
 export class ForumsModule { }
