@@ -29,7 +29,7 @@
             ],
             "styles": [
               "src/styles.scss",  
-              "../node_modules/@ctrl/ngx-emoji-mart/picker.css" 
+              "./node_modules/@ctrl/ngx-emoji-mart/picker.css" 
             ],
             "scripts": []
           },
