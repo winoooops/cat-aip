@@ -7,16 +7,17 @@ export class AuthGuard implements CanActivate {
     constructor(
         private userService: UserService,
         private router: Router
-    ) {} 
+    ) { }
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-        if( this.userService.isLoggedIn() ) {
+        if (this.userService.isLoggedIn()) {
             // if user is login, allow access
             return true
         } else {
             // if not, deny access, and ask to login first 
+            alert("You have to login first to see the details");
             this.router.navigate(['/user/login'], {
                 queryParams: {
-                    return: state.url 
+                    return: state.url
                 }
             });
             return false;
