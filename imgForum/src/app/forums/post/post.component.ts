@@ -3,6 +3,7 @@ import { ImageService, Image } from '../services/image.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
+import { UserService } from 'src/app/user/services/user.service';
 
 
 
@@ -26,13 +27,13 @@ export class PostComponent implements OnInit {
 
   constructor(
     private imageService: ImageService,
+    private userService: UserService,
     private route: ActivatedRoute,
     private router: Router
   ) { }
 
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
-      this.author = params['id']
       this.commentOn = params['commentOn'] || ""
     })
   }
@@ -47,7 +48,7 @@ export class PostComponent implements OnInit {
     console.log(this.file)
     let formData: FormData = new FormData()
     formData.append("image", this.file, this.file.name)
-    formData.append("author", this.author)
+    formData.append("author", localStorage.getItem('username'))
     formData.append("commentOn", this.commentOn)// add anchor where the comment holds
     for(let i = 0 ; i < this.tags.length ; i ++ ) {
       formData.append('tags[]', this.tags[i])
