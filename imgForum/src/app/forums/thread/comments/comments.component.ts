@@ -10,7 +10,7 @@ import { CommentComponent } from '../comment/comment.component';
 })
 export class CommentsComponent implements OnInit {
   commentRef: ComponentRef<CommentComponent>
-
+  isNewest: boolean
   @Input() id: string
   idArr: string[]
   onlyShowTenComments: boolean = true
@@ -43,5 +43,8 @@ export class CommentsComponent implements OnInit {
     // let the page rerender the remain child component 
   }
 
-
+  reverseOrder() {
+    this.isNewest = !this.isNewest 
+    this.idArr = this.idArr.reverse()
+  }
 }
