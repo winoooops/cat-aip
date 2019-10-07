@@ -116,6 +116,15 @@ router.post('/emoji', checkIfAuthenticated, (req, res) => {
         })
 })
 
+router.put('/emoji-change', checkIfAuthenticated, (req,res) => {
+    //
+    Image
+        .updateOne({ _id: req.body.id }, { emoji: req.body.code })
+        .then( r => {
+            res.json( r )
+        })
+})
+
 // router.get('/', (req, res) => {
 //     // read all the image data
 //     // send an array of images as response upon req
