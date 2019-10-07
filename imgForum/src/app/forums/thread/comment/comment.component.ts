@@ -75,7 +75,7 @@ export class CommentComponent implements OnInit {
 
   openEmojiDialog() {
     let dialogRef = this.dialog.open(EmojiDialogComponent, {
-      data: { "commentOn": this.id, } 
+      data: { "commentOn": this.id, isNew: true } 
     })
 
     dialogRef.afterClosed().subscribe(result => {
@@ -89,5 +89,18 @@ export class CommentComponent implements OnInit {
       .subscribe( (r) => {
         location.reload() 
       })
+  }
+
+  change() {
+    if ( !this.isImage ) {
+      this.changeEmoji() 
+    }
+  }
+
+
+  changeEmoji() {
+    let dialogRef = this.dialog.open(EmojiDialogComponent, {
+      data: { "id" : this.id, isNew: false }
+    })
   }
 }
