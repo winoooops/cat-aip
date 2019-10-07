@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject, ChangeDetectorRef } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { arrayBufferToBase64 } from '../shared/convertB64'
 import { ActivatedRoute, Router } from '@angular/router';
@@ -24,7 +24,8 @@ export class ThreadComponent implements OnInit {
     private imageService: ImageService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cdr: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
@@ -81,9 +82,14 @@ export class ThreadComponent implements OnInit {
   // } 
 
   openEmojiDialog() {
-    this.dialog.open(EmojiDialogComponent, {
+    const emojiDialog = this.dialog.open(EmojiDialogComponent, {
       data: { "commentOn": this.id } 
     })
+    emojiDialog
+      .afterClosed()
+      .subscribe( () => {
+        location.reload() 
+      })
   }
 
   delete() {

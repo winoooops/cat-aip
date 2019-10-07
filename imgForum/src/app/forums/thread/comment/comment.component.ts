@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
 import { ImageService } from '../../services/image.service';
 import { arrayBufferToBase64 } from '../../shared/convertB64';
 import { EmojiDialogComponent } from '../emoji-dialog/emoji-dialog.component';
@@ -33,7 +33,8 @@ export class CommentComponent implements OnInit {
     private userService: UserService,
     private router: Router,
     private route: ActivatedRoute,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private cdr: ChangeDetectorRef 
   ) { }
   
   ngOnInit() {
@@ -86,7 +87,7 @@ export class CommentComponent implements OnInit {
     this.imageService
       .deleteDoc(this.docID)
       .subscribe( (r) => {
-        console.log( r )
+        location.reload() 
       })
   }
 }

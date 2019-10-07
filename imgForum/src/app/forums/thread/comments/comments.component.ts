@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ComponentRef, ViewChild, ViewContainerRef } from '@angular/core';
 import { ImageService } from '../../services/image.service';
 import { Router } from '@angular/router';
+import { CommentComponent } from '../comment/comment.component';
 
 @Component({
   selector: 'app-comments',
@@ -8,6 +9,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./comments.component.scss']
 })
 export class CommentsComponent implements OnInit {
+  commentRef: ComponentRef<CommentComponent>
+
   @Input() id: string
   idArr: string[]
   onlyShowTenComments: boolean = true
