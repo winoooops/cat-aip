@@ -95,6 +95,32 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
     }
 })
 
+
+router.put('/:id', checkIfAuthenticated, upload.single('image'), (req, res) => {
+    const file = req.file
+    if (!file) {
+        return
+    }
+
+    const tags = req.body.tags
+    const img = fs.readFileSync(req.file.path)
+    
+    
+    Image
+        .updateOne({ _id: req.params.id }, {
+            img: {
+                data: new Buffer(img),
+                contentType: req.file.mimetype,
+            },
+            tags: tags,
+        })
+        .then( r => {
+            res.json( r )
+        })
+})
+
+
+
 router.post('/emoji', checkIfAuthenticated, (req, res) => {
     // issue found: because express can not parse form data, if I do it in the old way, the req.body would be empty 
     //-> resolved by add httpHeaders to be app/json
@@ -197,6 +223,7 @@ router.get('/:id', checkIfAuthenticated, (req, res) => {
             res.json(result)
         })
 })
+
 
 
 router.delete('/:id', checkIfAuthenticated, (req,res) => {

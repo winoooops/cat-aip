@@ -98,4 +98,12 @@ export class ThreadComponent implements OnInit {
         this.router.navigate(['forums/all'])
       })
   }
+
+  change() {
+    this.router.navigate(['forums/post'], {
+      queryParams: {
+        id: this.id
+      }
+    })
+  }
 }

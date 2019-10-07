@@ -58,6 +58,10 @@ export class ImageService {
     return this.http.post<any>(`${SERVER_URL}/forums/post`, data)
   }
 
+  changeImageData(data, id): Observable<any> {
+    return this.http.put<any>(`${SERVER_URL}/forums/${id}`, data)
+  }
+
   getImageId(): Observable<Array<any>> {
     return this.http.get<any>(`${SERVER_URL}/forums/`)
   }

@@ -14,6 +14,7 @@ import { UserService } from 'src/app/user/services/user.service';
 })
 export class PostComponent implements OnInit {
   file
+  id: string 
   commentOn: string
   author: string
   tags: string[] = ["cats", "films", "wallpaper"]
@@ -35,6 +36,7 @@ export class PostComponent implements OnInit {
   ngOnInit() {
     this.route.queryParams.subscribe((params: Params) => {
       this.commentOn = params['commentOn'] || ""
+      this.id = params['id'] || ""
     })
   }
 
@@ -45,8 +47,27 @@ export class PostComponent implements OnInit {
 
 
   onSubmit() {
-    console.log(this.file)
+    
     let formData: FormData = new FormData()
+
+    if( this.id !== "" ) {
+
+      formData.append("image", this.file, this.file.name)
+      for(let i = 0 ; i < this.tags.length ; i ++ ) {
+        formData.append('tags[]', this.tags[i])
+      }
+
+      this.imageService
+        .changeImageData( formData, this.id )
+        .subscribe( r => {
+          if( this.commentOn === "") {
+            this.router.navigateByUrl('forums/all')
+          } else {
+            this.router.navigateByUrl(`forums/all/${this.commentOn}`)
+          }
+        })
+
+    }
     formData.append("image", this.file, this.file.name)
     formData.append("author", localStorage.getItem('username'))
     formData.append("commentOn", this.commentOn)// add anchor where the comment holds
@@ -55,11 +76,6 @@ export class PostComponent implements OnInit {
     }
     // formData.append('tags', this.tags)
     
-
-
-    console.log(formData.get('image'))
-    console.log(formData.get('author'))
-
     this.imageService
       .saveImageData(formData)
       .subscribe(r => {
