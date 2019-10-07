@@ -19,11 +19,10 @@
 </div> -->
 <div class="comments-panel">
     <button mat-button color="primary" (click)="addComment()">reply to this image</button>
-    <div class="comments-content" *ngFor="let imgId of idArr; let i = index">
-        <div *ngIf="i < 10">
-            <app-comment [id]="imgId"></app-comment>
+        <div class="comments-content" *ngFor="let imgId of idArr; let i = index">
+            <app-comment [id]="imgId" [hidden]="i < 10 ? false && onlyShowTenComments : true && onlyShowTenComments"></app-comment>
+            <!-- should be display the remaining comments as well... -->
         </div>
-        <!-- should be display the remaining comments as well... -->
-    </div>
+    <button mat-raised-button (click)="showMoreComments()">Load All Comments</button>    
 </div>
 
