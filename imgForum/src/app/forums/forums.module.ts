@@ -19,6 +19,8 @@ import { CarouselComponent } from './carousel/carousel.component';
 import { AuthGuard } from '../user/services/auth.guard';
 import { ImageService } from './services/image.service';
 import { UserService } from '../user/services/user.service';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { AuthInterceptor } from '../user/services/auth.interceptor';
 
 
 const routes: Routes = [
@@ -66,7 +68,7 @@ const routes: Routes = [
   providers: [
     AuthGuard,
     ImageService, 
-    UserService
+    UserService,
   ]
 })
 export class ForumsModule { }
