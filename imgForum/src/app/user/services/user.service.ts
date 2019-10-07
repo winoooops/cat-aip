@@ -13,11 +13,11 @@ export interface User {
 const SERVER_URL = "http://localhost:3000"
 
 const httpOptions = {
-  headers: new HttpHeaders({ 
+  headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'credentials' : 'include'
+    'credentials': 'include'
   }),
-};  
+};
 
 
 
@@ -34,14 +34,15 @@ export class UserService {
   }
 
   login(data): Observable<any> {
+    localStorage.setItem('username', data.userId)
     return this.http.post<any>(`${SERVER_URL}/user/signin`, data, httpOptions)
   }
   // parts of the code below is from https://blog.angular-university.io/angular-jwt-authentication/
   setSession(res) {
-    const expiresIn = Number( res.expiresIn.substring(0,1) )
-    const expiresAt = moment().add(expiresIn,'h');
+    const expiresIn = Number(res.expiresIn.substring(0, 1))
+    const expiresAt = moment().add(expiresIn, 'h');
     localStorage.setItem('id_token', res.token)
-    localStorage.setItem('expiresAt', JSON.stringify( expiresAt ) )
+    localStorage.setItem('expiresAt', JSON.stringify(expiresAt))
   }
 
   logOut() {
@@ -50,11 +51,11 @@ export class UserService {
   }
 
   isLoggedIn() {
-    return moment().isBefore( this.getExpiration() )
+    return moment().isBefore(this.getExpiration())
   }
 
   isLoggedOut() {
-    return !this.isLoggedIn() 
+    return !this.isLoggedIn()
   }
 
   getExpiration() {
