@@ -8,6 +8,7 @@ import { ActivatedRoute, Params, Router } from '@angular/router';
 import { UserService } from 'src/app/user/services/user.service';
 
 
+
 @Component({
   selector: 'app-comment',
   templateUrl: './comment.component.html',
@@ -17,6 +18,7 @@ export class CommentComponent implements OnInit {
   // because the comment-content's card, by design, should not be clickable
   // so I won't be using routing here
   @Input() id: string
+  thread_id: string 
   docID: string 
   isImage: boolean
   imgSrc: string
@@ -42,8 +44,10 @@ export class CommentComponent implements OnInit {
     // const thread_ali = this.route.snapshot.params['thread_alias']
     // this.url = `/forums/${forums_ali}/${thread_ali}`
     // console.log( this.url )
-    
-    this.imageService
+    this.route.params.subscribe( params => {
+      this.thread_id = params['thread_alias']
+
+      this.imageService
       .getDocData(this.id)
       .subscribe(doc => {
         if( doc.author === localStorage.getItem('username')) {
@@ -67,6 +71,9 @@ export class CommentComponent implements OnInit {
         this.time = doc.createdAt
         this.docID = doc._id
       })
+    })
+
+   
   }
 
   toggleComment() {
@@ -94,6 +101,8 @@ export class CommentComponent implements OnInit {
   change() {
     if ( !this.isImage ) {
       this.changeEmoji() 
+    } else {
+      this.changeImage()
     }
   }
 
@@ -101,6 +110,16 @@ export class CommentComponent implements OnInit {
   changeEmoji() {
     let dialogRef = this.dialog.open(EmojiDialogComponent, {
       data: { "id" : this.id, isNew: false }
+    })
+  }
+
+
+  changeImage() {
+    this.router.navigate(['forums/post'], {
+      queryParams: {
+        id: this.id,
+        commentOn: this.thread_id
+      }
     })
   }
 }

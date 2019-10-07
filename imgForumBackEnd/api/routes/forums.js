@@ -96,7 +96,7 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
 })
 
 
-router.put('/:id', checkIfAuthenticated, upload.single('image'), (req, res) => {
+router.put('/:id', upload.single('image'), checkIfAuthenticated,  (req, res) => {
     const file = req.file
     if (!file) {
         return

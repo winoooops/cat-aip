@@ -51,7 +51,6 @@ export class PostComponent implements OnInit {
     let formData: FormData = new FormData()
 
     if( this.id !== "" ) {
-
       formData.append("image", this.file, this.file.name)
       for(let i = 0 ; i < this.tags.length ; i ++ ) {
         formData.append('tags[]', this.tags[i])
@@ -66,26 +65,27 @@ export class PostComponent implements OnInit {
             this.router.navigateByUrl(`forums/all/${this.commentOn}`)
           }
         })
-
-    }
-    formData.append("image", this.file, this.file.name)
-    formData.append("author", localStorage.getItem('username'))
-    formData.append("commentOn", this.commentOn)// add anchor where the comment holds
-    for(let i = 0 ; i < this.tags.length ; i ++ ) {
-      formData.append('tags[]', this.tags[i])
-    }
-    // formData.append('tags', this.tags)
+    } else {
+      formData.append("image", this.file, this.file.name)
+      formData.append("author", localStorage.getItem('username'))
+      formData.append("commentOn", this.commentOn)// add anchor where the comment holds
+      for(let i = 0 ; i < this.tags.length ; i ++ ) {
+        formData.append('tags[]', this.tags[i])
+      }
+      // formData.append('tags', this.tags)
+      
+      this.imageService
+        .saveImageData(formData)
+        .subscribe(r => {
+          if( this.commentOn === "") {
+            this.router.navigateByUrl('forums/all')
+          } else {
+            this.router.navigateByUrl(`forums/all/${this.commentOn}`)
+          }
+          
+        })
+      }
     
-    this.imageService
-      .saveImageData(formData)
-      .subscribe(r => {
-        if( this.commentOn === "") {
-          this.router.navigateByUrl('forums/all')
-        } else {
-          this.router.navigateByUrl(`forums/all/${this.commentOn}`)
-        }
-        
-      })
   }
 
   add(event: MatChipInputEvent) {
