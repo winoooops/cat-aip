@@ -5,7 +5,7 @@ const router = express.Router()
 const Image = require('../models/image')
 const multer = require('multer')
 const expressJwt = require('express-jwt')
-
+// const Objec
 
 // define a storage location and naming strategy <---- multer enabled 
 const storage = multer.diskStorage({
@@ -189,5 +189,13 @@ router.get('/:id', checkIfAuthenticated, (req, res) => {
         })
 })
 
+
+router.delete('/:id', checkIfAuthenticated, (req,res) => {
+    Image
+        .deleteOne({_id: req.params.id})
+        .then( (r) => {
+            res.json( r )
+        })
+})
 
 module.exports = router
