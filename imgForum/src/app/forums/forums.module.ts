@@ -16,6 +16,8 @@ import { Moment } from './shared/moment.pipe';
 import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { EmojiDialogComponent } from './thread/emoji-dialog/emoji-dialog.component';
 import { ToEmojiPipe } from './shared/to-emoji.pipe';
+import { CarouselComponent } from './carousel/carousel.component';
+
 
 const routes: Routes = [
   { path: 'post', component: PostComponent },
@@ -27,7 +29,7 @@ const routes: Routes = [
       { path: ':thread_alias', component: ThreadComponent }
     ]
   },
-  { path: '', component: ForumsComponent },
+  { path: '', redirectTo:'all' },
 ]
 
 
@@ -44,6 +46,7 @@ const routes: Routes = [
     Moment,
     EmojiDialogComponent,
     ToEmojiPipe,
+    CarouselComponent,
   ],
   imports: [
     CommonModule,
