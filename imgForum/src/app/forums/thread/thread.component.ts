@@ -12,13 +12,18 @@ import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
 })
 export class ThreadComponent implements OnInit {
   @Input() id: string
+  _id: string
+  isImage: boolean
   isCommentsViewable: boolean = false
   showEmojiPicker = false;
+  emoji: string
   imgSrc: string
   author: string
+  username: string
   tags: string[]
   time: string
   counts: number
+  isContentDeletable: boolean = false
   constructor(
     private imageService: ImageService,
     private route: ActivatedRoute,
@@ -28,6 +33,7 @@ export class ThreadComponent implements OnInit {
 
   ngOnInit() {
     // console.log( this.id )
+    this.username = localStorage.getItem('username')
     this.route.params.subscribe(params => {
       // if thread is open in threads' view, get Input() value,
       // if the thread is open by itself via routing, get the paramaters
@@ -41,20 +47,29 @@ export class ThreadComponent implements OnInit {
 
       this.imageService.getDocData(this.id)
         .subscribe(doc => {
-          // console.log( r )
-          // get the contentType
-          const flag = `data:${doc.img.contentType};base64,`
-          // console.log( flag )
-
-          // convent the BSON to base64
-          const imgStr = arrayBufferToBase64(doc.img.data.data)
+          this._id = doc._id
+          if (doc.img) {
+            this.isImage = true
+            // get the contentType 
+            const flag = `data:${doc.img.contentType};base64,`
+            // convent the BSON to base64
+            const imgStr = arrayBufferToBase64(doc.img.data.data)
+            this.imgSrc = flag + imgStr
+          } else {
+            this.isImage = false
+            this.emoji = doc.emoji
+            console.log(doc.emoji)
+          }
           // console.log( imgStr )
+          this.counts = doc.counts
           this.author = doc.author
+          // 
+          if (this.username === this.author) {
+            this.isContentDeletable = true
+          }
+
           this.tags = doc.tags
           this.time = doc.createdAt
-          this.counts = doc.counts
-          this.imgSrc = flag + imgStr
-          // console.log(this.imgSrc)
         })
     })
   }
@@ -77,7 +92,7 @@ export class ThreadComponent implements OnInit {
 
   openEmojiDialog() {
     this.dialog.open(EmojiDialogComponent, {
-      data: { "commentOn": this.id } 
+      data: { "commentOn": this.id }
     })
   }
 
