@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { DataSharingService } from './data-sharing.service';
+import { UserService } from './user/services/user.service';
 
 
 @Component({
@@ -7,13 +8,14 @@ import { DataSharingService } from './data-sharing.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
   isUserLoggedIn: boolean = false;
 
-  constructor(private dataSharingService: DataSharingService) {
-    this.dataSharingService.isUserLoggedIn.subscribe( value => {
-      this.isUserLoggedIn = value;
-    });
+  constructor(private userService: UserService) { }
+
+  ngOnInit() {
+    this.isUserLoggedIn = this.userService.isLoggedIn() 
+    console.log( this.isUserLoggedIn )
   }
-  title = 'imgForum';
+  
 }
