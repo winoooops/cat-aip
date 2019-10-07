@@ -19,20 +19,11 @@ const userSchema = new Schema({
     password: {
         type : String,
         required: true
-    }
+    },
+    salt: String
 })
   
 userSchema.plugin(uniqueValidator);
-userSchema.pre('save', function (next) {
-    var user = this;
-    bcrypt.hash(user.password, 10, function (err, hash){
-      if (err) {
-        return next(err);
-      }
-      user.password = hash;
-      next();
-    })
-  });
   
 const User = mongoose.model('User', userSchema)
 

@@ -17,22 +17,23 @@ var sess;
 
 router.post('/register', (req, res) => {
     // Get user information from the request
-    var userData = {
-        username: req.body.userId,
-        email: req.body.email,
-        password: req.body.pwd,    
-    }
-    User.create(userData, function (err, user) {
-        if (err) {
-            res.json({
-                "message" : "Username and email must be unique!"
-            });
-        } else {
-            res.json({
-                "message" : req.body.userId
-            });
-        }
-    });
+    bcrypt.genSalt(10,(err,salt) => {
+        bcrypt.hash(req.body.pwd, salt, function (err, hash){
+          if (err) {
+            return console.error(err);
+          }
+          new User({
+            username: req.body.userId,
+            email: req.body.email,
+            salt: salt,
+            password: hash
+            })
+            .save()
+            .then( r => {
+                res.json( r )
+            })
+        })
+      })
 })
 
   
@@ -47,27 +48,26 @@ router.post('/signin', (req, res) => {
             "message" : "Already signed in!"
         })
     }
-    User.findOne({username : req.body.userId}, function(err, result) {
-        if (err) {
-            console.log(err);
-        }
-        bcrypt.compare(req.body.password, result.password, (err, correctness) => {
-            if (err) {
-                console.log(err);
-            }
-            // username and password match
-            if (correctness) {
-                // generate token
-                let token = jwt.sign({username:req.body.userId},'secret', {expiresIn : '3h'});
-                res.json({
-                    token : token,
-                    expiresIn: '3h'
-                })
-            } else {
-                res.sendStatus(401)
-            }
-        })
-    }) 
+    User.findOne({username : req.body.userId})
+        .then( (result) => {
+            
+            // bcrypt.compare(req.body.password, result.password, (err, correctness) => {
+            //     if (err) {
+            //         console.log(err);
+            //     }
+            //     // username and password match
+            //     if (correctness) {
+            //         // generate token
+            //         let token = jwt.sign({username:req.body.userId},'secret', {expiresIn : '3h'});
+            //         res.json({
+            //             token : token,
+            //             expiresIn: '3h'
+            //         })
+            //     } else {
+            //         res.sendStatus(401)
+            //     }
+            // })
+        }) 
 })
 
 router.post('/logout', (req, res) => {
