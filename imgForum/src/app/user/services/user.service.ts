@@ -42,6 +42,7 @@ export class UserService {
     const expiresAt = moment().add(expiresIn,'h');
     localStorage.setItem('id_token', res.token)
     localStorage.setItem('expiresAt', JSON.stringify( expiresAt ) )
+    localStorage.setItem('username', res.username )
   }
 
   logOut() {
