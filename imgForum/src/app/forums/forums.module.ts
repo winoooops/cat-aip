@@ -16,17 +16,21 @@ import { PickerModule } from '@ctrl/ngx-emoji-mart';
 import { EmojiDialogComponent } from './thread/emoji-dialog/emoji-dialog.component';
 import { ToEmojiPipe } from './shared/to-emoji.pipe';
 import { CarouselComponent } from './carousel/carousel.component';
+import { AuthGuard } from '../user/services/auth.guard';
+import { ImageService } from './services/image.service';
+import { UserService } from '../user/services/user.service';
 
 
 const routes: Routes = [
-  { path: 'post', component: PostComponent },
+  { path: 'post', component: PostComponent, canActivate: [AuthGuard] },
   {
     path: ':forum_alias',
     component: ForumComponent,
     children: [
       { path: '', component: ThreadsComponent, },
       { path: ':thread_alias', component: ThreadComponent }
-    ]
+    ],
+    canActivate: [AuthGuard]
   },
   { path: '', redirectTo:'all' },
 ]
@@ -58,6 +62,11 @@ const routes: Routes = [
   ],
   entryComponents: [
     EmojiDialogComponent
+  ],
+  providers: [
+    AuthGuard,
+    ImageService, 
+    UserService
   ]
 })
 export class ForumsModule { }
