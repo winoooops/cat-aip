@@ -10,16 +10,17 @@
             <a [routerLink]="['']">#{{ tag }}</a>
         </div>
     </div>
-    
+
     <mat-card-actions>
-        <button mat-button color="primary" (click)="openEmojiDialog()"><mat-icon>sentiment_satisfied_alt</mat-icon></button>
+        <button mat-button color="primary" (click)="openEmojiDialog()">
+            <mat-icon>sentiment_satisfied_alt</mat-icon>
+        </button>
         <button mat-button color="primary">SHARE</button>
         <button mat-button color="primary" *ngIf="isCommentsViewable">COMMENT({{ counts }})</button>
+        <button mat-button color="accent" *ngIf="isContentDeletable">Delete</button>
     </mat-card-actions>
 </mat-card>
 
 <div class="comments" *ngIf="isCommentsViewable">
     <app-comments [id]="id"></app-comments>
 </div>
-
-
