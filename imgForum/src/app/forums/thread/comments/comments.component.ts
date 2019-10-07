@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 export class CommentsComponent implements OnInit {
   @Input() id: string
   idArr: string[]
+  onlyShowTenComments: boolean = true
   constructor(
     private imageService: ImageService,
     private router: Router
@@ -31,6 +32,12 @@ export class CommentsComponent implements OnInit {
         commentOn: this.id
       }
     })
+  }
+
+  showMoreComments() {
+    this.onlyShowTenComments = !this.onlyShowTenComments 
+    console.log( this.onlyShowTenComments || false  )
+    // let the page rerender the remain child component 
   }
 
 
