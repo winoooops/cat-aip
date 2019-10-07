@@ -9,6 +9,7 @@ import { arrayBufferToBase64 } from '../shared/convertB64'
 })
 export class CarouselComponent implements OnInit {
   imgSrcArr: string[] = []
+  idArr: string[] = []
   constructor( private imageService: ImageService) { }
 
   ngOnInit() {
@@ -19,6 +20,7 @@ export class CarouselComponent implements OnInit {
           this.imageService
             .getDocData( doc._id )
             .subscribe( doc => {
+              this.idArr.push( doc._id )
               const flag = `data:${doc.img.contentType};base64,`
               const imgStr = arrayBufferToBase64(doc.img.data.data)
               this.imgSrcArr.push(flag + imgStr)
