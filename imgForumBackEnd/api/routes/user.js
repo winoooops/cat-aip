@@ -61,13 +61,10 @@ router.post('/signin', (req, res) => {
                 let token = jwt.sign({username:req.body.userId},'secret', {expiresIn : '3h'});
                 res.json({
                     token : token,
-                    id : req.body.userId
+                    expiresIn: '3h'
                 })
             } else {
-                console.log("Loggin failure!");
-                res.json({
-                    id : "wrong password!"
-                })
+                res.sendStatus(401)
             }
         })
     }) 
