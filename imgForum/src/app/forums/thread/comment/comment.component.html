@@ -6,7 +6,7 @@
     <div class="image-content" *ngIf="isImage">
             <img [src]="imgSrc" alt="">
             <div class="tags-Link" *ngFor="let tag of tags">
-                <a [routerLink]="['']">#{{ tag }}</a>
+                <a>#{{ tag }}</a>
             </div>
     </div>
 

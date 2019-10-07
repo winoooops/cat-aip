@@ -7,7 +7,7 @@
     <img [src]="imgSrc" alt="" *ngIf="imgSrc">
     <div class="tags-Links" *ngIf="isCommentsViewable">
         <div class="tag" *ngFor="let tag of tags">
-            <a [routerLink]="['']">#{{ tag }}</a>
+            <a >#{{ tag }}</a>
         </div>
     </div>
     
