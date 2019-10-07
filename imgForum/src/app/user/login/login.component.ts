@@ -28,21 +28,9 @@ export class LoginComponent {
     this.userService.login({
       userId: this.username,
       password: this.password
-    }).subscribe(
-      data => {
-        // Log in successful
-        if (data.token) {
-          localStorage.setItem('token', data.token);
-          this.dataSharingService.isUserLoggedIn.next(true);
-          this.router.navigate(['forums/post'], { queryParams: { id: data.id } })  
-        } else {
-          alert("Wrong password or username!");
-        }
-      },
-      error => {
-        alert("Error occurred!");
-      }
-    );
+    }).subscribe( (auth) => {
+      this.userService.setSession( auth )
+    });
   }
 
 }
