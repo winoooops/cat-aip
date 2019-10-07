@@ -19,6 +19,7 @@ export class ThreadComponent implements OnInit {
   tags: string[]
   time: string
   counts: number
+  isMutable: boolean = false 
   constructor(
     private imageService: ImageService,
     private route: ActivatedRoute,
@@ -50,6 +51,10 @@ export class ThreadComponent implements OnInit {
           const imgStr = arrayBufferToBase64(doc.img.data.data)
           // console.log( imgStr )
           this.author = doc.author
+
+          if( this.author === localStorage.getItem('username') ) {
+            this.isMutable = true 
+          }
           this.tags = doc.tags
           this.time = doc.createdAt
           this.counts = doc.counts
