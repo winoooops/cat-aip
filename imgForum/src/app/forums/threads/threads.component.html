@@ -4,6 +4,9 @@
     <button mat-button color="accent" [routerLink]="['../../wallpaper']">Wallpaper</button>
     <button mat-button color="accent" [routerLink]="['../../films']">Film</button>
 </div>
+<div class="add">
+    <button mat-raised-button color="primary" [routerLink]="['../../post']">Post New Topic</button>
+</div>
 <main>
     <div *ngFor="let index of idArr">
         <app-thread [id]="index" [routerLink]="[index]"></app-thread>
