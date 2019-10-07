@@ -48,26 +48,38 @@ router.post('/signin', (req, res) => {
             "message" : "Already signed in!"
         })
     }
-    User.findOne({username : req.body.userId})
-        .then( (result) => {
-            
-            // bcrypt.compare(req.body.password, result.password, (err, correctness) => {
-            //     if (err) {
-            //         console.log(err);
-            //     }
-            //     // username and password match
-            //     if (correctness) {
-            //         // generate token
-            //         let token = jwt.sign({username:req.body.userId},'secret', {expiresIn : '3h'});
-            //         res.json({
-            //             token : token,
-            //             expiresIn: '3h'
-            //         })
-            //     } else {
-            //         res.sendStatus(401)
-            //     }
-            // })
-        }) 
+
+    User
+        .findOne({ username: req.body.userId })
+        .then(doc => {
+            // if (doc) {
+            //     // 2.1 if not found, notify user to register
+            //     // send back a json respons saying the id doesn't exist
+            //     res.json({
+            //         "message": "Id not found..."
+            //     })
+            // }
+            console.log( doc )
+            const salt = doc['salt']//get the salt from database
+            bcrypt.hash(req.body.password, salt, (err, hash) => {
+                if (err) return err;
+                // comepare the inputed hash with the hash store
+                if (hash === doc['password']) {
+                    let token = jwt.sign({username:req.body.userId},'secret', {expiresIn : '3h'});
+                    res.json({
+                        token : token,
+                        expiresIn: '3h',
+                        username: doc['username']
+                    })
+                } else {
+                    res.json({
+                        "message": "wrong password"
+                    })
+                }
+
+            })
+        })
+
 })
 
 router.post('/logout', (req, res) => {
@@ -78,29 +90,7 @@ router.post('/logout', (req, res) => {
     })
 })
 
-// Below codes are modified based on https://github.com/AzharHusain/token-based-authentication
-router.get('/username', verifyToken, function(req,res,next){
-    return res.status(200).json(decodedToken.username);
-  })
   
-var decodedToken = '';
-
-function verifyToken(req,res,next){
-    let token = req.query.token;
-    jwt.verify(token,'secret', function(err, tokendata){
-      if(err){
-        return res.status(400).json({message:' Unauthorized request'});
-      }
-      if(tokendata){
-        decodedToken = tokendata;
-        next();
-      }
-    })
-  }
-  
-
-
-
 /*****************************************
  *  user login & authentification 
 ******************************************/
