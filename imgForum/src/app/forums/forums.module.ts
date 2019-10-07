@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 // import { HttpClientModule } from '@angular/common/http'
 import { FormsModule } from '@angular/forms'
 import { CommonModule } from '@angular/common';
-import { ForumsComponent } from './forums/forums.component';
 import { Routes, RouterModule } from '@angular/router'
 import { ForumComponent } from './forum/forum.component';
 // import { ForumPostComponent } from './forum-post/forum-post.component';
@@ -35,7 +34,6 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    ForumsComponent,
     ForumComponent,
     // ForumPostComponent,
     ThreadsComponent,
