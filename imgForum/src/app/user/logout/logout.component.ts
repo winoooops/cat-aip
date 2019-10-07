@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { DataSharingService } from '../../data-sharing.service';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-logout',
@@ -10,18 +10,17 @@ import { DataSharingService } from '../../data-sharing.service';
 export class LogoutComponent implements OnInit {
   curUrl : string = '';
   prevUrl : string = '';
-  constructor(private router : Router, private dataSharingService: DataSharingService) {
+  constructor(private router : Router, private userService: UserService) {
     this.curUrl = this.router.url;
   }
 
   ngOnInit() {
-    if (!localStorage.token) {
+    if (!localStorage.id_token) {
       alert("You haven't logged in!")
       this.router.navigate(['/user/login']);
     } else {
       localStorage.clear();
       alert("You have successfully logged out!");
-      this.dataSharingService.isUserLoggedIn.next(false);
       this.router.navigate(['/user/login']);
     }
   }
