@@ -26,7 +26,7 @@ export class EmojiDialogComponent {
   addEmoji(event) {
     this.code = event.emoji.unified
     this.commentOn = this.data.commentOn
-    this.author = "anoymous user"
+    this.author = localStorage.getItem('username')
     console.log( this.commentOn )
     this.imageService
       .saveEmojiData( { "code": this.code, "commentOn": this.commentOn, "author": this.author } )
