@@ -52,7 +52,7 @@ router.post('/post', upload.single('image'), (req, res) => {
             },
             author: author,
             tags: tags,
-            isRoot: true, 
+            isRoot: true,
             createdAt: new Date(),
             counts: 0
         })
@@ -94,21 +94,42 @@ router.post('/emoji', (req, res) => {
     //-> resolved by add httpHeaders to be app/json
     Image
         .updateOne({ "_id": req.body.commentOn }, { $inc: { counts: 1 } })
-        .then( () => {
+        .then(() => {
             new Image({
                 emoji: req.body.code,
                 commentOn: req.body.commentOn,
                 author: req.body.author,
                 createdAt: new Date(),
-                counts: 0 
+                counts: 0
                 // counts: 0
             })
                 .save()
-                .then( r => {
-                    res.json( r )
+                .then(r => {
+                    res.json(r)
                 })
         })
 })
+
+
+router.put('/emoji', (req, res) => {
+    Image
+        .updateOne({ "_id": req.body.id }, { "emoji": req.body.code })
+        .then(r => {
+            res.json(r)
+        })
+
+})
+
+
+router.delete('/comment/:id', (req, res) => {
+    const id = req.params.id
+    Image
+        .deleteOne({ "_id": id })
+        .then(r => {
+            res.json(r)
+        })
+})
+
 
 // router.get('/', (req, res) => {
 //     // read all the image data
@@ -137,12 +158,12 @@ router.get('/hot-threads', (req, res) => {
     // find all the root images in the database ``````````````
     Image
         .aggregate([
-            { $match: { isRoot: { $eq: true } }},
-            { $sort: { counts: -1 }}, 
+            { $match: { isRoot: { $eq: true } } },
+            { $sort: { counts: -1 } },
             { $limit: 5 }
         ])
-        .then( r => {
-            res.json( r )
+        .then(r => {
+            res.json(r)
         })
 })
 
