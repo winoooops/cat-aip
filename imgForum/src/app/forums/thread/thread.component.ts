@@ -2,7 +2,6 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { arrayBufferToBase64 } from '../shared/convertB64'
 import { ActivatedRoute, Router } from '@angular/router';
-import { Moment } from '../shared/moment.pipe';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
 
