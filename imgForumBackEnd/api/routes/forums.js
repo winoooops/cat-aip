@@ -4,7 +4,7 @@ const fs = require('fs')
 const router = express.Router()
 const Image = require('../models/image')
 const multer = require('multer')
-
+const expressJwt = require('express-jwt')
 
 
 // define a storage location and naming strategy <---- multer enabled 
@@ -20,7 +20,13 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage })
 
 
-router.post('/post', upload.single('image'), (req, res) => {
+//This middleware will throw an error if a correctly signed JWT is not present in the Authorization header. 
+//The middleware will also throw an error if the JWT is correctly signed, but it has already expired.
+const checkIfAuthenticated = expressJwt({
+    secret: 'secret'
+}); 
+
+router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) => {
     // allow user to upload the image's url -> users are now required to upload img from disk (updated 16/09/19)
     // automatically takes down user's id
     // created an empty array for comments 
@@ -89,7 +95,7 @@ router.post('/post', upload.single('image'), (req, res) => {
     }
 })
 
-router.post('/emoji', (req, res) => {
+router.post('/emoji', checkIfAuthenticated, (req, res) => {
     // issue found: because express can not parse form data, if I do it in the old way, the req.body would be empty 
     //-> resolved by add httpHeaders to be app/json
     Image
@@ -122,7 +128,7 @@ router.post('/emoji', (req, res) => {
 
 // })
 
-router.get('/comment/:id', (req, res) => {
+router.get('/comment/:id', checkIfAuthenticated, (req, res) => {
     const id = req.params.id
     // noted that, the results includes iamge and emoji comments 
     Image
@@ -151,7 +157,7 @@ router.get('/tags/:tag', (req, res) => {
     // read the image data based on the tags
     //
     const tag = req.params.tag
-
+    console.log( req.headers )
     if (tag == "all") {
         Image
             .find({ isRoot: { $eq: true } })
@@ -174,7 +180,7 @@ router.get('/tags/:tag', (req, res) => {
 // get the doc's data by _id 
 // if the id is passed by threads compoenent, this will only search for image docs
 // if the id is passed by comments component, this will search all the docs type
-router.get('/:id', (req, res) => {
+router.get('/:id', checkIfAuthenticated, (req, res) => {
     const id = req.params.id
     Image
         .findOne({ "_id": id })
