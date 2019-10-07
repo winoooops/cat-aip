@@ -80,4 +80,8 @@ export class ImageService {
       params: new HttpParams().append('token', localStorage.getItem('token'))
     });
   }
+
+  deleteDoc(id) {
+    return this.http.delete<any>(`${SERVER_URL}/forums/${id}`)
+  }
 }
