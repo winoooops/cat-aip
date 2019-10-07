@@ -10,10 +10,6 @@
         <input type="file" autofocus (change)="fileChange($event)">
       </div>
 
-      <mat-form-field>
-        <input type="text" matInput name="author" placeholder="Your name" [(ngModel)]="author">
-      </mat-form-field>
-
       <mat-form-field class="tags-chip-list">
           <mat-chip-list #chipList aria-label="tags">
             <mat-chip 
