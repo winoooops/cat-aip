@@ -17,6 +17,7 @@ export class CommentComponent implements OnInit {
   // because the comment-content's card, by design, should not be clickable
   // so I won't be using routing here
   @Input() id: string
+  docID: string 
   isImage: boolean
   imgSrc: string
   author: string
@@ -63,6 +64,7 @@ export class CommentComponent implements OnInit {
         this.author = doc.author
         this.tags = doc.tags
         this.time = doc.createdAt
+        this.docID = doc._id
       })
   }
 
@@ -78,5 +80,13 @@ export class CommentComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {
       // should refresh the parent 
     });
+  }
+
+  delete() {
+    this.imageService
+      .deleteDoc(this.docID)
+      .subscribe( (r) => {
+        console.log( r )
+      })
   }
 }
