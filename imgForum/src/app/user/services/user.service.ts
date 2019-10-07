@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 export interface User {
   userId: string,
@@ -34,5 +35,31 @@ export class UserService {
 
   login(data): Observable<any> {
     return this.http.post<any>(`${SERVER_URL}/user/signin`, data, httpOptions)
+  }
+  // parts of the code below is from https://blog.angular-university.io/angular-jwt-authentication/
+  setSession(res) {
+    const expiresIn = Number( res.expiresIn.substring(0,1) )
+    const expiresAt = moment().add(expiresIn,'h');
+    localStorage.setItem('id_token', res.token)
+    localStorage.setItem('expiresAt', JSON.stringify( expiresAt ) )
+  }
+
+  logOut() {
+    localStorage.removeItem('id_token')
+    localStorage.removeItem('expiresAt')
+  }
+
+  isLoggedIn() {
+    return moment().isBefore( this.getExpiration() )
+  }
+
+  isLoggedOut() {
+    return !this.isLoggedIn() 
+  }
+
+  getExpiration() {
+    const expiration = localStorage.getItem('expiresAt')
+    const expiresAt = JSON.parse(expiration)
+    return moment(expiresAt)
   }
 }
