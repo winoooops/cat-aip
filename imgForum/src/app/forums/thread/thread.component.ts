@@ -86,4 +86,10 @@ export class ThreadComponent implements OnInit {
     })
   }
 
+  delete() {
+    this.imageService.deleteDoc( this.id )
+      .subscribe( r => {
+        this.router.navigate(['forums/all'])
+      })
+  }
 }
