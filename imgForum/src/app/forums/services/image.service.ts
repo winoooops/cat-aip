@@ -50,6 +50,10 @@ export class ImageService {
     return this.http.post<any>(`${SERVER_URL}/forums/emoji`, data, httpOptions)
   }
 
+  changeEmoji(data) {
+    return this.http.put<any>(`${SERVER_URL}/forums/emoji-change`, data, httpOptions)
+  }
+
   saveImageData(data): Observable<any> {
     return this.http.post<any>(`${SERVER_URL}/forums/post`, data)
   }
@@ -84,4 +88,6 @@ export class ImageService {
   deleteDoc(id) {
     return this.http.delete<any>(`${SERVER_URL}/forums/${id}`)
   }
+
+  
 }
