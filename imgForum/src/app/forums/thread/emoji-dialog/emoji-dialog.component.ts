@@ -3,7 +3,9 @@ import { MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material/dial
 import { ImageService } from '../../services/image.service';
 
 export interface ImageID {
-  commentOn: string
+  commentOn: string,
+  id: string,
+  isNew: boolean
 }
 
 
@@ -27,12 +29,20 @@ export class EmojiDialogComponent {
     this.code = event.emoji.unified
     this.commentOn = this.data.commentOn
     this.author = localStorage.getItem('username')
-    console.log( this.commentOn )
-    this.imageService
+
+    if( this.data.isNew  ) {
+      this.imageService
       .saveEmojiData( { "code": this.code, "commentOn": this.commentOn, "author": this.author } )
       .subscribe( r => {
         console.log( r )
       })
+    } else {
+      this.imageService
+        .changeEmoji( { "code": this.code, "id": this.data.id })
+        .subscribe( r => {
+          console.log(r)
+        })
+    }
     this.dialogRef.close()
   }
 }
