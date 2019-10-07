@@ -65,7 +65,10 @@ router.post('/signin', (req, res) => {
                 if (err) return err;
                 // comepare the inputed hash with the hash store
                 if (hash === doc['password']) {
-                    let token = jwt.sign({username:req.body.userId},'secret', {expiresIn : '3h'});
+                    let token = jwt.sign({}, 'secret', {
+                        expiresIn : '3h',
+                        subject: req.body.userId
+                    });
                     res.json({
                         token : token,
                         expiresIn: '3h',
