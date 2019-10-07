@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from 'src/app/forums/services/image.service';
-import { arrayBufferToBase64 } from '../../forums/shared/convertB64'
+import { arrayBufferToBase64 } from '../shared/convertB64'
 
 @Component({
   selector: 'app-carousel',
