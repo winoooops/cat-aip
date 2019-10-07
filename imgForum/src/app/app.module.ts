@@ -8,12 +8,10 @@ import { AppComponent } from './app.component';
 import { FlexLayoutModule } from '@angular/flex-layout'
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule } from '@angular/forms';
-import { CarouselComponent } from './ui/carousel/carousel.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CarouselComponent,
   ],
   imports: [
     BrowserModule,
