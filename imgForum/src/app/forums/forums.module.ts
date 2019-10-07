@@ -30,11 +30,10 @@ const routes: Routes = [
     component: ForumComponent,
     children: [
       { path: '', component: ThreadsComponent, },
-      { path: ':thread_alias', component: ThreadComponent }
+      { path: ':thread_alias', component: ThreadComponent, canActivate: [AuthGuard] }
     ],
-    canActivate: [AuthGuard]
   },
-  { path: '', redirectTo:'all' },
+  { path: '', redirectTo: 'all' },
 ]
 
 
