@@ -18,7 +18,7 @@
     <app-comment></app-comment>
 </div> -->
 <div class="comments-panel">
-    <button mat-button color="primary" (click)="addComment()">reply to this image</button>
+    <button mat-raised-button color="primary" (click)="addComment()">reply to this image</button>
         <div class="comments-content" *ngFor="let imgId of idArr; let i = index">
             <app-comment [id]="imgId" [hidden]="i < 10 ? false && onlyShowTenComments : true && onlyShowTenComments"></app-comment>
             <!-- should be display the remaining comments as well... -->
