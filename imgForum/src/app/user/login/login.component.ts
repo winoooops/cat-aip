@@ -18,7 +18,7 @@ export class LoginComponent {
     private router: Router, 
     private dataSharingService: DataSharingService
   ) { 
-    if (localStorage.token) {
+    if (localStorage.id_token) {
       alert("You have already signed in!")
       this.router.navigate(['/forums/post']);
     }
@@ -30,6 +30,7 @@ export class LoginComponent {
       password: this.password
     }).subscribe( (auth) => {
       this.userService.setSession( auth )
+      this.router.navigate(['/forums/all']);
     });
   }
 
