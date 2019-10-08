@@ -31,7 +31,7 @@ export class LoginComponent {
     }).subscribe((auth) => {
       console.log(auth.message)
       if (auth.message) {
-        alert("Your password/username was not correct! Please try again")
+        alert(auth.message)
       } else {
         this.userService.setSession(auth)
         this.router.navigate(['/forums/all']);

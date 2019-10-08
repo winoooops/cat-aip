@@ -66,7 +66,7 @@ const routes: Routes = [
   ],
   providers: [
     AuthGuard,
-    ImageService, 
+    ImageService,
     UserService,
   ]
 })

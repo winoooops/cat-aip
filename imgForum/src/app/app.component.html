@@ -27,7 +27,9 @@
         </button>
       </div>
       <div>
-        <a [routerLink]="['/']">Image Forum</a>
+        <a [routerLink]="['/']">
+          <mat-icon>broken_image</mat-icon>CatHub
+        </a>
       </div>
       <div fxFlex fxLayout fxLayoutAlign="flex-end" fxHide.xs>
         <ul fxLayout fxLayoutGap="20px" class="navigation-items">
@@ -49,13 +51,7 @@
               <span class="label">Home</span>
             </a>
           </li>
-          <li>
-            <a [routerLink]="['/']">
-              <!-- add the feature later -->
-              <mat-icon class="icon">dashboard</mat-icon>
-              <span class="label">LeaderBoard</span>
-            </a>
-          </li>
+
 
           <!-- <li>
                   <a [routerLink]="['/user/logout']">

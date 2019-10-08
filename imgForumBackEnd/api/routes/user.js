@@ -76,14 +76,14 @@ router.post('/signin', (req, res) => {
                     })
                 } else {
                     res.json({
-                        "message": "wrong password"
+                        "message": "Username/password not correct, please try again..."
                     })
                 }
 
             })
         })
         .catch(() => {
-            res.json({ message: "no match" })
+            res.json({ message: "Username doesn't exist...Please register" })
         })
 
 })

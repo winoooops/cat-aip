@@ -24,7 +24,7 @@ const upload = multer({ storage: storage })
 //The middleware will also throw an error if the JWT is correctly signed, but it has already expired.
 const checkIfAuthenticated = expressJwt({
     secret: 'secret'
-}); 
+});
 
 router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) => {
     // allow user to upload the image's url -> users are now required to upload img from disk (updated 16/09/19)
@@ -58,7 +58,7 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
             },
             author: author,
             tags: tags,
-            isRoot: true, 
+            isRoot: true,
             createdAt: new Date(),
             counts: 0
         })
@@ -96,7 +96,7 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
 })
 
 
-router.put('/:id', upload.single('image'), checkIfAuthenticated,  (req, res) => {
+router.put('/:id', upload.single('image'), checkIfAuthenticated, (req, res) => {
     const file = req.file
     if (!file) {
         return
@@ -104,8 +104,8 @@ router.put('/:id', upload.single('image'), checkIfAuthenticated,  (req, res) => 
 
     const tags = req.body.tags
     const img = fs.readFileSync(req.file.path)
-    
-    
+
+
     Image
         .updateOne({ _id: req.params.id }, {
             img: {
@@ -114,8 +114,8 @@ router.put('/:id', upload.single('image'), checkIfAuthenticated,  (req, res) => 
             },
             tags: tags,
         })
-        .then( r => {
-            res.json( r )
+        .then(r => {
+            res.json(r)
         })
 })
 
@@ -126,28 +126,28 @@ router.post('/emoji', checkIfAuthenticated, (req, res) => {
     //-> resolved by add httpHeaders to be app/json
     Image
         .updateOne({ "_id": req.body.commentOn }, { $inc: { counts: 1 } })
-        .then( () => {
+        .then(() => {
             new Image({
                 emoji: req.body.code,
                 commentOn: req.body.commentOn,
                 author: req.body.author,
                 createdAt: new Date(),
-                counts: 0 
+                counts: 0
                 // counts: 0
             })
                 .save()
-                .then( r => {
-                    res.json( r )
+                .then(r => {
+                    res.json(r)
                 })
         })
 })
 
-router.put('/emoji-change', checkIfAuthenticated, (req,res) => {
+router.put('/emoji-change', checkIfAuthenticated, (req, res) => {
     //
     Image
         .updateOne({ _id: req.body.id }, { emoji: req.body.code })
-        .then( r => {
-            res.json( r )
+        .then(r => {
+            res.json(r)
         })
 })
 
@@ -163,7 +163,7 @@ router.put('/emoji-change', checkIfAuthenticated, (req,res) => {
 
 // })
 
-router.get('/comment/:id', checkIfAuthenticated, (req, res) => {
+router.get('/comment/:id', (req, res) => {
     const id = req.params.id
     // noted that, the results includes iamge and emoji comments 
     Image
@@ -178,12 +178,12 @@ router.get('/hot-threads', (req, res) => {
     // find all the root images in the database ``````````````
     Image
         .aggregate([
-            { $match: { isRoot: { $eq: true } }},
-            { $sort: { counts: -1 }}, 
+            { $match: { isRoot: { $eq: true } } },
+            { $sort: { counts: -1 } },
             { $limit: 5 }
         ])
-        .then( r => {
-            res.json( r )
+        .then(r => {
+            res.json(r)
         })
 })
 
@@ -192,7 +192,7 @@ router.get('/tags/:tag', (req, res) => {
     // read the image data based on the tags
     //
     const tag = req.params.tag
-    console.log( req.headers )
+    console.log(req.headers)
     if (tag == "all") {
         Image
             .find({ isRoot: { $eq: true } })
@@ -215,7 +215,7 @@ router.get('/tags/:tag', (req, res) => {
 // get the doc's data by _id 
 // if the id is passed by threads compoenent, this will only search for image docs
 // if the id is passed by comments component, this will search all the docs type
-router.get('/:id', checkIfAuthenticated, (req, res) => {
+router.get('/:id', (req, res) => {
     const id = req.params.id
     Image
         .findOne({ "_id": id })
@@ -226,11 +226,11 @@ router.get('/:id', checkIfAuthenticated, (req, res) => {
 
 
 
-router.delete('/:id', checkIfAuthenticated, (req,res) => {
+router.delete('/:id', checkIfAuthenticated, (req, res) => {
     Image
-        .deleteOne({_id: req.params.id})
-        .then( (r) => {
-            res.json( r )
+        .deleteOne({ _id: req.params.id })
+        .then((r) => {
+            res.json(r)
         })
 })
 
