@@ -22,6 +22,21 @@ export interface Image {
 }
 
 
+export interface Post {
+  id: string, 
+  author: string, 
+  timestamp: string, 
+  counts: string, 
+  tags: string[],
+  img: {
+    data: object, 
+    contentType: string 
+  },
+  emoji: string, 
+  isRoot: boolean
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
