@@ -3,30 +3,33 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const compression = require('compression')
 
 const forumRoute = require('./api/routes/forums')
 const userRoute = require('./api/routes/user')
 const db = require('./config/db')
 
-const app = express() 
-const PORT = 3000 
+const app = express()
+const PORT = 3000
 
 var corsOptions = {
-    origin : 'http://localhost:4200',
-    credentials : true
-   }
-app.use( cors(corsOptions) )
-app.use(function(req, res, next) {
+    origin: 'http://localhost:4200',
+    credentials: true
+}
+app.use(cors(corsOptions))
+app.use(function (req, res, next) {
     res.setHeader("Access-Control-Allow-Origin", "*");
     res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, authorization");
     res.setHeader("Access-Control-Allow-Methods", "GET,POST,DELETE,PUT,OPTIONS");
     next();
 });
 
-app.use( express.static('public'))
-app.use( bodyParser.json() )
-app.use( bodyParser.urlencoded({ extended: true }))
-app.use( cors() )
+app.use(express.static('public'))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
+app.use(cors())
+app.use(compression())
+
 
 app.use('/forums', forumRoute)
 app.use('/user', userRoute)
@@ -37,7 +40,7 @@ app.get('/', (req, res) => {
     }
     req.session.count++;
     res.json({
-        count : req.session.count
+        count: req.session.count
     })
 })
 app.listen(PORT, () => {
