@@ -36,39 +36,28 @@ export class ThreadComponent implements OnInit {
         this.isCommentsViewable = true
       }
 
+      this.imageService.loadThread( this.id )
+      this.imageService.thread
+        .subscribe( thread => {
+          if( thread ) {
+            // get the contentType
+            const flag = `data:${thread.img.contentType};base64,`
 
-      this.imageService.getDocData(this.id)
-        .subscribe(doc => {
-          // console.log( r )
-          // get the contentType
-          const flag = `data:${doc.img.contentType};base64,`
-          // console.log( flag )
+            // convent the BSON to base64
+            const imgStr = arrayBufferToBase64(thread.img.data.data)
+            // comebine to a base64 string
+            const imgSrc = flag + imgStr
 
-          // convent the BSON to base64
-          const imgStr = arrayBufferToBase64(doc.img.data.data)
-          // console.log( imgStr )
-          
-          const author = doc.author 
-          if( author === localStorage.getItem('username') ) {
-            this.isMutable = true 
+            this.thread = {
+              id: this.id, 
+              author: thread.author,
+              tags: thread.tags, 
+              timestamp: thread.createdAt,
+              counts: thread.counts,
+              imgSrc, 
+              isRoot: thread.isRoot
+            }
           }
-
-          const tags = doc.tags 
-          const timestamp = doc.createdAt
-          const counts = doc.counts 
-          const imgSrc = flag + imgStr
-          const isRoot = doc.isRoot
-
-          this.thread = {
-            id: this.id, 
-            author, 
-            tags,
-            timestamp, 
-            counts,
-            imgSrc,
-            isRoot
-          }
-          
         })
     })
   }
