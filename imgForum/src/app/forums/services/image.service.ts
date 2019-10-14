@@ -12,28 +12,18 @@ const httpOptions = {
   })
 };
 
-
-
-//define a dummy forums dataset
-
-export interface Image {
-  image: File,
-  author: string
-}
-
-
-export interface Post {
+export interface Thread {
   id: string, 
   author: string, 
   timestamp: string, 
   counts: string, 
   tags: string[],
-  img: {
-    data: object, 
-    contentType: string 
-  },
-  emoji: string, 
+  imgSrc: string, 
   isRoot: boolean
+}
+
+export interface Comment {
+
 }
 
 
@@ -48,17 +38,6 @@ export class ImageService {
 
   constructor(private http: HttpClient) { }
 
-
-  forums(): Forum[] {
-    return this._data
-  }
-
-  forum(forum_alias): Forum{
-    // return the forum that matches the alias
-    return this._data.find( row => {
-      return row.alias = forum_alias
-    })
-  }
 
   saveEmojiData(data): Observable<any>{
     // dont need to use formdata this time,

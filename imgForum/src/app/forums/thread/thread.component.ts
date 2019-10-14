@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject, ChangeDetectorRef } from '@angular/core';
-import { ImageService } from '../services/image.service';
+import { ImageService, Thread } from '../services/image.service';
 import { arrayBufferToBase64 } from '../shared/convertB64'
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -12,13 +12,9 @@ import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
 })
 export class ThreadComponent implements OnInit {
   @Input() id: string
+  thread: Thread 
   isCommentsViewable: boolean = false
   showEmojiPicker = false;
-  imgSrc: string
-  author: string
-  tags: string[]
-  time: string
-  counts: number
   isMutable: boolean = false 
   constructor(
     private imageService: ImageService,
@@ -51,16 +47,28 @@ export class ThreadComponent implements OnInit {
           // convent the BSON to base64
           const imgStr = arrayBufferToBase64(doc.img.data.data)
           // console.log( imgStr )
-          this.author = doc.author
-
-          if( this.author === localStorage.getItem('username') ) {
+          
+          const author = doc.author 
+          if( author === localStorage.getItem('username') ) {
             this.isMutable = true 
           }
-          this.tags = doc.tags
-          this.time = doc.createdAt
-          this.counts = doc.counts
-          this.imgSrc = flag + imgStr
-          // console.log(this.imgSrc)
+
+          const tags = doc.tags 
+          const timestamp = doc.createdAt
+          const counts = doc.counts 
+          const imgSrc = flag + imgStr
+          const isRoot = doc.isRoot
+
+          this.thread = {
+            id: this.id, 
+            author, 
+            tags,
+            timestamp, 
+            counts,
+            imgSrc,
+            isRoot
+          }
+          
         })
     })
   }
