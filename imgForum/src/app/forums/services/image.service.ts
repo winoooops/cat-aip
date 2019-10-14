@@ -1,6 +1,6 @@
 import { Injectable, ComponentFactoryResolver } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, BehaviorSubject } from 'rxjs';
 import { Data, Forum } from '../../services/data'
 
 const SERVER_URL = "http://localhost:3000"
@@ -34,9 +34,20 @@ export interface Comment {
 
 
 export class ImageService {
-  private _data = Data
+  private _data = new BehaviorSubject([])
+  data = this._data.asObservable() 
 
   constructor(private http: HttpClient) { }
+
+
+  loadAll(tag) {
+    this.http.get<any>(`${SERVER_URL}/forums/tags/${tag}`)
+      .subscribe( data => {
+        this._data.next( data )
+      })
+  }
+
+
 
 
   saveEmojiData(data): Observable<any>{
