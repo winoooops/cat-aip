@@ -1,5 +1,5 @@
 import { Component, OnInit, ɵbypassSanitizationTrustResourceUrl } from '@angular/core';
-import { ImageService, Image } from '../services/image.service';
+import { ImageService } from '../services/image.service';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { ENTER, COMMA } from '@angular/cdk/keycodes'
