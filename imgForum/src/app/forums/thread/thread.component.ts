@@ -85,7 +85,7 @@ export class ThreadComponent implements OnInit {
     emojiDialog
       .afterClosed()
       .subscribe( () => {
-        location.reload() 
+        
       })
   }
 

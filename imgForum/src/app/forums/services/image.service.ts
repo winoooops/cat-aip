@@ -2,6 +2,7 @@ import { Injectable, ComponentFactoryResolver } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Data, Forum } from '../../services/data'
+import { CdkAccordion } from '@angular/cdk/accordion';
 
 const SERVER_URL = "http://localhost:3000"
 
@@ -58,7 +59,12 @@ export class ImageService {
       })
   }
 
-
+  postThread(doc, cb) {
+    this.http.post<any>(`${SERVER_URL}/forums/post`, doc)
+      .subscribe( r => {
+        console.log( r )
+      })
+  }
 
 
   saveEmojiData(data): Observable<any>{

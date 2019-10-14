@@ -74,18 +74,15 @@ export class PostComponent implements OnInit {
       }
       // formData.append('tags', this.tags)
       
-      this.imageService
-        .saveImageData(formData)
-        .subscribe(r => {
-          if( this.commentOn === "") {
-            this.router.navigateByUrl('forums/all')
-          } else {
-            this.router.navigateByUrl(`forums/all/${this.commentOn}`)
-          }
-          
-        })
-      }
-    
+
+      this.imageService.postThread(formData, () => {
+        if( this.commentOn === "") {
+          this.router.navigateByUrl('forums/all')
+        } else {
+          this.router.navigateByUrl(`forums/all/${this.commentOn}`)
+        }
+      })
+    }
   }
 
   add(event: MatChipInputEvent) {

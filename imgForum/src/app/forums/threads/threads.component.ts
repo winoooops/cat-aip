@@ -24,8 +24,9 @@ export class ThreadsComponent implements OnInit {
       // I might consider not loading the whole data, but only the first dozens of data objects though
       this.imageService.loadAll(this.tag)
       this.imageService.data.subscribe( data => {
-        console.log( data )
-        this.idArr = data.map( doc => doc._id )
+        if( data ) {
+          this.idArr = data.map( doc => doc._id )
+        }
       })
     })
   }
