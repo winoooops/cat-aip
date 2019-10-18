@@ -32,15 +32,6 @@ export class CommentsComponent implements OnInit {
     })
   }
 
-  addComment() {
-    console.log( this.id )
-    this.router.navigate(['/forums/post'], {
-      queryParams: {
-        commentOn: this.id
-      }
-    })
-  }
-
   showMoreComments() {
     this.onlyShowTenComments = !this.onlyShowTenComments 
     console.log( this.onlyShowTenComments || false  )

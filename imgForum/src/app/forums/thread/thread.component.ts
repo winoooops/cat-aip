@@ -63,7 +63,7 @@ export class ThreadComponent implements OnInit {
   }
 
 
-  addComment() {
+  replyImage() {
     console.log(this.id)
     this.router.navigate(['/forums/post'], {
       queryParams: {
