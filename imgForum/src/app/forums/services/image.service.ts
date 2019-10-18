@@ -36,10 +36,8 @@ export interface Comment {
 
 export class ImageService {
   private _data = new BehaviorSubject([])
-  private _thread = new BehaviorSubject(undefined)
   data = this._data.asObservable() 
-  thread = this._thread.asObservable() 
-
+  
   constructor(private http: HttpClient) { }
 
   loadAll(tag) {
@@ -60,7 +58,8 @@ export class ImageService {
   postThread(doc, cb) {
     this.http.post<any>(`${SERVER_URL}/forums/post`, doc)
       .subscribe( r => {
-        console.log( r )
+        this._data.next([...this._data.value, r ])
+        cb() 
       })
   }
 
