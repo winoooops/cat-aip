@@ -37,6 +37,9 @@ export interface Comment {
 export class ImageService {
   private _data = new BehaviorSubject([])
   data = this._data.asObservable() 
+
+  private _comments = new BehaviorSubject([])
+  comments = this._comments.asObservable() 
   
   constructor(private http: HttpClient) { }
 
@@ -52,6 +55,7 @@ export class ImageService {
   loadThread(id): Observable<any>{
     // travase throught the data array
     // find the items that has the exact _id 
+    console.log( this._data.value )
     return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
   }
 
@@ -60,6 +64,13 @@ export class ImageService {
       .subscribe( r => {
         this._data.next([...this._data.value, r ])
         cb() 
+      })
+  }
+
+  loadComments(id) {
+    this.http.get<any>(`${SERVER_URL}/forums/comment/${id}`)
+      .subscribe( comments => {
+        this._comments.next( comments )
       })
   }
 
