@@ -51,6 +51,7 @@ export class PostComponent implements OnInit {
     let formData: FormData = new FormData()
 
     if( this.id !== "" ) {
+      // if the user is just changing the image by updating with a new one
       formData.append("image", this.file, this.file.name)
       for(let i = 0 ; i < this.tags.length ; i ++ ) {
         formData.append('tags[]', this.tags[i])
@@ -66,6 +67,7 @@ export class PostComponent implements OnInit {
           }
         })
     } else {
+      // if the user is posting a new image at the topic level
       formData.append("image", this.file, this.file.name)
       formData.append("author", localStorage.getItem('username'))
       formData.append("commentOn", this.commentOn)// add anchor where the comment holds
