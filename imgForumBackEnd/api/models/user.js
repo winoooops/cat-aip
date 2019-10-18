@@ -23,8 +23,11 @@ const userSchema = new Schema({
     salt: String
 })
   
+
+// This plugin will pre-check if the user being created has unique username and email address.
+// If not unique, it will return error to the user.regiser function. 
 userSchema.plugin(uniqueValidator);
-  
+
 const User = mongoose.model('User', userSchema)
 
 module.exports = User;
