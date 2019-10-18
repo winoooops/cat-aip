@@ -68,6 +68,7 @@ export class ImageService {
       })
   }
 
+
   loadComments(id) {
     this.http.get<any>(`${SERVER_URL}/forums/comment/${id}`)
       .subscribe( comments => {
@@ -76,9 +77,12 @@ export class ImageService {
   }
 
 
-  saveEmojiData(data): Observable<any>{
+  saveEmojiData(data){
     // dont need to use formdata this time,
-    return this.http.post<any>(`${SERVER_URL}/forums/emoji`, data, httpOptions)
+    this.http.post<any>(`${SERVER_URL}/forums/emoji`, data, httpOptions)
+      .subscribe( comment => {
+        this._comments.next([...this._comments.value, comment ])
+      })
   }
 
   changeEmoji(data) {

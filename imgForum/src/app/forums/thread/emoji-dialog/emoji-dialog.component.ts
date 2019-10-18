@@ -32,10 +32,8 @@ export class EmojiDialogComponent {
 
     if( this.data.isNew  ) {
       this.imageService
-      .saveEmojiData( { "code": this.code, "commentOn": this.commentOn, "author": this.author } )
-      .subscribe( r => {
-        console.log( r )
-      })
+        .saveEmojiData( { "code": this.code, "commentOn": this.commentOn, "author": this.author } )
+      
     } else {
       this.imageService
         .changeEmoji( { "code": this.code, "id": this.data.id })
