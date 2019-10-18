@@ -42,21 +42,19 @@ export class ImageService {
 
   constructor(private http: HttpClient) { }
 
-
   loadAll(tag) {
     this.http.get<any>(`${SERVER_URL}/forums/tags/${tag}`)
       .subscribe( data => {
+      // it seems like the behaviorsubject is store the data basesd on previous records
+      // instaed of loading 
         this._data.next( data )
       })
   }
 
-  loadThread(id) {
+  loadThread(id): Observable<any>{
     // travase throught the data array
     // find the items that has the exact _id 
-    this.http.get<any>(`${SERVER_URL}/forums/${id}`)
-      .subscribe( doc => {
-        this._thread.next( doc )
-      })
+    return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
   }
 
   postThread(doc, cb) {

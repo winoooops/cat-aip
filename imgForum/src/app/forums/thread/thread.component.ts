@@ -36,8 +36,8 @@ export class ThreadComponent implements OnInit {
         this.isCommentsViewable = true
       }
 
+      // this.imageService.loadThread( this.id )
       this.imageService.loadThread( this.id )
-      this.imageService.thread
         .subscribe( thread => {
           if( thread ) {
             // get the contentType
