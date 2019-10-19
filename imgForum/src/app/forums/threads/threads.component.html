@@ -6,8 +6,14 @@
     <button mat-button color="accent" [routerLink]="['../../films']">Film</button>
 </div>
 <button mat-raised-button color="primary" [routerLink]="['../../post']">Add Your Image Topic</button>
-<main>
-    <div *ngFor="let index of idArr">
-        <app-thread [id]="index" [routerLink]="[index]"></app-thread>
+<main *ngIf="threads">
+    <div *ngFor="let thread of threads">
+        <mat-card class="img-card" *ngIf="thread" [routerLink]="[thread.id]">
+            <mat-card-header>
+                <mat-card-title>{{ thread.author }}</mat-card-title>
+                <mat-card-subtitle>post {{ thread.timestamp | moment }} </mat-card-subtitle>
+            </mat-card-header>
+            <img [src]="thread.imgSrc" alt="">     
+        </mat-card>
     </div>
 </main>

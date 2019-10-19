@@ -87,7 +87,7 @@ export class ImageService {
       .subscribe( r => {
         console.log( r )
         // add the most recent post to the _data state
-        this._data.next([...this._data.value, r ])
+        this._data.next( r )
         cb() 
       })
   }

@@ -72,7 +72,6 @@ export class CommentComponent implements OnInit {
       emoji: emoji,
       isRoot: this.doc.isRoot, 
     }
-    console.log( this.comment )
   }
 
   // toggleComment() {

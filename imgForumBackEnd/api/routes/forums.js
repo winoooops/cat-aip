@@ -41,6 +41,7 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
         return
     }
 
+    console.log( req.body )
     const author = req.body.author
     const tags = req.body.tags
     const commentOn = req.body.commentOn
@@ -73,7 +74,7 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
         // search the target doc with the commnetOn's value
         // add the new Image inside
         Image
-            .updateOne(
+            .findOneAndUpdate(
                 {_id: commentOn }, 
                 { $push: 
                     {
@@ -93,14 +94,14 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
                 }
                     
             )
-            .then( () => {
-                Image.findOne({ _id: commentOn })
+            .then( (r) => {
+                console.log('succeed')
+                res.status(200).json( r )
             })
             .catch( err => {
-                res.status(400).send({ err })
+                console.log("poop")
+                res.status(400).json(err)
             })
-            
-
     }
 })
 
@@ -134,20 +135,23 @@ router.post('/emoji', checkIfAuthenticated, (req, res) => {
     // issue found: because express can not parse form data, if I do it in the old way, the req.body would be empty 
     //-> resolved by add httpHeaders to be app/json
     Image
-        .updateOne({ "_id": req.body.commentOn }, { $inc: { counts: 1 } })
-        .then(() => {
-            new Image({
-                emoji: req.body.code,
-                commentOn: req.body.commentOn,
-                author: req.body.author,
-                createdAt: new Date(),
-                counts: 0
-                // counts: 0
-            })
-                .save()
-                .then(r => {
-                    res.json(r)
-                })
+        .findOneAndUpdate(
+            { "_id": req.body.commentOn }, 
+            { 
+                $push: {
+                    comments: {
+                        emoji: req.body.code, 
+                        author: req.body.author, 
+                    }
+                }
+            }    
+        )
+        .then( res => {
+            // get a new copy of the comment 
+            res.json( res )
+        })
+        .catch( err => {
+            res.status(400).json(err)
         })
 })
 
@@ -201,12 +205,10 @@ router.get('/tags/:tag', (req, res) => {
     // read the image data based on the tags
     //
     const tag = req.params.tag
-    console.log(req.headers)
     if (tag == "all") {
         Image
             .find({ isRoot: { $eq: true } })
             .then((result) => {
-                console.log(result)
                 res.json(result)
             })
     }

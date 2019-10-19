@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-const options = { useNewUrlParser: true }
+const options = { useNewUrlParser: true, useFindAndModify: false }
 mongoose.set('useCreateIndex', true);
 const dbName = 'imgForum'
 let client

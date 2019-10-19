@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ImageService } from '../services/image.service';
 import { ActivatedRoute, Params } from '@angular/router';
+import { arrayBufferToBase64 } from '../shared/convertB64'
 
 @Component({
   selector: 'app-threads',
@@ -9,6 +10,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 })
 export class ThreadsComponent implements OnInit {
   idArr: String[]
+  threads 
   id: string
   tag: string 
 
@@ -24,8 +26,20 @@ export class ThreadsComponent implements OnInit {
       // I might consider not loading the whole data, but only the first dozens of data objects though
       this.imageService.loadAll(this.tag)
       this.imageService.data.subscribe( data => {
+
         if( data ) {
-          this.idArr = data.map( doc => doc._id )
+          this.threads = data.map( doc => {
+            const id = doc._id
+            const flag = `data:${doc.img.contentType};base64,`
+
+            // convent the BSON to base64
+            const imgStr = arrayBufferToBase64(doc.img.data.data)
+            // comebine to a base64 string
+            const imgSrc = flag + imgStr
+            const timestamp = doc.createAt
+            const author = doc.author
+            return { id, imgSrc, author, timestamp }
+          })  
         }
       })
     })

@@ -11,7 +11,8 @@ import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
   styleUrls: ['./thread.component.scss'],
 })
 export class ThreadComponent implements OnInit {
-  @Input() id: string
+  @Input() doc
+  id
   thread: Thread 
   isCommentsViewable: boolean = false
   showEmojiPicker = false;
@@ -31,10 +32,9 @@ export class ThreadComponent implements OnInit {
       // if the thread is open by itself via routing, get the paramaters
 
       // params['thread_alias'] ? this.id = params['thread_alias']: null; 
-      if (params['thread_alias']) {
-        this.id = params['thread_alias']
-        this.isCommentsViewable = true
-      }
+      
+      this.id = params['thread_alias']
+        
 
       // this.imageService.loadThread( this.id )
       this.imageService.loadThread( this.id )
@@ -57,7 +57,6 @@ export class ThreadComponent implements OnInit {
               imgSrc, 
               isRoot: thread.isRoot
             }
-            console.log( this.thread.comments )
           }
           
         })
