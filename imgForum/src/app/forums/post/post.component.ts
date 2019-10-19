@@ -46,54 +46,57 @@ export class PostComponent implements OnInit {
 
 
   onSubmit() {
-    
-    let formData: FormData = new FormData()
+    if( this.file ) {
+      let formData: FormData = new FormData()
+      if( this.id !== "" ) {
+        // if the user is just changing the image by updating with a new one
+        formData.append("image", this.file, this.file.name)
+        for(let i = 0 ; i < this.tags.length ; i ++ ) {
+          formData.append('tags[]', this.tags[i])
+        }
 
-    if( this.id !== "" ) {
-      // if the user is just changing the image by updating with a new one
-      formData.append("image", this.file, this.file.name)
-      for(let i = 0 ; i < this.tags.length ; i ++ ) {
-        formData.append('tags[]', this.tags[i])
-      }
-
-      this.imageService
-        .changeImageData( formData, this.id )
-        .subscribe( r => {
-          if( this.commentOn === "") {
-            this.router.navigateByUrl('forums/all')
-          } else {
-            this.router.navigateByUrl(`forums/all/${this.commentOn}`)
-          }
-        })
-    } else {
-      // if the user is posting a new image at the topic level
-      formData.append("image", this.file, this.file.name)
-      formData.append("author", localStorage.getItem('username'))
-      formData.append("commentOn", this.commentOn)// add anchor where the comment holds
-      for(let i = 0 ; i < this.tags.length ; i ++ ) {
-        formData.append('tags[]', this.tags[i])
-      }
-      // formData.append('tags', this.tags)
-      
-      if( this.commentOn === '') {
-        this.imageService.postThread(formData, () => {
-          if( this.commentOn === "") {
-            this.router.navigateByUrl('forums/all')
-          } else {
-            this.router.navigateByUrl(`forums/all/${this.commentOn}`)
-          }
-        })
+        this.imageService
+          .changeImageData( formData, this.id )
+          .subscribe( r => {
+            if( this.commentOn === "") {
+              this.router.navigateByUrl('forums/all')
+            } else {
+              this.router.navigateByUrl(`forums/all/${this.commentOn}`)
+            }
+          })
       } else {
-        this.imageService.postComment(formData, () => {
-          if( this.commentOn === "") {
-            this.router.navigateByUrl('forums/all')
-          } else {
-            this.router.navigateByUrl(`forums/all/${this.commentOn}`)
-          }
-        })
+        // if the user is posting a new image at the topic level
+        formData.append("image", this.file, this.file.name)
+        formData.append("author", localStorage.getItem('username'))
+        formData.append("commentOn", this.commentOn)// add anchor where the comment holds
+        for(let i = 0 ; i < this.tags.length ; i ++ ) {
+          formData.append('tags[]', this.tags[i])
+        }
+        // formData.append('tags', this.tags)
+        
+        if( this.commentOn === '') {
+          this.imageService.postThread(formData, () => {
+            if( this.commentOn === "") {
+              this.router.navigateByUrl('forums/all')
+            } else {
+              this.router.navigateByUrl(`forums/all/${this.commentOn}`)
+            }
+          })
+        } else {
+          this.imageService.postComment(formData, () => {
+            if( this.commentOn === "") {
+              this.router.navigateByUrl('forums/all')
+            } else {
+              this.router.navigateByUrl(`forums/all/${this.commentOn}`)
+            }
+          })
+        }
+        
       }
-      
+    } else {
+      alert("Please selct an image first...")
     }
+    
   }
 
   add(event: MatChipInputEvent) {
