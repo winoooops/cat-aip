@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { Data, Forum } from '../../services/data'
 import { CdkAccordion } from '@angular/cdk/accordion';
+import { compileBaseDefFromMetadata } from '@angular/compiler';
 
 const SERVER_URL = "http://localhost:3000"
 
@@ -56,10 +57,10 @@ export class ImageService {
 
   loadAll(tag) {
     this.http.get<any>(`${SERVER_URL}/forums/tags/${tag}`)
-      .subscribe( data => {
+      .subscribe( r => {
       // it seems like the behaviorsubject is store the data basesd on previous records
       // instaed of loading 
-        this._data.next( data )
+        this._data.next( r )
       })
   }
 
@@ -67,19 +68,19 @@ export class ImageService {
     // travase throught the data array
     // find the items that has the exact _id 
     this.http.get<any>(`${SERVER_URL}/forums/${id}`)
-      .subscribe( thread => {
+      .subscribe( r => {
         // update to the newest version 
-        this._thread.next( thread )
+        this._thread.next( r )
       })
 
   }
 
-  loadComment(id) {
-    // Because there are going to be multiple comments with each possibily having multiple comments inside
-    // I can not let the service to own the property of comment
-    // have to passed from the commenet component's instance
-    return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
-  }
+  // loadComment(id) {
+  //   // Because there are going to be multiple comments with each possibily having multiple comments inside
+  //   // I can not let the service to own the property of comment
+  //   // have to passed from the commenet component's instance
+  //   return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
+  // }
 
 
   postThread(doc, cb) {
@@ -92,22 +93,26 @@ export class ImageService {
       })
   }
 
-  loadComments(id) {
-    this.http.get<any>(`${SERVER_URL}/forums/comment/${id}`)
-      .subscribe( comments => {
-        this._comments.next( comments )
+  postComment(doc, cb ) {
+    this.http.post<any>(`${SERVER_URL}/forums/post`, doc)
+      .subscribe( thread => {
+        this._thread.next( thread )
+        cb()
       })
   }
+  
 
 
   saveEmojiData(data){
     // dont need to use formdata this time,
     this.http.post<any>(`${SERVER_URL}/forums/emoji`, data, httpOptions)
-      .subscribe( comment => {
+      .subscribe( comments => {
         // add the most recenet emoji comment to the _comment state
-        this._comments.next([...this._comments.value, comment ])
+        this._thread.next(comments )
       })
   }
+
+
   // now that I've updated the comments, 
   changeEmojiData(data) {
     return this.http.put<any>(`${SERVER_URL}/forums/emoji-change`, data, httpOptions)

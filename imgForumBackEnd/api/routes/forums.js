@@ -146,9 +146,9 @@ router.post('/emoji', checkIfAuthenticated, (req, res) => {
                 }
             }    
         )
-        .then( res => {
+        .then( r => {
             // get a new copy of the comment 
-            res.json( res )
+            res.status(200).json( r )
         })
         .catch( err => {
             res.status(400).json(err)

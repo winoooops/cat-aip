@@ -26,10 +26,10 @@ export class CommentsComponent implements OnInit {
     //     this.idArr = r.map( doc => doc._id)
     //     console.log( this.idArr )
     //   })
-    this.imageService.loadComments( this.id )
-    this.imageService.comments.subscribe( comments => {
-      this.idArr = comments.map( comment => comment._id )
-    })
+    // this.imageService.loadComments( this.id )
+    // this.imageService.comments.subscribe( comments => {
+    //   this.idArr = comments.map( comment => comment._id )
+    // })
   }
 
   showMoreComments() {
