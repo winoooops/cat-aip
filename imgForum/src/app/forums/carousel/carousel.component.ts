@@ -17,14 +17,15 @@ export class CarouselComponent implements OnInit {
       .getHotThreads()
       .subscribe( docArr => {
         docArr.forEach( doc => {
-          this.imageService
-            .getDocData( doc._id )
-            .subscribe( doc => {
-              this.idArr.push( doc._id )
-              const flag = `data:${doc.img.contentType};base64,`
-              const imgStr = arrayBufferToBase64(doc.img.data.data)
-              this.imgSrcArr.push(flag + imgStr)
-            })
+          // console.log( doc )
+          // create an array of hot thread id
+          this.idArr.push( doc._id)
+          const flag = `data:${doc.img.contentType};base64,`
+          console.log( doc.img.data.data)
+          const imgStr = arrayBufferToBase64(doc.img.data.data)
+          // create an array of hot thread imgSrc
+          // console.log( flag + imgStr )
+          this.imgSrcArr.push(flag + imgStr)
         })
       })
   }

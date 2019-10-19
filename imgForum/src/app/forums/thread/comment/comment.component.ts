@@ -19,16 +19,8 @@ export class CommentComponent implements OnInit {
   // so I won't be using routing here
   @Input() doc 
   comment: Comment
-  thread_id: string 
-  docID: string 
   isImage: boolean = false 
   imgSrc: string
-  author: string
-  tags: string[]
-  time: string
-  counts: number
-  emoji: string 
-  url: string
   isCommentsViewable: boolean
   isMutable: boolean = false 
   constructor(
@@ -72,6 +64,14 @@ export class CommentComponent implements OnInit {
       emoji: emoji,
       isRoot: this.doc.isRoot, 
     }
+  }
+
+  replyImage() {
+    this.router.navigate(['/forums/post'], {
+      queryParams: {
+        commentOn: this.comment.id
+      }
+    })
   }
 
   // toggleComment() {

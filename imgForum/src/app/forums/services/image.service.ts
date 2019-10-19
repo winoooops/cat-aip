@@ -43,7 +43,8 @@ export interface Comment {
 
 
 export class ImageService {
-  
+
+
   private _data = new BehaviorSubject([])
   data = this._data.asObservable() 
 
@@ -101,6 +102,9 @@ export class ImageService {
       })
   }
   
+  loadComment( id ) {
+
+  }
 
 
   saveEmojiData(data){
@@ -113,39 +117,45 @@ export class ImageService {
   }
 
 
+  getHotThreads(): Observable<Array<any>>{
+    return this.http.get<any>(`${SERVER_URL}/forums/hot-threads`)
+  }
+
+
+  /***********************************
+   * ! need to be updated
+   *********************************/
+
+
+
+
+
+
+
+
+
+
+
+
+
   // now that I've updated the comments, 
   changeEmojiData(data) {
     return this.http.put<any>(`${SERVER_URL}/forums/emoji-change`, data, httpOptions)
   }
 
-  saveImageData(data): Observable<any> {
-    return this.http.post<any>(`${SERVER_URL}/forums/post`, data)
-  }
 
   changeImageData(data, id): Observable<any> {
     return this.http.put<any>(`${SERVER_URL}/forums/${id}`, data)
   }
 
-  getImageId(): Observable<Array<any>> {
-    return this.http.get<any>(`${SERVER_URL}/forums/`)
-  }
+  
 
-  getImageIdByTag(tag): Observable<Array<any>> {
-    return this.http.get<any>(`${SERVER_URL}/forums/tags/${tag}`)
-  }
   // findone topic image's data by _id
   getDocData(id): Observable<any>{
     return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
   }
 
-  getCommentImages(id): Observable<Array<any>> {
-    return this.http.get<any>(`${SERVER_URL}/forums/comment/${id}`)
-  }
-
-  getHotThreads(): Observable<Array<any>>{
-    return this.http.get<any>(`${SERVER_URL}/forums/hot-threads`)
-  }
-
+ 
   getUserName() {
     return this.http.get(`${SERVER_URL}/user/username`, {
       observe : 'body',

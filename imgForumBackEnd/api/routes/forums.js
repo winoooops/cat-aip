@@ -41,7 +41,7 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
         return
     }
 
-    console.log( req.body )
+    
     const author = req.body.author
     const tags = req.body.tags
     const commentOn = req.body.commentOn
@@ -99,7 +99,7 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
                 res.status(200).json( r )
             })
             .catch( err => {
-                console.log("poop")
+                console.log("error")
                 res.status(400).json(err)
             })
     }
@@ -147,6 +147,7 @@ router.post('/emoji', checkIfAuthenticated, (req, res) => {
             }    
         )
         .then( r => {
+            console.log( r )
             // get a new copy of the comment 
             res.status(200).json( r )
         })
@@ -164,17 +165,6 @@ router.put('/emoji-change', checkIfAuthenticated, (req, res) => {
         })
 })
 
-// router.get('/', (req, res) => {
-//     // read all the image data
-//     // send an array of images as response upon req
-//     Image
-//         .find({ isRoot: true })
-//         .then((result) => {
-//             console.log( result.length )
-//             res.json(result)
-//         })
-
-// })
 
 router.get('/comment/:id', (req, res) => {
     const id = req.params.id

@@ -4,6 +4,7 @@ import { arrayBufferToBase64 } from '../shared/convertB64'
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-thread',
@@ -11,6 +12,7 @@ import { EmojiDialogComponent } from './emoji-dialog/emoji-dialog.component';
   styleUrls: ['./thread.component.scss'],
 })
 export class ThreadComponent implements OnInit {
+  
   @Input() doc
   id
   thread: Thread 
