@@ -15,6 +15,7 @@ export class ThreadComponent implements OnInit {
   
   @Input() doc
   id
+  interval
   thread: Thread 
   showEmojiPicker = false;
   isMutable: boolean = false 
@@ -65,7 +66,17 @@ export class ThreadComponent implements OnInit {
           }
           
         })
+
+      this.interval = setInterval( () => {
+        this.imageService.loadThread( this.id )
+      }, 60000)
     })
+  }
+
+  ngOnDestroy(): void {
+    //Called once, before the instance is destroyed.
+    //Add 'implements OnDestroy' to the class.
+    clearInterval(this.interval)
   }
 
 
