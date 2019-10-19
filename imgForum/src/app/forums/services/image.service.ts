@@ -17,14 +17,21 @@ export interface Thread {
   id: string, 
   author: string, 
   timestamp: string, 
-  counts: string, 
+  counts: number, 
   tags: string[],
   imgSrc: string, 
   isRoot: boolean
 }
 
 export interface Comment {
-
+  id: string, 
+  author: string, 
+  timestamp: string, 
+  counts: number, 
+  tags: string[],
+  imgSrc: string, 
+  isRoot: boolean, 
+  emoji: string, 
 }
 
 
@@ -35,6 +42,7 @@ export interface Comment {
 
 
 export class ImageService {
+  
   private _data = new BehaviorSubject([])
   data = this._data.asObservable() 
 
@@ -55,9 +63,16 @@ export class ImageService {
   loadThread(id): Observable<any>{
     // travase throught the data array
     // find the items that has the exact _id 
-    console.log( this._data.value )
     return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
   }
+
+  loadComment(id) {
+    // Because there are going to be multiple comments with each possibily having multiple comments inside
+    // I can not let the service to own the property of comment
+    // have to passed from the commenet component's instance
+    return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
+  }
+
 
   postThread(doc, cb) {
     this.http.post<any>(`${SERVER_URL}/forums/post`, doc)
@@ -67,7 +82,6 @@ export class ImageService {
         cb() 
       })
   }
-
 
   loadComments(id) {
     this.http.get<any>(`${SERVER_URL}/forums/comment/${id}`)
@@ -81,13 +95,21 @@ export class ImageService {
     // dont need to use formdata this time,
     this.http.post<any>(`${SERVER_URL}/forums/emoji`, data, httpOptions)
       .subscribe( comment => {
+        // add the most recenet emoji comment to the _comment state
         this._comments.next([...this._comments.value, comment ])
       })
   }
-
-  changeEmoji(data) {
+  // now that I've updated the comments, 
+  changeEmojiData(data) {
     return this.http.put<any>(`${SERVER_URL}/forums/emoji-change`, data, httpOptions)
   }
+
+
+
+
+
+
+
 
   saveImageData(data): Observable<any> {
     return this.http.post<any>(`${SERVER_URL}/forums/post`, data)
