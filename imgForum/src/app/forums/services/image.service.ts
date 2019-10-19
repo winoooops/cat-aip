@@ -17,7 +17,7 @@ export interface Thread {
   id: string, 
   author: string, 
   timestamp: string, 
-  counts: number, 
+  comments: Thread[]
   tags: string[],
   imgSrc: string, 
   isRoot: boolean
@@ -27,7 +27,7 @@ export interface Comment {
   id: string, 
   author: string, 
   timestamp: string, 
-  counts: number, 
+  comments: Comment[], 
   tags: string[],
   imgSrc: string, 
   isRoot: boolean, 
@@ -46,6 +46,9 @@ export class ImageService {
   private _data = new BehaviorSubject([])
   data = this._data.asObservable() 
 
+  private _thread = new BehaviorSubject(undefined)
+  thread = this._thread.asObservable() 
+
   private _comments = new BehaviorSubject([])
   comments = this._comments.asObservable() 
   
@@ -60,10 +63,15 @@ export class ImageService {
       })
   }
 
-  loadThread(id): Observable<any>{
+  loadThread(id){
     // travase throught the data array
     // find the items that has the exact _id 
-    return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
+    this.http.get<any>(`${SERVER_URL}/forums/${id}`)
+      .subscribe( thread => {
+        // update to the newest version 
+        this._thread.next( thread )
+      })
+
   }
 
   loadComment(id) {

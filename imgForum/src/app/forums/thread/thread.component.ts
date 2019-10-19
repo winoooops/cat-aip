@@ -38,7 +38,7 @@ export class ThreadComponent implements OnInit {
 
       // this.imageService.loadThread( this.id )
       this.imageService.loadThread( this.id )
-        .subscribe( thread => {
+      this.imageService.thread.subscribe( thread => {
           if( thread ) {
             // get the contentType
             const flag = `data:${thread.img.contentType};base64,`
@@ -53,11 +53,13 @@ export class ThreadComponent implements OnInit {
               author: thread.author,
               tags: thread.tags, 
               timestamp: thread.createdAt,
-              counts: thread.counts,
+              comments: thread.comments,
               imgSrc, 
               isRoot: thread.isRoot
             }
+            console.log( this.thread.comments )
           }
+          
         })
     })
   }
@@ -79,6 +81,7 @@ export class ThreadComponent implements OnInit {
   // } 
 
   openEmojiDialog() {
+    // from the thread component,  a user can only add emoji comment 
     const emojiDialog = this.dialog.open(EmojiDialogComponent, {
       data: { "commentOn": this.id, isNew: true } 
     })

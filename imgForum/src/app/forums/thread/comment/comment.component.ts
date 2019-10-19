@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ChangeDetectorRef } from '@angular/core';
-import { ImageService } from '../../services/image.service';
+import { ImageService, Thread, Comment } from '../../services/image.service';
 import { arrayBufferToBase64 } from '../../shared/convertB64';
 import { EmojiDialogComponent } from '../emoji-dialog/emoji-dialog.component';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -17,10 +17,11 @@ import { UserService } from 'src/app/user/services/user.service';
 export class CommentComponent implements OnInit {
   // because the comment-content's card, by design, should not be clickable
   // so I won't be using routing here
-  @Input() id: string
+  @Input() doc 
+  comment: Comment
   thread_id: string 
   docID: string 
-  isImage: boolean
+  isImage: boolean = false 
   imgSrc: string
   author: string
   tags: string[]
@@ -28,7 +29,7 @@ export class CommentComponent implements OnInit {
   counts: number
   emoji: string 
   url: string
-  isCommentsViewable: boolean = false
+  isCommentsViewable: boolean
   isMutable: boolean = false 
   constructor(
     private imageService: ImageService,
@@ -44,82 +45,80 @@ export class CommentComponent implements OnInit {
     // const thread_ali = this.route.snapshot.params['thread_alias']
     // this.url = `/forums/${forums_ali}/${thread_ali}`
     // console.log( this.url )
-    this.route.params.subscribe( params => {
-      this.thread_id = params['thread_alias']
-
-      this.imageService
-      .getDocData(this.id)
-      .subscribe(doc => {
-        if( doc.author === localStorage.getItem('username')) {
-          this.isMutable = true;
-        }
-        if( doc.img ) {
-          this.isImage = true 
-          // get the contentType 
-          const flag = `data:${doc.img.contentType};base64,`
-          // convent the BSON to base64
-          const imgStr = arrayBufferToBase64(doc.img.data.data)
-          this.imgSrc = flag + imgStr
-        } else {
-          this.isImage = false 
-          this.emoji = doc.emoji
-        }
-        // console.log( imgStr )
-        this.counts = doc.counts
-        this.author = doc.author
-        this.tags = doc.tags
-        this.time = doc.createdAt
-        this.docID = doc._id
-      })
-    })
-
-   
-  }
-
-  toggleComment() {
-    this.isCommentsViewable = !this.isCommentsViewable
-  }
-
-  openEmojiDialog() {
-    let dialogRef = this.dialog.open(EmojiDialogComponent, {
-      data: { "commentOn": this.id, isNew: true } 
-    })
-
-    dialogRef.afterClosed().subscribe(result => {
-      // should refresh the parent 
-    });
-  }
-
-  delete() {
-    this.imageService
-      .deleteDoc(this.docID)
-      .subscribe( (r) => {
-        location.reload() 
-      })
-  }
-
-  change() {
-    if ( !this.isImage ) {
-      this.changeEmoji() 
-    } else {
-      this.changeImage()
+    // console.log( this.doc._id   )
+    let imgSrc: string 
+    let emoji: string
+    if( this.doc.img ) {
+      this.isImage = true
+      const flag = `data:${this.doc.img.contentType};base64,`
+      // convent the BSON to base64
+      const imgStr = arrayBufferToBase64(this.doc.img.data.data)
+      // comebine to a base64 string
+      imgSrc = flag + imgStr
     }
+
+    if( this.doc.emoji ) {
+      this.isImage = false 
+      emoji = this.doc.emoji
+    }
+    
+    this.comment = {
+      id: this.doc._id,
+      author: this.doc.author,
+      timestamp: this.doc.createAt, 
+      comments: this.doc.comments,
+      tags: this.doc.tags,
+      imgSrc: imgSrc,
+      emoji: emoji,
+      isRoot: this.doc.isRoot, 
+    }
+    console.log( this.comment )
   }
 
+  // toggleComment() {
+  //   this.isCommentsViewable = !this.isCommentsViewable
+  // }
 
-  changeEmoji() {
-    let dialogRef = this.dialog.open(EmojiDialogComponent, {
-      data: { "id" : this.id, isNew: false }
-    })
-  }
+  // openEmojiDialog() {
+  //   let dialogRef = this.dialog.open(EmojiDialogComponent, {
+  //     data: { "commentOn": this.id, isNew: true } 
+  //   })
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     // should refresh the parent 
+  //   });
+  // }
+
+  // delete() {
+  //   this.imageService
+  //     .deleteDoc(this.docID)
+  //     .subscribe( (r) => {
+  //       location.reload() 
+  //     })
+  // }
+
+  // change() {
+  //   if ( !this.isImage ) {
+  //     this.changeEmoji() 
+  //   } else {
+  //     this.changeImage()
+  //   }
+  // }
 
 
-  changeImage() {
-    this.router.navigate(['forums/post'], {
-      queryParams: {
-        id: this.id,
-        commentOn: this.thread_id
-      }
-    })
-  }
+  // changeEmoji() {
+  //   let dialogRef = this.dialog.open(EmojiDialogComponent, {
+  //     data: { "id" : this.id, isNew: false }
+  //   })
+  // }
+
+
+  // changeImage() {
+  //   this.router.navigate(['forums/post'], {
+  //     queryParams: {
+  //       id: this.id,
+  //       commentOn: this.thread_id
+  //     }
+  //   })
+  // }
 }

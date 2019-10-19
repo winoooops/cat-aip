@@ -85,7 +85,7 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
                             },
                             author: author,
                             tags: tags,
-                            isRoot: true,
+                            isRoot: false,
                             createdAt: new Date(),
                             comment: []
                         }

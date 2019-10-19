@@ -2,7 +2,7 @@
     <mat-card-header>
         <mat-card-title>{{ thread.author }}</mat-card-title>
         <mat-card-subtitle>post {{ thread.timestamp | moment }} </mat-card-subtitle>
-        <mat-card-subtitle>{{ thread.counts }} replies</mat-card-subtitle>
+        <mat-card-subtitle>{{ thread.comments.length }} replies</mat-card-subtitle>
     </mat-card-header>
     <img [src]="thread.imgSrc" alt="">
     <div class="tags-Links" *ngIf="isCommentsViewable">
@@ -14,15 +14,16 @@
     <mat-card-actions>
         <button mat-button color="primary" (click)="replyImage()"> Reply </button>
         <button mat-button color="primary" (click)="openEmojiDialog()"><mat-icon>sentiment_satisfied_alt</mat-icon></button>
-        <button mat-button color="primary" *ngIf="isCommentsViewable">COMMENT({{ thread.counts }})</button>
         
         <button mat-button color="accent" *ngIf="isMutable && isCommentsViewable" (click)="delete()">Delete</button>
         <button mat-button color="accent" *ngIf="isMutable && isCommentsViewable" (click)="change()">Change</button>
     </mat-card-actions>
 </mat-card>
 
-<div class="comments" *ngIf="isCommentsViewable">
-    <app-comments [id]="id"></app-comments>
+<div class="comments" *ngIf="thread">
+    <div class="comment-row" *ngFor="let comment of thread.comments">
+        <app-comment [doc]="comment"></app-comment>
+    </div>
 </div>
 
 

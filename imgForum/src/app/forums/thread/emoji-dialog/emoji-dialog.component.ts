@@ -29,16 +29,15 @@ export class EmojiDialogComponent {
     this.code = event.emoji.unified
     this.commentOn = this.data.commentOn
     this.author = localStorage.getItem('username')
-
     if( this.data.isNew  ) {
       this.imageService
         .saveEmojiData( { "code": this.code, "commentOn": this.commentOn, "author": this.author } )
       
     } else {
       this.imageService
-        .changeEmoji( { "code": this.code, "id": this.data.id })
+        .changeEmojiData( { "code": this.code, "id": this.data.id })
         .subscribe( r => {
-          console.log(r)
+          console.log( r )
         })
     }
     this.dialogRef.close()

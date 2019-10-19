@@ -1,17 +1,17 @@
-<mat-card class="img-card">
+<mat-card class="img-card" *ngIf="comment">
     <mat-card-header>
-        <mat-card-title>{{ author }}</mat-card-title>
-        <mat-card-subtitle>reply {{ time | moment }}</mat-card-subtitle>
+        <mat-card-title>{{ comment.author }}</mat-card-title>
+        <mat-card-subtitle>reply {{ comment.timestamp | moment }}</mat-card-subtitle>
     </mat-card-header>
     <div class="image-content" *ngIf="isImage">
-            <img [src]="imgSrc" alt="">
-            <div class="tags-Link" *ngFor="let tag of tags">
+            <img [src]="comment.imgSrc" alt="">
+            <div class="tags-Link" *ngFor="let tag of comment.tags">
                 <a>#{{ tag }}</a>
             </div>
     </div>
 
     <div class="emoji-content" *ngIf="!isImage">
-        <p>{{ emoji | toEmoji }}</p>
+        <p>{{ comment.emoji | toEmoji }}</p>
     </div>
     
     
@@ -22,6 +22,3 @@
         <button mat-button color="accent" *ngIf="isMutable" (click)="delete()">Delete</button>
     </mat-card-actions>
 </mat-card>
-<div class="comments" *ngIf="isCommentsViewable">
-    <app-comments [id]="id"></app-comments>
-</div>
