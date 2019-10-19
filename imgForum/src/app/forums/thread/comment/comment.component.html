@@ -13,13 +13,6 @@
     <div class="emoji-content" *ngIf="!isImage">
         <p>{{ comment.emoji | toEmoji }}</p>
     </div>
-    
-    
-    <mat-card-actions>
-        <button mat-button color="primary" (click)="openEmojiDialog()"><mat-icon>sentiment_satisfied_alt</mat-icon></button>
-        <button mat-button color="accent" *ngIf="isMutable" (click)="change()">Change</button>
-        <button mat-button color="accent" *ngIf="isMutable" (click)="delete()">Delete</button>
-    </mat-card-actions>
 </mat-card>
 <div *ngIf="comment.comments">
     <div class="comment-row" *ngFor="let comment of comment.comments">
