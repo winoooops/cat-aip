@@ -144,10 +144,11 @@ router.post('/emoji', checkIfAuthenticated, (req, res) => {
                         author: req.body.author, 
                     }
                 }
-            }    
+            },
+            { new: true } 
         )
         .then( r => {
-            console.log( r )
+            console.log( r ) // not getting the updated quire
             // get a new copy of the comment 
             res.status(200).json( r )
         })
@@ -159,7 +160,7 @@ router.post('/emoji', checkIfAuthenticated, (req, res) => {
 router.put('/emoji-change', checkIfAuthenticated, (req, res) => {
     //
     Image
-        .updateOne({ _id: req.body.id }, { emoji: req.body.code })
+        .updateOne({ _id: req.body.id }, { emoji: req.body.code }, { new: true })
         .then(r => {
             res.json(r)
         })

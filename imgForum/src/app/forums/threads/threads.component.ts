@@ -25,10 +25,10 @@ export class ThreadsComponent implements OnInit {
       // load the whole data the first time, and save it in the service
       // I might consider not loading the whole data, but only the first dozens of data objects though
       this.imageService.loadAll(this.tag)
-      this.imageService.data.subscribe( data => {
+      this.imageService.data.subscribe( docs => {
 
-        if( data ) {
-          this.threads = data.map( doc => {
+        if( docs ) {
+          this.threads = docs.map( doc => {
             const id = doc._id
             const flag = `data:${doc.img.contentType};base64,`
 
