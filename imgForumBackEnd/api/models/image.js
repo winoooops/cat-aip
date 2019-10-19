@@ -10,9 +10,12 @@ const imgSchema = new Schema({
     author: String,
     tags: [String],
     isRoot: { type: Boolean, default: false },
-    commentOn: String,
-    counts: Number,
     createdAt: Date,
 })
+// recursively add imgSchema
+imgSchema.add({
+    comments: [imgSchema]
+})
+
 
 module.exports = mongoose.model('Image', imgSchema)

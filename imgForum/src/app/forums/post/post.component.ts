@@ -42,7 +42,6 @@ export class PostComponent implements OnInit {
 
   fileChange(element) {
     this.file = element.target.files[0]
-    console.log(this.file)
   }
 
 

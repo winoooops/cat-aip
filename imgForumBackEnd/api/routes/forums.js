@@ -60,7 +60,7 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
             tags: tags,
             isRoot: true,
             createdAt: new Date(),
-            counts: 0
+            comments: []
         })
             .save()
             .then((r) => {
@@ -71,27 +71,36 @@ router.post('/post', upload.single('image'), checkIfAuthenticated, (req, res) =>
     } else {
         // if the image is commenting others, 
         // search the target doc with the commnetOn's value
-        // increment the comments by 1 
-        // save the new image
+        // add the new Image inside
         Image
-            .updateOne({ "_id": commentOn }, { $inc: { counts: 1 } })
-            .then(() => {
-                new Image({
-                    img: {
-                        data: new Buffer(img),
-                        contentType: req.file.mimetype,
-                    },
-                    author: author,
-                    tags: tags,
-                    commentOn: commentOn,
-                    createdAt: new Date(),
-                    counts: 0
-                })
-                    .save()
-                    .then((r) => {
-                        res.json(r)
-                    })
+            .updateOne(
+                {_id: commentOn }, 
+                { $push: 
+                    {
+                        comments: 
+                        {
+                            img: {
+                                data: new Buffer(img),
+                                contentType: req.file.mimetype,
+                            },
+                            author: author,
+                            tags: tags,
+                            isRoot: true,
+                            createdAt: new Date(),
+                            comment: []
+                        }
+                    }
+                }
+                    
+            )
+            .then( () => {
+                Image.findOne({ _id: commentOn })
             })
+            .catch( err => {
+                res.status(400).send({ err })
+            })
+            
+
     }
 })
 

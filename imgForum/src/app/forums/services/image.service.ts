@@ -77,6 +77,7 @@ export class ImageService {
   postThread(doc, cb) {
     this.http.post<any>(`${SERVER_URL}/forums/post`, doc)
       .subscribe( r => {
+        console.log( r )
         // add the most recent post to the _data state
         this._data.next([...this._data.value, r ])
         cb() 
@@ -103,13 +104,6 @@ export class ImageService {
   changeEmojiData(data) {
     return this.http.put<any>(`${SERVER_URL}/forums/emoji-change`, data, httpOptions)
   }
-
-
-
-
-
-
-
 
   saveImageData(data): Observable<any> {
     return this.http.post<any>(`${SERVER_URL}/forums/post`, data)
