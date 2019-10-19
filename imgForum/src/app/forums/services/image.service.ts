@@ -18,7 +18,7 @@ export interface Thread {
   id: string, 
   author: string, 
   timestamp: string, 
-  comments: Thread[]
+  comments: any[]
   tags: string[],
   imgSrc: string, 
   isRoot: boolean

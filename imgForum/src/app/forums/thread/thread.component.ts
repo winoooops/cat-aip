@@ -16,7 +16,6 @@ export class ThreadComponent implements OnInit {
   @Input() doc
   id
   thread: Thread 
-  isCommentsViewable: boolean = false
   showEmojiPicker = false;
   isMutable: boolean = false 
   constructor(
@@ -49,6 +48,10 @@ export class ThreadComponent implements OnInit {
             const imgStr = arrayBufferToBase64(thread.img.data.data)
             // comebine to a base64 string
             const imgSrc = flag + imgStr
+
+            if( thread.author === localStorage.getItem('username')) {
+              this.isMutable = true
+            }
 
             this.thread = {
               id: this.id, 
@@ -86,25 +89,39 @@ export class ThreadComponent implements OnInit {
     const emojiDialog = this.dialog.open(EmojiDialogComponent, {
       data: { "commentOn": this.id, isNew: true } 
     })
-    emojiDialog
-      .afterClosed()
-      .subscribe( () => {
+    // emojiDialog
+    //   .afterClosed()
+    //   .subscribe( () => {
         
-      })
+    //   })
   }
 
   delete() {
-    this.imageService.deleteDoc( this.id )
+    // can be deletd with no image reply
+    console.log( this.thread.comments )
+    if( this.thread.comments.some( comment => comment.img )) {
+      alert("You are not allowed to delete an image with image replies")
+    } else {
+      this.imageService.deleteDoc( this.id )
       .subscribe( r => {
         this.router.navigate(['forums/all'])
       })
+    }
   }
 
   change() {
-    this.router.navigate(['forums/post'], {
-      queryParams: {
-        id: this.id
-      }
-    })
+    const hasEmoji = this.thread.comments.some( comment => comment.emoji )
+    const hasImage = this.thread.comments.some( comment => comment.img )
+
+    // if the thread has emoji but not image reply, can not be changed 
+    if( hasEmoji && !hasImage ) {
+      alert("You can not allowed to change this image")
+    } else {
+      this.router.navigate(['forums/post'], {
+        queryParams: {
+          id: this.id
+        }
+    })  
+   }
   }
 }
