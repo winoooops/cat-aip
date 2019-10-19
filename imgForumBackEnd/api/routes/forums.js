@@ -125,7 +125,10 @@ router.put('/:id', upload.single('image'), checkIfAuthenticated, (req, res) => {
             tags: tags,
         })
         .then(r => {
-            res.json(r)
+            res.status(200).json(r)
+        })
+        .catch( err => {
+            res.status(400).json(err)
         })
 })
 
@@ -145,10 +148,9 @@ router.post('/emoji', checkIfAuthenticated, (req, res) => {
                     }
                 }
             },
-            { new: true } 
+            { new: true } // so mongodb will return the updated document
         )
         .then( r => {
-            console.log( r ) // not getting the updated quire
             // get a new copy of the comment 
             res.status(200).json( r )
         })
@@ -164,6 +166,9 @@ router.put('/emoji-change', checkIfAuthenticated, (req, res) => {
         .then(r => {
             res.json(r)
         })
+        .catch( err => {
+            res.status(400).json( err )
+        })
 })
 
 
@@ -174,6 +179,9 @@ router.get('/comment/:id', (req, res) => {
         .find({ commentOn: id })
         .then(result => {
             res.json(result)
+        })
+        .catch( err => {
+            res.status(400).json( err )
         })
 })
 
@@ -189,6 +197,9 @@ router.get('/hot-threads', (req, res) => {
         .then(r => {
             res.json(r)
         })
+        .catch( err => {
+            res.status(400).json(err)
+        })
 })
 
 
@@ -202,12 +213,18 @@ router.get('/tags/:tag', (req, res) => {
             .then((result) => {
                 res.json(result)
             })
+            .catch( err => {
+                res.status(400).status(err)
+            })
     }
     else {
         Image
             .find({ isRoot: { $eq: true }, tags: { $all: [tag] } })
             .then(result => {
                 res.json(result)
+            })
+            .catch( err => {
+                res.status(400).status(err)
             })
     }
 
@@ -224,6 +241,9 @@ router.get('/:id', (req, res) => {
         .then(result => {
             res.json(result)
         })
+        .catch( err => {
+            res.status(400).status(err)
+        })
 })
 
 
@@ -233,6 +253,9 @@ router.delete('/:id', checkIfAuthenticated, (req, res) => {
         .deleteOne({ _id: req.params.id })
         .then((r) => {
             res.json(r)
+        })
+        .catch( err => {
+            res.status(400).status(err)
         })
 })
 
