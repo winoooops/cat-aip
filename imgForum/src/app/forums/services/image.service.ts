@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { Data, Forum } from '../../services/data'
 
@@ -56,5 +56,12 @@ export class ImageService {
 
   getImageData(id): Observable<any>{
     return this.http.get<any>(`${SERVER_URL}/forums/${id}`)
+  }
+
+  getUserName() {
+    return this.http.get(`${SERVER_URL}/user/username`, {
+      observe : 'body',
+      params: new HttpParams().append('token', localStorage.getItem('token'))
+    });
   }
 }
